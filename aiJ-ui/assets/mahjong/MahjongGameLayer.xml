@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <controller name="c1" pages="0,prepare,1,playing,2,gameEnd,3,end,4,vote" selected="2">
+    <remark page="0" value="预备"/>
+    <remark page="1" value="游戏开始"/>
+    <remark page="2" value="游戏结束"/>
+    <remark page="3" value="结束"/>
+    <remark page="4" value="投票"/>
+    <action type="play_transition" fromPage="0" toPage="1" transition="t2"/>
+  </controller>
+  <displayList>
+    <image id="n0_pjrl" name="n0" src="pjrl1" fileName="images/mahjong_bg.png" xy="0,0"/>
+    <component id="n2_pjrl" name="SetButton" src="pjrl48" fileName="component/IconButton.xml" xy="5,94" size="75,77">
+      <Button icon="ui://04bgp3gtpjrl45"/>
+    </component>
+    <component id="n3_pjrl" name="DismissVoteButton" src="pjrl48" fileName="component/IconButton.xml" xy="5,5" size="75,77">
+      <Button icon="ui://04bgp3gtpjrl43"/>
+    </component>
+    <component id="n4_pjrl" name="TalkButton" src="pjrl48" fileName="component/IconButton.xml" xy="1207,519" size="52,77">
+      <Button icon="ui://04bgp3gtpjrl47"/>
+    </component>
+    <component id="n1_pjrl" name="ChatButton" src="pjrl48" fileName="component/IconButton.xml" xy="1196,436" size="75,77">
+      <Button icon="ui://04bgp3gtpjrl42"/>
+    </component>
+    <image id="n5_pjrl" name="n5" src="pjrl49" fileName="images/timer/time.png" xy="574,294" group="n10_pjrl"/>
+    <image id="n6_pjrl" name="pilotLamp0" src="pjrl4b" fileName="images/timer/time0.png" xy="452,387" group="n10_pjrl" visible="false"/>
+    <image id="n7_pjrl" name="pilotLamp1" src="pjrl4d" fileName="images/timer/time1.png" xy="668,122" group="n10_pjrl" visible="false"/>
+    <image id="n8_pjrl" name="pilotLamp2" src="pjrl4a" fileName="images/timer/time2.png" xy="454,130" group="n10_pjrl" visible="false"/>
+    <image id="n9_pjrl" name="pilotLamp3" src="pjrl4c" fileName="images/timer/time3.png" xy="410,122" group="n10_pjrl" visible="false"/>
+    <text id="n16_q55e" name="CountDownText" xy="614,344" size="52,32" group="n10_pjrl" font="ui://04bgp3gtq55e4x" fontSize="12" color="#ffff00" align="center" leading="0" autoSize="none" text="30"/>
+    <group id="n10_pjrl" name="time_group" xy="410,122" size="468,468" collapsed="true"/>
+    <image id="n13_pyxr" name="n13" src="pyxr4o" fileName="images/b1.png" xy="390,338" pivot="0.5,0.5"/>
+    <image id="n14_pyxr" name="n14" src="pyxr4p" fileName="images/b2.png" xy="730,339" pivot="0.5,0.5"/>
+    <component id="n25_j57n" name="SouthDiscardComponent" src="j57n5o" fileName="component/SouthDiscardComponent.xml" xy="356,388" scale="0.68,0.68"/>
+    <component id="n27_j57n" name="NorthDiscardComponent" src="j57n5p" fileName="component/NorthDiscardComponent.xml" xy="356,127" scale="0.68,0.68"/>
+    <component id="n28_j57n" name="EastDiscardComponent" src="j57n5q" fileName="component/EastDiscardComponent.xml" xy="923,125" scale="0.6,0.6"/>
+    <component id="n29_j57n" name="WestDiscardComponent" src="j57n5r" fileName="component/WestDiscardComponent.xml" xy="141,125" scale="0.6,0.6"/>
+    <component id="n19_s9sm" name="WestComponent" src="s9sm5f" fileName="component/WestComponent.xml" xy="92,50" scale="0.55,0.55"/>
+    <component id="n20_s9sm" name="EastComponent" src="s9sm5g" fileName="component/EastComponent.xml" xy="1158,50" scale="0.55,0.55"/>
+    <component id="n22_s9sm" name="NorthComponent" src="s9sm5h" fileName="component/NorthComponent.xml" xy="248,29" scale="0.7,0.7"/>
+    <component id="n15_s74l" name="SouthComponent" src="s74l4u" fileName="component/SouthComponent.xml" xy="92,600" size="1102,118"/>
+    <component id="n17_njl1" name="OperateNotifyComponent" src="njl15e" fileName="component/OperateNotifyComponent.xml" xy="654,474" size="465,98"/>
+    <text id="n31_j57n" name="LeftCardCountText" xy="466,344" size="36,26" font="ui://04bgp3gtq55e4x" fontSize="6" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="84"/>
+    <text id="n32_j57n" name="LeftNumberText" xy="806,344" size="36,26" font="ui://04bgp3gtq55e4x" fontSize="6" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="7"/>
+    <component id="n49_gapc" name="SitDownButton" src="pjrl48" fileName="component/IconButton.xml" xy="550,420" size="180,76">
+      <Button icon="ui://04bgp3gtpjrl46"/>
+    </component>
+    <component id="n112_s2fl" name="LeaveButton" src="pjrl48" fileName="component/IconButton.xml" xy="1013,605" size="156,72">
+      <gearDisplay controller="c1" pages="0"/>
+      <Button icon="ui://04bgp3gts2fl7g"/>
+    </component>
+    <component id="n46_j8ud" name="SouthHeadComponent" src="gapc68" fileName="component/SouthHeadComponent.xml" xy="594,559"/>
+    <component id="n42_j8ud" name="NorthHeadComponent" src="gapc66" fileName="component/NorthHeadComponent.xml" xy="594,38"/>
+    <component id="n47_j8ud" name="WestHeadComponent" src="gapc67" fileName="component/WestHeadComponent.xml" xy="77,303"/>
+    <component id="n48_gapc" name="EastHeadComponent" src="j8ud5z" fileName="component/EastHeadComponent.xml" xy="1113,303"/>
+    <image id="n74_oiag" name="n74" src="oiag6m" fileName="images/n2.png" xy="0,0" group="n72_oiag"/>
+    <loader id="n53_oiag" name="ResultLoader" xy="370,0" size="539,180" group="n72_oiag" url="ui://04bgp3gtoiag6i"/>
+    <image id="n50_oiag" name="n50" src="oiag6a" fileName="images/img_gameover.png" xy="61,101" size="1158,544" group="n72_oiag"/>
+    <component id="n60_oiag" name="SouthGameOverItemComponent" src="oiag6k" fileName="component/GameOverItemComponent.xml" xy="104,126" size="1822,200" group="n72_oiag" scale="0.6,0.6"/>
+    <component id="n61_oiag" name="EastGameOverItemComponent" src="oiag6k" fileName="component/GameOverItemComponent.xml" xy="105,249" size="1822,200" group="n72_oiag" scale="0.6,0.6"/>
+    <component id="n62_oiag" name="NorthGameOverItemComponent" src="oiag6k" fileName="component/GameOverItemComponent.xml" xy="105,372" size="1822,200" group="n72_oiag" scale="0.6,0.6"/>
+    <component id="n63_oiag" name="WestGameOverItemComponent" src="oiag6k" fileName="component/GameOverItemComponent.xml" xy="106,495" size="1822,200" group="n72_oiag" scale="0.6,0.6"/>
+    <text id="n64_oiag" name="n64" xy="1045,129" size="53,31" group="n72_oiag" fontSize="24" color="#ff0000" align="center" vAlign="middle" bold="true" text="分数"/>
+    <component id="n76_oiag" name="n76" src="pjrl48" fileName="component/IconButton.xml" xy="1161,80" size="73,73" group="n72_oiag">
+      <Button icon="ui://04bgp3gtoiag6r" controller="c1" page="1"/>
+    </component>
+    <component id="n68_oiag" name="ShareTimeLineGameEnButton" src="pjrl48" fileName="component/IconButton.xml" xy="913,32" size="66,93" group="n72_oiag">
+      <Button icon="ui://04bgp3gtoiag6b"/>
+    </component>
+    <component id="n69_oiag" name="ShareWxGameEnButton" src="pjrl48" fileName="component/IconButton.xml" xy="1006,31" size="70,93" group="n72_oiag">
+      <Button icon="ui://04bgp3gtoiag6c"/>
+    </component>
+    <component id="n80_oiag" name="NextGameButton" src="pjrl48" fileName="component/IconButton.xml" xy="565,631" size="162,85" group="n72_oiag">
+      <Button icon="ui://04bgp3gtoiag6u"/>
+    </component>
+    <group id="n72_oiag" name="GameEndGroup" xy="0,0" size="1928,720" locked="true" advanced="true">
+      <gearDisplay controller="c1" pages="2"/>
+    </group>
+    <image id="n125_l0zi" name="n125" src="oiag6m" fileName="images/n2.png" xy="0,0" group="n82_xtij"/>
+    <image id="n81_xtij" name="n81" src="xtij74" fileName="images/gameover_bg.png" xy="0,1" group="n82_xtij"/>
+    <text id="n106_s2fl" name="n106" xy="87,65" size="438,39" group="n82_xtij" fontSize="20" color="#ff0000" vAlign="middle" autoSize="none" text="本界面仅用于展示排名，请勿用于其他用途！"/>
+    <component id="n83_xtij" name="ShareTimelineButton" src="pjrl48" fileName="component/IconButton.xml" xy="607,604" size="182,69" group="n82_xtij">
+      <Button icon="ui://04bgp3gtxtij78"/>
+    </component>
+    <component id="n84_xtij" name="ShareButton" src="pjrl48" fileName="component/IconButton.xml" xy="809,604" size="182,69" group="n82_xtij">
+      <Button icon="ui://04bgp3gtxtij79"/>
+    </component>
+    <component id="n85_xtij" name="BackButton" src="pjrl48" fileName="component/IconButton.xml" xy="1011,604" size="182,69" group="n82_xtij">
+      <Button icon="ui://04bgp3gtxtij77"/>
+    </component>
+    <component id="n103_xtij" name="SouthEndItemComponent" src="xtij7f" fileName="component/EndItemComponent.xml" xy="93,116" group="n82_xtij"/>
+    <component id="n105_xtij" name="EastEndItemComponent" src="xtij7f" fileName="component/EndItemComponent.xml" xy="368,116" group="n82_xtij"/>
+    <component id="n88_xtij" name="NorthEndItemComponent" src="xtij7f" fileName="component/EndItemComponent.xml" xy="643,116" group="n82_xtij"/>
+    <component id="n104_xtij" name="WestEndItemComponent" src="xtij7f" fileName="component/EndItemComponent.xml" xy="918,116" group="n82_xtij"/>
+    <text id="n107_s2fl" name="TimeInfoText" xy="93,599" size="482,81" group="n82_xtij" customData="开始时间:&lt;%=startedTime%>&#xD;结束时间:&lt;%=endedTime%>" fontSize="20" color="#660000" vAlign="middle" leading="2" autoSize="none" autoClearText="true" text="开始时间:2019-02-01 09:03:16&#xA;结束时间:2019-02-01 09:03:16"/>
+    <text id="n109_s2fl" name="TableNoText" xy="996,65" size="189,39" group="n82_xtij" customData="房号:&lt;%=tableNo%>" fontSize="24" color="#660000" vAlign="middle" leading="2" autoSize="none" autoClearText="true" text="房号:102910 "/>
+    <group id="n82_xtij" name="EndGroup" xy="0,0" size="1280,721" advanced="true" collapsed="true">
+      <gearDisplay controller="c1" pages="3"/>
+    </group>
+    <image id="n126_l0zi" name="n126" src="oiag6m" fileName="images/n2.png" xy="0,0" group="n120_s2fl"/>
+    <image id="n115_s2fl" name="n115" src="s2fl7l" fileName="images/vote/imscale9_alertbg.png" xy="324,136" group="n120_s2fl"/>
+    <image id="n116_s2fl" name="n116" src="s2fl7j" fileName="images/vote/im_diss_clock.png" xy="837,102" group="n120_s2fl"/>
+    <component id="n117_s2fl" name="VoteAgreeButton" src="pjrl48" fileName="component/IconButton.xml" xy="430,526" size="153,69" group="n120_s2fl">
+      <Button icon="ui://04bgp3gts2fl7h"/>
+    </component>
+    <component id="n118_s2fl" name="VoteRefuseButton" src="pjrl48" fileName="component/IconButton.xml" xy="712,526" size="151,65" group="n120_s2fl">
+      <Button icon="ui://04bgp3gts2fl7i"/>
+    </component>
+    <text id="n119_s2fl" name="VoteTimeText" xy="361,471" size="320,46" group="n120_s2fl" fontSize="24" color="#ffffff" vAlign="middle" autoSize="none" text="2019-02-01 18:24:08"/>
+    <list id="n121_s2fl" name="VoteItemList" xy="368,220" size="518,202" group="n120_s2fl" overflow="scroll">
+      <item url="ui://04bgp3gts2fl7m"/>
+      <item url="ui://04bgp3gts2fl7m"/>
+      <item url="ui://04bgp3gts2fl7m"/>
+      <item url="ui://04bgp3gts2fl7m"/>
+    </list>
+    <text id="n124_s2fl" name="VoteCountDownText" xy="856,124" size="76,76" group="n120_s2fl" font="ui://04bgp3gts2fl7x" fontSize="8" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="100"/>
+    <group id="n120_s2fl" name="VoteGroup" xy="0,0" size="1279,720" advanced="true">
+      <gearDisplay controller="c1" pages="4"/>
+    </group>
+  </displayList>
+  <transition name="t2">
+    <item time="6" type="XY" target="n42_j8ud" value="1040,2"/>
+    <item time="6" type="XY" target="n46_j8ud" value="2,456"/>
+    <item time="6" type="XY" target="n47_j8ud" value="2,290"/>
+    <item time="6" type="XY" target="n48_gapc" value="1187,290"/>
+  </transition>
+</component>

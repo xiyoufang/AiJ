@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="481,51">
+  <displayList>
+    <text id="n122_s2fl" name="NickNameText" xy="0,0" size="297,50" fontSize="24" color="#ffffff" vAlign="middle" autoSize="none" text="你男朋友的噩梦"/>
+    <text id="n123_s2fl" name="VoteResultText" xy="387,1" size="94,50" fontSize="24" color="#ffffff" vAlign="middle" autoSize="none" text="等待"/>
+  </displayList>
+</component>

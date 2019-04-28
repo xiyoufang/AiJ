@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n2_n4bd" name="n2" src="oiag20" fileName="images/n2.png" xy="0,0" size="1280,720"/>
+    <image id="n0_o74m" name="n0" src="o74m1g" fileName="images/jointable/im_bg.png" xy="313,3"/>
+    <component id="n13_n4bd" name="n13" src="n4bd1x" fileName="component/InputButton.xml" xy="398,281" customData="1">
+      <Button icon="ui://qlq5e6a6o74m1r"/>
+    </component>
+    <component id="n14_n4bd" name="n14" src="n4bd1x" fileName="component/InputButton.xml" xy="574,281" customData="2">
+      <Button icon="ui://qlq5e6a6o74m1q"/>
+    </component>
+    <component id="n15_n4bd" name="n15" src="n4bd1x" fileName="component/InputButton.xml" xy="750,281" customData="3">
+      <Button icon="ui://qlq5e6a6o74m1p"/>
+    </component>
+    <component id="n16_n4bd" name="n16" src="n4bd1x" fileName="component/InputButton.xml" xy="398,384" customData="4">
+      <Button icon="ui://qlq5e6a6o74m1o"/>
+    </component>
+    <component id="n17_n4bd" name="n17" src="n4bd1x" fileName="component/InputButton.xml" xy="574,384" customData="5">
+      <Button icon="ui://qlq5e6a6o74m1n"/>
+    </component>
+    <component id="n18_n4bd" name="n18" src="n4bd1x" fileName="component/InputButton.xml" xy="750,384" customData="6">
+      <Button icon="ui://qlq5e6a6o74m1m"/>
+    </component>
+    <component id="n20_n4bd" name="n19" src="n4bd1x" fileName="component/InputButton.xml" xy="398,487" customData="7">
+      <Button icon="ui://qlq5e6a6o74m1l"/>
+    </component>
+    <component id="n21_n4bd" name="n20" src="n4bd1x" fileName="component/InputButton.xml" xy="574,487" customData="8">
+      <Button icon="ui://qlq5e6a6o74m1k"/>
+    </component>
+    <component id="n22_n4bd" name="n21" src="n4bd1x" fileName="component/InputButton.xml" xy="750,487" customData="9">
+      <Button icon="ui://qlq5e6a6o74m1j"/>
+    </component>
+    <component id="n24_n4bd" name="n22" src="n4bd1x" fileName="component/InputButton.xml" xy="574,590" customData="0">
+      <Button icon="ui://qlq5e6a6o74m1i"/>
+    </component>
+    <component id="n23_n4bd" name="n24" src="n4bd1x" fileName="component/InputButton.xml" xy="398,590">
+      <Button icon="ui://qlq5e6a6o74m1u"/>
+    </component>
+    <component id="n25_n4bd" name="n25" src="n4bd1x" fileName="component/InputButton.xml" xy="750,590">
+      <Button icon="ui://qlq5e6a6o74m1s"/>
+    </component>
+    <component id="n27_n4bd" name="n27" src="n4bd1y" fileName="component/LineTextButton.xml" xy="722,216" size="140,48">
+      <Button titleColor="#cc3300" titleFontSize="34"/>
+    </component>
+    <text id="n26_n4bd" name="n26" xy="392,216" size="328,48" fontSize="32" vAlign="bottom" autoSize="shrink" text="您上一次进入的房号："/>
+    <text id="n29_e77d" name="n31" xy="395,119" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="6"/>
+    <text id="n31_e77d" name="n32" xy="483,120" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="1"/>
+    <text id="n32_e77d" name="n33" xy="571,120" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="0"/>
+    <text id="n33_e77d" name="n34" xy="659,120" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="9"/>
+    <text id="n34_e77d" name="n35" xy="747,120" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="2"/>
+    <text id="n35_e77d" name="n36" xy="835,120" size="51,54" fontSize="50" color="#ff0033" align="center" vAlign="middle" autoSize="shrink" bold="true" italic="true" autoClearText="true" text="3"/>
+  </displayList>
+</component>

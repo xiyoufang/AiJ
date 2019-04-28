@@ -1,0 +1,94 @@
+# AiJ 游戏服务器
+
+#### 介绍
+AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来满足更大的人数承载，并且提供了良好的调试接口。
+
+主要模块包括：
+
+* 注册中心
+* 大厅服务 
+* 游戏服务
+* 亲友圈服务
+* 运营管理系统
+* CocosCreator游戏客户端。
+
+网络协议使用Websocket，以更好的支持多平台需求，计划同时支持Mysql、Oracle、SqlServer、Postgresql、Sqlite等多种数据库。
+
+#### 开发环境
+
+* JDK-1.8.0_181
+* zookeeper-3.5.4
+* 数据库（Mysql-5.7.24、sqlite3）
+
+#### 技术架构
+
+* Socket框架tio
+* mvc与orm框架jfinal
+* 注册中心zookeeper
+* 网络协议Websocket
+* 数据库版本管理flyway
+* 客户端游戏引擎CocosCreator
+* 客户端编辑器FairyGUI
+* 开发语言:java、typescript、javascript、sql
+
+### 业务架构
+* 大厅
+    * 房卡充值
+    * 游戏回放
+    * 游戏战绩
+    * 实名制
+* 子游戏
+    * 麻将
+    * 斗地主
+    * 象棋
+* 亲友圈
+    * ...
+* 运营管理
+    * 玩家管理
+    * 服务器管理
+    * 代理管理
+    * 报表统计
+    * ...
+
+#### 安装教程
+1. 安装Zookeeper
+2. 安装CocosCreator
+3. 安装FairyGUI
+
+#### 使用说明
+
+* UI编辑器
+
+![输入图片说明](https://gitee.com/uploads/images/2019/0428/175537_3e7b183a_369917.png "2.png")
+
+* 开发调试
+
+![输入图片说明](https://gitee.com/uploads/images/2019/0428/175549_b02a6a74_369917.png "WX20190428-175249.png")
+
+* 子游戏
+
+![输入图片说明](https://gitee.com/uploads/images/2019/0428/175557_f17fec31_369917.png "WX20190428-175218.png")
+
+* 运营管理
+
+![输入图片说明](https://gitee.com/uploads/images/2019/0428/175609_acddfeaf_369917.png "4.png")
+
+#### 参与贡献
+
+1. Fork 本仓库
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request
+
+
+#### 其他
+
+1. 个人博客 [www.xiyoufang.com](https://www.xiyoufang.com) 获取更多软件开发信息
+2. gitee项目首页 [https://gitee.com/xiyoufang/aij](https://gitee.com/xiyoufang/aij)
+3. 欢迎关注我的个人微信订阅号
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0712/165633_95e6b777_369917.jpeg "qrcode_for_gh_3870df3b5d1f_344.jpg")
+
+### 您也可以加入游戏开发交流QQ群：112958956 ，一起讨论游戏开发技术。
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0708/183503_d1f599f2_369917.png "temp_qrcode_share_112958956.png")

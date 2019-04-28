@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="50,973">
+  <displayList>
+    <image id="n0_s9sm" name="n0" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,0"/>
+    <image id="n1_s9sm" name="n1" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,57"/>
+    <image id="n2_s9sm" name="n2" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,115"/>
+    <image id="n3_s9sm" name="n3" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,173"/>
+    <image id="n4_s9sm" name="n4" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,231"/>
+    <image id="n5_s9sm" name="n5" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,289"/>
+    <image id="n6_s9sm" name="n6" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,347"/>
+    <image id="n7_s9sm" name="n7" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,405"/>
+    <image id="n8_s9sm" name="n8" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,463"/>
+    <image id="n9_s9sm" name="n9" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,521"/>
+    <image id="n10_s9sm" name="n10" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,579"/>
+    <image id="n11_s9sm" name="n11" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,637"/>
+    <image id="n12_s9sm" name="n12" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,695"/>
+    <image id="n13_s9sm" name="n13" src="pjrl15" fileName="images/mahjong/w_hand.png" xy="0,853"/>
+  </displayList>
+</component>

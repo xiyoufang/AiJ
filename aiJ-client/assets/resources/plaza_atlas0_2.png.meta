@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "e28e1241-d7e5-45e0-9e16-9bb111a95535",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "plaza_atlas0_2": {
+      "ver": "1.0.3",
+      "uuid": "cb34295f-a3bb-463f-a9d9-7b1726a6576b",
+      "rawTextureUuid": "e28e1241-d7e5-45e0-9e16-9bb111a95535",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -384,
+      "offsetY": 148,
+      "trimX": 0,
+      "trimY": 359,
+      "width": 1280,
+      "height": 1034,
+      "rawWidth": 2048,
+      "rawHeight": 2048,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

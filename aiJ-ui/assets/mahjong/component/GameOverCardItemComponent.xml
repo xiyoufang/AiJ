@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1096,134">
+  <displayList>
+    <image id="n0_oiag" name="n0" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="1,16"/>
+    <image id="n1_oiag" name="n1" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="76,16"/>
+    <image id="n2_oiag" name="n2" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="152,16"/>
+    <image id="n3_oiag" name="n3" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="228,16"/>
+    <image id="n4_oiag" name="n4" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="304,16"/>
+    <image id="n5_oiag" name="n5" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="380,16"/>
+    <image id="n6_oiag" name="n6" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="456,16"/>
+    <image id="n7_oiag" name="n7" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="532,16"/>
+    <image id="n8_oiag" name="n8" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="608,16"/>
+    <image id="n9_oiag" name="n9" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="684,16"/>
+    <image id="n10_oiag" name="n10" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="760,16"/>
+    <image id="n11_oiag" name="n11" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="836,16"/>
+    <image id="n12_oiag" name="n12" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="912,16"/>
+    <image id="n13_oiag" name="n13" src="pjrl2h" fileName="images/mahjong/2/s_mingmah_02.png" xy="1020,16"/>
+    <component id="n15_oiag" name="n15" src="s9sm5i" fileName="component/SouthPengComponent.xml" xy="0,14"/>
+    <component id="n16_oiag" name="n16" src="s74l4r" fileName="component/SouthGangComponent.xml" xy="229,0"/>
+  </displayList>
+</component>

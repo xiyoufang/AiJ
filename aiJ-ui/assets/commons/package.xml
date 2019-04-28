@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="zpyz66ct" jpegQuality="80" compressPNG="true">
+  <resources>
+    <component id="k2xp8" name="AlertWindow.xml" path="/" exported="true"/>
+    <component id="k2xp6" name="AlertFrame.xml" path="/component/"/>
+    <component id="k2xp7" name="closeButton.xml" path="/component/"/>
+    <image id="k2xp5" name="bt_close.png" path="/images/"/>
+    <image id="k2xp4" name="window_bg.png" path="/images/"/>
+    <image id="covu9" name="loading5.png" path="/images/loading/"/>
+    <image id="covua" name="loading4.png" path="/images/loading/"/>
+    <image id="covub" name="loading6.png" path="/images/loading/"/>
+    <image id="covuc" name="loading7.png" path="/images/loading/"/>
+    <image id="covud" name="loading3.png" path="/images/loading/"/>
+    <image id="covue" name="loading2.png" path="/images/loading/"/>
+    <image id="covuf" name="loading1.png" path="/images/loading/"/>
+    <image id="covug" name="loading8.png" path="/images/loading/"/>
+    <movieclip id="covuh" name="LoadingMovieClip.jta" path="/animate/"/>
+    <image id="covui" name="shaizi_anmi1.png" path="/images/touzi/"/>
+    <image id="covuj" name="shaizi_anmi2.png" path="/images/touzi/"/>
+    <image id="covuk" name="shaizi_anmi3.png" path="/images/touzi/"/>
+    <image id="covul" name="shaizi_anmi4.png" path="/images/touzi/"/>
+    <image id="covum" name="shaizi_anmi5.png" path="/images/touzi/"/>
+    <image id="covun" name="shaizi_anmi6.png" path="/images/touzi/"/>
+    <image id="covuo" name="shaizi_anmi7.png" path="/images/touzi/"/>
+    <image id="covup" name="shaizi_anmi8.png" path="/images/touzi/"/>
+    <image id="covuq" name="shaizi_anmi9.png" path="/images/touzi/"/>
+    <image id="covur" name="shaizi_anmi10.png" path="/images/touzi/"/>
+    <image id="covus" name="shaizi_anmi11.png" path="/images/touzi/"/>
+    <movieclip id="covut" name="TouziMovieClip.jta" path="/animate/"/>
+    <image id="covuu" name="loadingbg.png" path="/images/"/>
+    <component id="covuv" name="LoadingWindow.xml" path="/" exported="true"/>
+    <component id="qyeww" name="LoadingFrame.xml" path="/component/"/>
+    <component id="rtufx" name="UserInfoWindowFrame.xml" path="/component/"/>
+    <image id="rtufy" name="im_bg.png" path="/images/"/>
+    <image id="rtufz" name="im_defaulthead.png" path="/images/"/>
+    <component id="rtuf10" name="UserInfoWindow.xml" path="/" exported="true"/>
+    <component id="atbb11" name="SettingWindow.xml" path="/" exported="true"/>
+    <image id="atbb12" name="bt_off.png" path="/images/setting/"/>
+    <image id="atbb13" name="bt_on.png" path="/images/setting/"/>
+    <image id="atbb14" name="im_bg.png" path="/images/setting/"/>
+    <image id="atbb15" name="im_close.png" path="/images/setting/"/>
+    <image id="atbb16" name="im_music.png" path="/images/setting/"/>
+    <image id="atbb17" name="im_sound.png" path="/images/setting/"/>
+    <component id="atbb18" name="SettingFrame.xml" path="/component/"/>
+    <component id="atbb19" name="ToggleButton.xml" path="/component/"/>
+    <image id="atbb1a" name="bt_green.png" path="/images/"/>
+    <image id="atbb1b" name="bt_orange.png" path="/images/"/>
+    <image id="atbb1c" name="n8.png" path="/images/"/>
+    <image id="atbb1d" name="n7.png" path="/images/"/>
+    <component id="atbb1e" name="IconButton.xml" path="/component/"/>
+    <sound id="od391j" name="bgm.mp3" path="/audio/" exported="true"/>
+  </resources>
+  <publish name="commons"/>
+</packageDescription>

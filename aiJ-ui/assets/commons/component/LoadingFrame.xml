@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="323,229" extention="Label" initName="frame">
+  <displayList>
+    <image id="n0_qyew" name="n0" src="covuu" fileName="images/loadingbg.png" xy="0,0" size="323,229">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <graph id="n1_qyew" name="dragArea" xy="0,0" size="323,28">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n2_qyew" name="contentArea" xy="0,28" size="323,201">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+  </displayList>
+</component>

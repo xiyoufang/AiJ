@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1100,74">
+  <displayList>
+    <image id="n24_xtij" name="n24" src="xtij2h" fileName="images/video/img_item_bg.png" xy="0,0" size="1100,74"/>
+    <text id="n25_xtij" name="ServiceNameText" xy="20,15" size="175,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="南丰麻将"/>
+    <text id="n26_xtij" name="TableNoText" xy="235,15" size="85,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="801221"/>
+    <text id="n27_xtij" name="NickNameText" xy="360,15" size="169,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="最萌最寂寞"/>
+    <text id="n28_xtij" name="ScoreText" xy="569,15" size="94,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="+100"/>
+    <text id="n29_xtij" name="StartedTimeText" xy="703,15" size="251,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="2019-01-31 09:39:52"/>
+    <component id="n30_xtij" name="DetailButton" src="g256k" fileName="component/IconButton.xml" xy="982,14" size="100,42">
+      <Button icon="ui://qlq5e6a6covu23"/>
+    </component>
+  </displayList>
+</component>

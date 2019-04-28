@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1094,119">
+  <displayList>
+    <image id="n15_s9sm" name="n15" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="0,0"/>
+    <image id="n16_s9sm" name="n16" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="151,0"/>
+    <image id="n17_s9sm" name="n17" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="227,0"/>
+    <image id="n18_s9sm" name="n18" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="303,0"/>
+    <image id="n19_s9sm" name="n19" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="379,0"/>
+    <image id="n20_s9sm" name="n20" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="75,0"/>
+    <image id="n21_s9sm" name="n21" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="531,0"/>
+    <image id="n22_s9sm" name="n22" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="607,0"/>
+    <image id="n23_s9sm" name="n23" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="683,0"/>
+    <image id="n24_s9sm" name="n24" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="759,0"/>
+    <image id="n25_s9sm" name="n25" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="455,0"/>
+    <image id="n26_s9sm" name="n26" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="835,0"/>
+    <image id="n27_s9sm" name="n27" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="912,0"/>
+    <image id="n28_s9sm" name="n28" src="pjrl35" fileName="images/mahjong/2/s_handmah_19.png" xy="1022,0"/>
+  </displayList>
+</component>

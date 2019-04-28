@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="190,74" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_m0rf" name="n0" src="9azv16" fileName="images/select_empty.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n1_m0rf" name="n1" xy="27,17" size="133,40" fontSize="32" color="#993333" strokeColor="#ffcc66" text="大众麻将"/>
+  </displayList>
+  <Button downEffect="dark" downEffectValue="0.80"/>
+</component>

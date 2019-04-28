@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="871,511" extention="Label" initName="frame">
+  <displayList>
+    <image id="n0_atbb" name="n0" src="atbb14" fileName="images/setting/im_bg.png" xy="0,0" size="871,511">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <component id="n1_atbb" name="closeButton" src="k2xp7" fileName="component/closeButton.xml" xy="825,-20">
+      <relation target="" sidePair="right-right"/>
+    </component>
+    <graph id="n2_atbb" name="dragArea" xy="0,0" size="824,86">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n3_atbb" name="contentArea" xy="0,89" size="871,422">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+  </displayList>
+</component>

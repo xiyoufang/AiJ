@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="228,131">
+  <displayList>
+    <loader id="n15_s74l" name="n0" xy="0,25" size="76,118" scale="0.9,0.9" url="ui://04bgp3gtpjrl2b" vAlign="bottom"/>
+    <loader id="n16_s74l" name="n1" xy="68,25" size="76,118" scale="0.9,0.9" url="ui://04bgp3gtpjrl2b"/>
+    <loader id="n20_s74l" name="n2" xy="136,25" size="76,118" scale="0.9,0.9" url="ui://04bgp3gtpjrl2b"/>
+    <loader id="n21_s74l" name="n3" xy="68,0" size="76,118" scale="0.9,0.9" url="ui://04bgp3gtpjrl2b"/>
+  </displayList>
+</component>

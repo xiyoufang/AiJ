@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="430,176">
+  <displayList>
+    <component id="n0_rtuf" name="frame" src="rtufx" fileName="component/UserInfoWindowFrame.xml" xy="1,0"/>
+    <image id="n1_rtuf" name="n1" src="rtufz" fileName="images/im_defaulthead.png" xy="25,18"/>
+    <loader id="n2_rtuf" name="AvatarLoader" xy="25,18" size="94,94" url="ui://zpyz66ctrtufz" fill="scale" shrinkOnly="true"/>
+    <text id="n4_rtuf" name="n4" xy="25,125" size="61,25" fontSize="18" vAlign="middle" autoSize="none" text="地址："/>
+    <text id="n5_rtuf" name="n5" xy="136,57" size="32,25" fontSize="18" vAlign="middle" autoSize="none" text="ID:"/>
+    <text id="n6_rtuf" name="n6" xy="136,88" size="32,25" fontSize="18" vAlign="middle" autoSize="none" text="IP:"/>
+    <text id="n3_rtuf" name="UserAddressText" xy="90,125" size="317,24" fontSize="12" vAlign="middle" autoSize="none" text="广东省深圳市福田区侨香路"/>
+    <text id="n7_rtuf" name="NickNameText" xy="136,19" size="271,32" fontSize="24" vAlign="middle" autoSize="none" text="一代天骄"/>
+    <text id="n8_rtuf" name="UserIdText" xy="170,57" size="237,25" fontSize="18" vAlign="middle" autoSize="none" text="00000001"/>
+    <text id="n9_rtuf" name="UserIpText" xy="170,88" size="236,25" fontSize="18" vAlign="middle" autoSize="none" text="127.0.0.1"/>
+  </displayList>
+</component>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="240,32">
+  <displayList>
+    <text id="n57_xtij" name="NickNameText" xy="0,0" size="153,31" fontSize="24" color="#660000" vAlign="middle" autoSize="none" autoClearText="true" text="追梦最挚爱"/>
+    <text id="n58_xtij" name="ScoreText" xy="177,1" size="62,31" fontSize="24" color="#660000" vAlign="middle" autoSize="none" autoClearText="true" text="+100"/>
+  </displayList>
+</component>

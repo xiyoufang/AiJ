@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1822,200">
+  <displayList>
+    <component id="n0_oiag" name="GameOverCardItemComponent" src="oiag6l" fileName="component/GameOverCardItemComponent.xml" xy="440,51"/>
+    <component id="n18_oiag" name="GameOverHeadItemComponent" src="fda66v" fileName="component/GameOverHeadItemComponent.xml" xy="15,29"/>
+    <image id="n17_oiag" name="winner" src="oiag6j" fileName="images/winner.png" xy="1731,115"/>
+    <text id="n23_oiag" name="ScoreText" xy="1572,93" size="69,47" fontSize="38" color="#ff0000" vAlign="middle" autoClearText="true" text="+10"/>
+    <text id="n24_oiag" name="InfoText" xy="442,4" size="237,40" fontSize="32" color="#330000" vAlign="middle" bold="true" autoClearText="true" text="杠上开花,碰碰胡"/>
+  </displayList>
+</component>

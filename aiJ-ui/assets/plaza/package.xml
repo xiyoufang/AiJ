@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="qlq5e6a6" jpegQuality="80" compressPNG="true">
+  <resources>
+    <component id="jhjb1" name="PlazaLayer.xml" path="/" exported="true"/>
+    <image id="jhjb3" name="bg_1.png" path="/images/"/>
+    <image id="jhjb5" name="im_up.png" path="/images/"/>
+    <image id="jhjb6" name="im_bottom.png" path="/images/"/>
+    <image id="jhjb7" name="c.png" path="/images/"/>
+    <image id="jhjb8" name="d.png" path="/images/"/>
+    <image id="jhjb9" name="e.png" path="/images/"/>
+    <component id="jhjba" name="ButtonCreateTable.xml" path="/component/"/>
+    <component id="jhjbb" name="ButtonJoinTable.xml" path="/component/"/>
+    <component id="jhjbc" name="ButtonClub.xml" path="/component/"/>
+    <image id="jhjbd" name="im_people_0.png" path="/images/"/>
+    <image id="jhjbe" name="im_people_1.png" path="/images/"/>
+    <image id="jhjbf" name="im_peoplebottom.png" path="/images/"/>
+    <component id="jhjbg" name="Component2.xml" path="/component/"/>
+    <image id="jhjbh" name="plaza_bg.png" path="/images/"/>
+    <component id="g256k" name="IconButton.xml" path="/component/"/>
+    <image id="g256l" name="bt_help.png" path="/images/"/>
+    <image id="g256m" name="bt_kefu.png" path="/images/"/>
+    <image id="g256n" name="bt_notice.png" path="/images/"/>
+    <image id="g256o" name="bt_record.png" path="/images/"/>
+    <image id="g256p" name="bt_shop.png" path="/images/"/>
+    <image id="h2x3s" name="bt_list.png" path="/images/"/>
+    <image id="h2x3t" name="o_1.png" path="/images/" scale="" scale9grid="50,50,100,100"/>
+    <image id="h2x3u" name="o_2.png" path="/images/"/>
+    <image id="h2x3v" name="o_3.png" path="/images/"/>
+    <image id="h2x3w" name="im_defaulthead_0.png" path="/images/"/>
+    <image id="h2x3x" name="im_defaulthead_1.png" path="/images/"/>
+    <image id="h2x3y" name="im_namebg.png" path="/images/"/>
+    <image id="h2x3z" name="bt_set.png" path="/images/"/>
+    <image id="h2x310" name="bt_share.png" path="/images/"/>
+    <image id="h2x311" name="im_diamond_bg.png" path="/images/" scale="9grid" scale9grid="20,12,127,24"/>
+    <image id="h2x312" name="im_diamond.png" path="/images/"/>
+    <image id="zgxh13" name="bt_adddiamond.png" path="/images/"/>
+    <image id="9azv14" name="im_carete_bg.png" path="/images/"/>
+    <image id="9azv15" name="im_close.png" path="/images/"/>
+    <image id="9azv16" name="select_empty.png" path="/images/"/>
+    <image id="9azv17" name="selectb.png" path="/images/"/>
+    <image id="9azv19" name="cancelBtn.png" path="/images/"/>
+    <image id="9azv1a" name="sureBtn.png" path="/images/"/>
+    <component id="m0rf1d" name="MahjongButton.xml" path="/component/"/>
+    <component id="m0rf1e" name="PokerButton.xml" path="/component/"/>
+    <image id="o74m1f" name="bt_close.png" path="/images/jointable/"/>
+    <image id="o74m1g" name="im_bg.png" path="/images/jointable/"/>
+    <component id="o74m1h" name="JoinTableComponent.xml" path="/component/"/>
+    <image id="o74m1i" name="1_0002_0.png" path="/images/jointable/"/>
+    <image id="o74m1j" name="1_0004_9.png" path="/images/jointable/"/>
+    <image id="o74m1k" name="1_0005_8.png" path="/images/jointable/"/>
+    <image id="o74m1l" name="1_0006_7.png" path="/images/jointable/"/>
+    <image id="o74m1m" name="1_0007_6.png" path="/images/jointable/"/>
+    <image id="o74m1n" name="1_0008_5.png" path="/images/jointable/"/>
+    <image id="o74m1o" name="1_0009_4.png" path="/images/jointable/"/>
+    <image id="o74m1p" name="1_0010_3.png" path="/images/jointable/"/>
+    <image id="o74m1q" name="1_0011_2.png" path="/images/jointable/"/>
+    <image id="o74m1r" name="1_0012_1.png" path="/images/jointable/"/>
+    <image id="o74m1s" name="im_delete.png" path="/images/jointable/"/>
+    <image id="o74m1u" name="im_input.png" path="/images/jointable/"/>
+    <image id="o74m1v" name="number_x.png" path="/images/jointable/"/>
+    <component id="n4bd1x" name="InputButton.xml" path="/component/"/>
+    <component id="n4bd1y" name="LineTextButton.xml" path="/component/"/>
+    <font id="n4bd1z" name="NumFont.fnt" path="/fonts/" exported="true"/>
+    <image id="oiag20" name="n2.png" path="/images/"/>
+    <component id="covu21" name="RoomRecordLayer.xml" path="/" exported="true"/>
+    <image id="covu22" name="hf.png" path="/images/video/"/>
+    <image id="covu23" name="bt_reserch.png" path="/images/video/"/>
+    <image id="covu27" name="base.png" path="/images/video/"/>
+    <image id="covu28" name="small_button.png" path="/images/"/>
+    <image id="covu2a" name="bt_back.png" path="/images/"/>
+    <image id="covu2b" name="im_bg2.png" path="/images/"/>
+    <image id="xtij2c" name="im_navbar.png" path="/images/"/>
+    <image id="xtij2d" name="back.png" path="/images/"/>
+    <image id="xtij2f" name="im_bg2.png" path="/images/video/"/>
+    <image id="xtij2g" name="bg_title.png" path="/images/"/>
+    <image id="xtij2h" name="img_item_bg.png" path="/images/video/"/>
+    <image id="xtij2i" name="bt_next.png" path="/images/video/"/>
+    <image id="xtij2j" name="close_btn.png" path="/images/video/"/>
+    <component id="xtij2k" name="RoomRecordComponent.xml" path="/component/" exported="true"/>
+    <image id="xtij2l" name="n17.png" path="/images/video/"/>
+    <image id="xtij2n" name="bg_item.png" path="/images/video/"/>
+    <component id="xtij2o" name="RoomRecordItemComponent.xml" path="/component/" exported="true"/>
+    <component id="xtij2p" name="RoomRecordItemScoreComponent.xml" path="/component/" exported="true"/>
+    <image id="xtij2q" name="-.png" path="/fonts/chars/"/>
+    <image id="xtij2r" name="+.png" path="/fonts/chars/"/>
+    <image id="xtij2s" name="0.png" path="/fonts/chars/"/>
+    <image id="xtij2t" name="1.png" path="/fonts/chars/"/>
+    <image id="xtij2u" name="2.png" path="/fonts/chars/"/>
+    <image id="xtij2v" name="3.png" path="/fonts/chars/"/>
+    <image id="xtij2w" name="4.png" path="/fonts/chars/"/>
+    <image id="xtij2x" name="5.png" path="/fonts/chars/"/>
+    <image id="xtij2y" name="6.png" path="/fonts/chars/"/>
+    <image id="xtij2z" name="7.png" path="/fonts/chars/"/>
+    <image id="xtij30" name="8.png" path="/fonts/chars/"/>
+    <image id="xtij31" name="9.png" path="/fonts/chars/"/>
+    <image id="bvie32" name="im_systemmessage.png" path="/images/"/>
+    <image id="bvie33" name="im_trumpet.png" path="/images/"/>
+    <image id="henj34" name="im_bg1.png" path="/images/admin/"/>
+    <image id="henj35" name="bt_giving.png" path="/images/admin/"/>
+    <image id="henj36" name="bt_record.png" path="/images/admin/"/>
+    <image id="henj37" name="im_givebg.png" path="/images/admin/"/>
+    <image id="henj38" name="im_huanying1.png" path="/images/admin/"/>
+    <image id="nb6n39" name="bt_cancel.png" path="/images/admin/"/>
+    <image id="nb6n3a" name="bt_give.png" path="/images/admin/"/>
+    <image id="nb6n3b" name="bt_OK.png" path="/images/admin/"/>
+    <image id="nb6n3c" name="im_numbbk.png" path="/images/admin/"/>
+    <image id="qs1s3d" name="im_defaulthead.png" path="/images/admin/"/>
+    <component id="kz7r3e" name="RechargeRecordLayer.xml" path="/" exported="true"/>
+    <component id="kz7r3f" name="RechargeRecordComponent.xml" path="/component/" exported="true"/>
+    <image id="kz7r3g" name="n17.png" path="/images/"/>
+  </resources>
+  <publish name="plaza"/>
+</packageDescription>

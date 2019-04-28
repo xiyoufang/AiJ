@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_covu" name="n0" src="jhjbh" fileName="images/plaza_bg.png" xy="0,0"/>
+    <image id="n13_xtij" name="n13" src="xtij2f" fileName="images/video/im_bg2.png" xy="17,29"/>
+    <image id="n17_xtij" name="n17" src="kz7r3g" fileName="images/n17.png" xy="87,70"/>
+    <list id="n7_covu" name="RechargeRecordList" xy="87,143" size="1105,438" overflow="scroll">
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+      <item url="ui://qlq5e6a6kz7r3f"/>
+    </list>
+    <component id="n34_xtij" name="BackButton" src="g256k" fileName="component/IconButton.xml" xy="559,585" size="162,85">
+      <Button icon="ui://qlq5e6a6covu2a"/>
+    </component>
+  </displayList>
+</component>

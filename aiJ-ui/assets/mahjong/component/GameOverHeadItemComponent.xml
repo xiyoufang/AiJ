@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="427,140">
+  <displayList>
+    <image id="n18_oiag" name="n18" src="oiag69" fileName="images/avatar_bg.png" xy="0,0" size="140,140"/>
+    <image id="n19_oiag" name="n19" src="j8ud5x" fileName="images/nohead.png" xy="7,7" size="126,126"/>
+    <loader id="n25_fda6" name="Avatar" xy="7,7" size="126,126" url="ui://04bgp3gtj8ud5x" fill="scale"/>
+    <image id="n22_oiag" name="Banker" src="oiag6f" fileName="images/over_banker.png" xy="93,93"/>
+    <text id="n20_oiag" name="IdText" xy="152,6" size="188,38" fontSize="30" vAlign="middle" text="10000000000"/>
+    <text id="n21_oiag" name="NickNameText" xy="152,95" size="275,38" fontSize="30" vAlign="middle" text="尘世间一迷途小书童"/>
+  </displayList>
+</component>

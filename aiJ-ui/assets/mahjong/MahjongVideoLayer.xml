@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_pjrl" name="n0" src="pjrl1" fileName="images/mahjong_bg.png" xy="0,0"/>
+    <image id="n5_pjrl" name="n5" src="pjrl49" fileName="images/timer/time.png" xy="574,294" group="n10_pjrl"/>
+    <image id="n6_pjrl" name="pilotLamp0" src="pjrl4b" fileName="images/timer/time0.png" xy="452,387" group="n10_pjrl" visible="false"/>
+    <image id="n7_pjrl" name="pilotLamp1" src="pjrl4d" fileName="images/timer/time1.png" xy="668,122" group="n10_pjrl" visible="false"/>
+    <image id="n8_pjrl" name="pilotLamp2" src="pjrl4a" fileName="images/timer/time2.png" xy="454,130" group="n10_pjrl" visible="false"/>
+    <image id="n9_pjrl" name="pilotLamp3" src="pjrl4c" fileName="images/timer/time3.png" xy="410,122" group="n10_pjrl" visible="false"/>
+    <text id="n90_xtij" name="CountDownText" xy="609,328" size="64,64" group="n10_pjrl" font="ui://04bgp3gtq55e4x" fontSize="8" align="center" vAlign="middle" autoSize="none" text="000"/>
+    <group id="n10_pjrl" name="time_group" xy="410,122" size="468,468"/>
+    <component id="n25_j57n" name="SouthDiscardComponent" src="j57n5o" fileName="component/SouthDiscardComponent.xml" xy="357,388" scale="0.68,0.68"/>
+    <component id="n27_j57n" name="NorthDiscardComponent" src="j57n5p" fileName="component/NorthDiscardComponent.xml" xy="357,127" scale="0.68,0.68"/>
+    <component id="n28_j57n" name="EastDiscardComponent" src="j57n5q" fileName="component/EastDiscardComponent.xml" xy="923,125" scale="0.6,0.6"/>
+    <component id="n29_j57n" name="WestDiscardComponent" src="j57n5r" fileName="component/WestDiscardComponent.xml" xy="142,125" scale="0.6,0.6"/>
+    <component id="n19_s9sm" name="WestComponent" src="s9sm5f" fileName="component/WestComponent.xml" xy="92,50" scale="0.55,0.55"/>
+    <component id="n20_s9sm" name="EastComponent" src="s9sm5g" fileName="component/EastComponent.xml" xy="1158,50" scale="0.55,0.55"/>
+    <component id="n22_s9sm" name="NorthComponent" src="s9sm5h" fileName="component/NorthComponent.xml" xy="248,29" scale="0.7,0.7"/>
+    <component id="n15_s74l" name="SouthComponent" src="s74l4u" fileName="component/SouthComponent.xml" xy="92,600" size="1102,118"/>
+    <component id="n46_j8ud" name="SouthHeadComponent" src="gapc68" fileName="component/SouthHeadComponent.xml" xy="2,456"/>
+    <component id="n42_j8ud" name="NorthHeadComponent" src="gapc66" fileName="component/NorthHeadComponent.xml" xy="1040,10"/>
+    <component id="n47_j8ud" name="WestHeadComponent" src="gapc67" fileName="component/WestHeadComponent.xml" xy="2,290"/>
+    <component id="n48_gapc" name="EastHeadComponent" src="j8ud5z" fileName="component/EastHeadComponent.xml" xy="1187,288"/>
+    <image id="n81_ruof" name="n81" src="ruof71" fileName="images/video/rec_play_bg.png" xy="406,307"/>
+    <component id="n86_ruof" name="BackwardButton" src="pjrl48" fileName="component/IconButton.xml" xy="446,336" size="50,41">
+      <Button icon="ui://04bgp3gtruof72"/>
+    </component>
+    <component id="n87_ruof" name="PauseButton" src="pjrl48" fileName="component/IconButton.xml" xy="561,329" size="48,56">
+      <Button icon="ui://04bgp3gtruof6y"/>
+    </component>
+    <component id="n88_ruof" name="ForwardButton" src="pjrl48" fileName="component/IconButton.xml" xy="677,336" size="50,41">
+      <Button icon="ui://04bgp3gtruof73"/>
+    </component>
+    <component id="n89_ruof" name="ExitButton" src="pjrl48" fileName="component/IconButton.xml" xy="764,335" size="54,50">
+      <Button icon="ui://04bgp3gtruof70"/>
+    </component>
+  </displayList>
+</component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="270,560">
+  <displayList>
+    <image id="n55_xtij" name="n55" src="xtij2n" fileName="images/video/bg_item.png" xy="0,0"/>
+    <component id="n50_xtij" name="PlayVideoButton" src="g256k" fileName="component/IconButton.xml" xy="87,498" size="85,56">
+      <Button icon="ui://qlq5e6a6covu22"/>
+    </component>
+    <list id="n56_xtij" name="RoomRecordItemScoreList" xy="16,84" size="238,337" overflow="scroll" lineGap="20">
+      <item url="ui://qlq5e6a6xtij2p"/>
+      <item url="ui://qlq5e6a6xtij2p"/>
+      <item url="ui://qlq5e6a6xtij2p"/>
+      <item url="ui://qlq5e6a6xtij2p"/>
+    </list>
+    <text id="n59_xtij" name="NumberText" xy="105,6" size="60,31" font="ui://qlq5e6a6n4bd1z" fontSize="24" align="center" vAlign="middle" autoSize="none" text="1"/>
+    <text id="n60_xtij" name="n60" xy="60,8" size="40,31" fontSize="24" align="center" vAlign="middle" autoSize="none" text="第"/>
+    <text id="n61_xtij" name="n61" xy="170,8" size="40,31" fontSize="24" align="center" vAlign="middle" autoSize="none" text="局"/>
+  </displayList>
+</component>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1100,74">
+  <displayList>
+    <image id="n24_xtij" name="n24" src="xtij2h" fileName="images/video/img_item_bg.png" xy="0,0" size="1100,74"/>
+    <text id="n25_xtij" name="TransText" xy="20,15" size="88,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="买"/>
+    <text id="n26_xtij" name="UserIdText" xy="168,15" size="135,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="801221"/>
+    <text id="n27_xtij" name="NickNameText" xy="363,15" size="204,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="最萌最寂寞"/>
+    <text id="n28_xtij" name="AssetNumberText" xy="627,15" size="118,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="+100"/>
+    <text id="n29_xtij" name="CreatedTimeText" xy="805,15" size="251,40" fontSize="24" align="center" vAlign="middle" autoSize="none" text="2019-01-31 09:39:52"/>
+  </displayList>
+</component>

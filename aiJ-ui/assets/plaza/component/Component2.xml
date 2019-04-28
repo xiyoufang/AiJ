@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,580">
+  <displayList>
+    <image id="n0_jhjb" name="n0" src="jhjbd" fileName="images/im_people_0.png" xy="2,0"/>
+    <image id="n1_jhjb" name="n1" src="jhjbf" fileName="images/im_peoplebottom.png" xy="23,392"/>
+  </displayList>
+</component>

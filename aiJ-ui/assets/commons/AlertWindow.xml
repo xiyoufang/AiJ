@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,370">
+  <displayList>
+    <component id="n0_k2xp" name="frame" src="k2xp6" fileName="component/WindowFrame.xml" xy="0,0"/>
+    <text id="n1_k2xp" name="title" xy="37,27" size="566,42" fontSize="32" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="提示"/>
+    <text id="n2_k2xp" name="content" xy="34,101" size="569,226" fontSize="28" vAlign="middle" autoSize="none" text=""/>
+  </displayList>
+</component>

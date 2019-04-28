@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="323,229">
+  <displayList>
+    <component id="n4_qyew" name="frame" src="qyeww" fileName="component/LoadingFrame.xml" xy="-1,1"/>
+    <movieclip id="n2_covu" name="n2" src="covuh" fileName="animate/LoadingMovieClip.jta" xy="111,53"/>
+    <text id="n3_qyew" name="content" xy="61,158" size="200,40" fontSize="12" color="#660000" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="网络连接异常，重新连接中...&#xA;当前重试次数1"/>
+  </displayList>
+</component>

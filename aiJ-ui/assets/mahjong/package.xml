@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="04bgp3gt" jpegQuality="80" compressPNG="true">
+  <resources>
+    <component id="pjrl0" name="MahjongGameLayer.xml" path="/" exported="true"/>
+    <image id="pjrl1" name="mahjong_bg.png" path="/images/"/>
+    <image id="pjrl2" name="flag1.png" path="/images/"/>
+    <image id="pjrl3" name="im_banker.png" path="/images/"/>
+    <image id="pjrl4" name="n_hand.png" path="/images/mahjong/" exported="true"/>
+    <image id="pjrl5" name="e_hand.png" path="/images/mahjong/" exported="true"/>
+    <image id="pjrl6" name="e_mingmah_05.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl7" name="e_mingmah_19.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl8" name="e_mingmah_18.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl9" name="e_mingmah_04.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrla" name="e_mingmah_00.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlb" name="e_mingmah_06.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlc" name="e_mingmah_07.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrld" name="e_mingmah_03.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrle" name="e_mingmah_02.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlf" name="e_mingmah_28.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlg" name="e_mingmah_01.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlh" name="e_mingmah_29.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrli" name="e_mingmah_33.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlj" name="e_mingmah_32.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlk" name="e_mingmah_31.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrll" name="e_mingmah_35.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlm" name="e_mingmah_34.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrln" name="e_mingmah_36.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlo" name="e_mingmah_37.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlp" name="e_mingmah_24.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlq" name="e_mingmah_25.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlr" name="e_mingmah_11.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrls" name="e_mingmah_27.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlt" name="e_mingmah_13.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlu" name="e_mingmah_12.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlv" name="e_mingmah_26.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlw" name="e_mingmah_22.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlx" name="e_mingmah_16.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrly" name="e_mingmah_17.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrlz" name="e_mingmah_23.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl10" name="e_mingmah_09.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl11" name="e_mingmah_15.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl12" name="e_mingmah_21.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl13" name="e_mingmah_14.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl14" name="e_mingmah_08.png" path="/images/mahjong/1/" exported="true"/>
+    <image id="pjrl15" name="w_hand.png" path="/images/mahjong/" exported="true"/>
+    <image id="pjrl16" name="w_mingmah_05.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl17" name="w_mingmah_19.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl18" name="w_mingmah_18.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl19" name="w_mingmah_04.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1a" name="w_mingmah_00.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1b" name="w_mingmah_06.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1c" name="w_mingmah_07.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1d" name="w_mingmah_03.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1e" name="w_mingmah_02.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1f" name="w_mingmah_28.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1g" name="w_mingmah_01.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1h" name="w_mingmah_29.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1i" name="w_mingmah_33.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1j" name="w_mingmah_32.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1k" name="w_mingmah_31.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1l" name="w_mingmah_35.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1m" name="w_mingmah_34.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1n" name="w_mingmah_36.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1o" name="w_mingmah_37.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1p" name="w_mingmah_24.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1q" name="w_mingmah_25.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1r" name="w_mingmah_11.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1s" name="w_mingmah_27.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1t" name="w_mingmah_13.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1u" name="w_mingmah_12.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1v" name="w_mingmah_26.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1w" name="w_mingmah_22.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1x" name="w_mingmah_16.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1y" name="w_mingmah_17.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl1z" name="w_mingmah_23.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl20" name="w_mingmah_09.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl21" name="w_mingmah_15.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl22" name="w_mingmah_21.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl23" name="w_mingmah_14.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl24" name="w_mingmah_08.png" path="/images/mahjong/3/" exported="true"/>
+    <image id="pjrl25" name="s_mingmah_05.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl26" name="s_handmah_33.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl27" name="s_mingmah_19.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl28" name="s_mingmah_18.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl29" name="s_handmah_32.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2a" name="s_mingmah_04.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2b" name="s_mingmah_00.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2c" name="s_mingmah_06.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2d" name="s_handmah_31.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2e" name="s_mingmah_07.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2f" name="s_handmah_35.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2g" name="s_mingmah_03.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2h" name="s_mingmah_02.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2i" name="s_handmah_34.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2j" name="s_mingmah_28.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2k" name="s_handmah_36.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2l" name="s_mingmah_01.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2m" name="s_mingmah_29.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2n" name="s_handmah_37.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2o" name="s_handmah_24.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2p" name="s_handmah_25.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2q" name="s_handmah_11.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2r" name="s_handmah_27.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2s" name="s_handmah_13.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2t" name="s_handmah_12.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2u" name="s_handmah_26.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2v" name="s_handmah_22.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2w" name="s_handmah_16.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2x" name="s_handmah_17.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2y" name="s_handmah_23.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl2z" name="s_handmah_15.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl30" name="s_handmah_21.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl31" name="s_handmah_09.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl32" name="s_handmah_08.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl33" name="s_handmah_14.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl34" name="s_mingmah_33.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl35" name="s_handmah_19.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl36" name="s_handmah_05.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl37" name="s_handmah_04.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl38" name="s_handmah_18.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl39" name="s_mingmah_32.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3a" name="s_handmah_06.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3b" name="s_handmah_07.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3c" name="s_mingmah_31.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3d" name="s_handmah_03.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3e" name="s_mingmah_35.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3f" name="s_mingmah_34.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3g" name="s_handmah_02.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3h" name="s_handmah_28.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3i" name="s_mingmah_36.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3j" name="s_handmah_29.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3k" name="s_mingmah_37.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3l" name="s_handmah_01.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3m" name="s_mingmah_24.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3n" name="s_mingmah_25.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3o" name="s_mingmah_11.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3p" name="s_mingmah_27.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3q" name="s_mingmah_13.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3r" name="s_mingmah_12.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3s" name="s_mingmah_26.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3t" name="s_mingmah_22.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3u" name="s_mingmah_16.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3v" name="s_mingmah_17.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3w" name="s_mingmah_23.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3x" name="s_mingmah_09.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3y" name="s_mingmah_15.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl3z" name="s_mingmah_21.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl40" name="s_mingmah_14.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl41" name="s_mingmah_08.png" path="/images/mahjong/2/" exported="true"/>
+    <image id="pjrl42" name="bt_chat.png" path="/images/"/>
+    <image id="pjrl43" name="bt_dismiss.png" path="/images/"/>
+    <image id="pjrl44" name="bt_invite.png" path="/images/"/>
+    <image id="pjrl45" name="bt_set.png" path="/images/"/>
+    <image id="pjrl46" name="bt_start.png" path="/images/"/>
+    <image id="pjrl47" name="bt_talk.png" path="/images/"/>
+    <component id="pjrl48" name="IconButton.xml" path="/component/"/>
+    <image id="pjrl49" name="time.png" path="/images/timer/"/>
+    <image id="pjrl4a" name="time2.png" path="/images/timer/"/>
+    <image id="pjrl4b" name="time0.png" path="/images/timer/"/>
+    <image id="pjrl4c" name="time3.png" path="/images/timer/"/>
+    <image id="pjrl4d" name="time1.png" path="/images/timer/"/>
+    <image id="pjrl4e" name="0.png" path="/fonts/timer/"/>
+    <image id="pjrl4f" name="1.png" path="/fonts/timer/"/>
+    <image id="pjrl4g" name="2.png" path="/fonts/timer/"/>
+    <image id="pjrl4h" name="3.png" path="/fonts/timer/"/>
+    <image id="pjrl4i" name="4.png" path="/fonts/timer/"/>
+    <image id="pjrl4j" name="5.png" path="/fonts/timer/"/>
+    <image id="pjrl4k" name="6.png" path="/fonts/timer/"/>
+    <image id="pjrl4l" name="7.png" path="/fonts/timer/"/>
+    <image id="pjrl4m" name="8.png" path="/fonts/timer/"/>
+    <image id="pjrl4n" name="9.png" path="/fonts/timer/"/>
+    <image id="pyxr4o" name="b1.png" path="/images/"/>
+    <image id="pyxr4p" name="b2.png" path="/images/"/>
+    <component id="s74l4q" name="NorthPengComponent.xml" path="/component/" exported="true"/>
+    <component id="s74l4r" name="SouthGangComponent.xml" path="/component/" exported="true"/>
+    <component id="s74l4t" name="SouthCardComponent.xml" path="/component/" exported="true"/>
+    <component id="s74l4u" name="SouthComponent.xml" path="/component/"/>
+    <font id="q55e4x" name="TimerFont.fnt" path="/fonts/" exported="true"/>
+    <image id="njl14z" name="flag_gang.png" path="/images/"/>
+    <image id="njl150" name="flag_guo.png" path="/images/"/>
+    <image id="njl151" name="flag_hu.png" path="/images/"/>
+    <image id="njl152" name="flag_peng.png" path="/images/"/>
+    <image id="njl154" name="btn_op.png" path="/images/"/>
+    <image id="njl155" name="btn_peng.png" path="/images/"/>
+    <image id="njl156" name="btn_guo.png" path="/images/"/>
+    <image id="njl158" name="btn_gang.png" path="/images/"/>
+    <image id="njl159" name="btn_hu.png" path="/images/"/>
+    <component id="njl15a" name="HuButton.xml" path="/component/" exported="true"/>
+    <component id="njl15b" name="GangButton.xml" path="/component/" exported="true"/>
+    <component id="njl15c" name="PengButton.xml" path="/component/" exported="true"/>
+    <component id="njl15d" name="GuoButton.xml" path="/component/" exported="true"/>
+    <component id="njl15e" name="OperateNotifyComponent.xml" path="/component/"/>
+    <component id="s9sm5f" name="WestComponent.xml" path="/component/"/>
+    <component id="s9sm5g" name="EastComponent.xml" path="/component/"/>
+    <component id="s9sm5h" name="NorthComponent.xml" path="/component/"/>
+    <component id="s9sm5i" name="SouthPengComponent.xml" path="/component/" exported="true"/>
+    <component id="s9sm5j" name="NorthGangComponent.xml" path="/component/" exported="true"/>
+    <component id="s9sm5k" name="WestPengComponent.xml" path="/component/" exported="true"/>
+    <component id="s9sm5l" name="WestGangComponent.xml" path="/component/" exported="true"/>
+    <component id="s9sm5m" name="EastPengComponent.xml" path="/component/" exported="true"/>
+    <component id="s9sm5n" name="EastGangComponent.xml" path="/component/" exported="true"/>
+    <component id="j57n5o" name="SouthDiscardComponent.xml" path="/component/"/>
+    <component id="j57n5p" name="NorthDiscardComponent.xml" path="/component/"/>
+    <component id="j57n5q" name="EastDiscardComponent.xml" path="/component/"/>
+    <component id="j57n5r" name="WestDiscardComponent.xml" path="/component/"/>
+    <movieclip id="j57n5u" name="MahjongOutCardBadgeAnimate.jta" path="/animate/" exported="true"/>
+    <image id="j57n5v" name="flag2.png" path="/images/"/>
+    <image id="j8ud5w" name="head_bg.png" path="/images/"/>
+    <image id="j8ud5x" name="nohead.png" path="/images/"/>
+    <image id="j8ud5y" name="im_score.png" path="/images/"/>
+    <component id="j8ud5z" name="EastHeadComponent.xml" path="/component/"/>
+    <image id="j8ud63" name="im_status_ready.png" path="/images/"/>
+    <image id="j8ud64" name="img_talk.png" path="/images/"/>
+    <image id="j8ud65" name="off_line_sign.png" path="/images/"/>
+    <component id="gapc66" name="NorthHeadComponent.xml" path="/component/"/>
+    <component id="gapc67" name="WestHeadComponent.xml" path="/component/"/>
+    <component id="gapc68" name="SouthHeadComponent.xml" path="/component/"/>
+    <image id="oiag69" name="avatar_bg.png" path="/images/"/>
+    <image id="oiag6a" name="img_gameover.png" path="/images/"/>
+    <image id="oiag6b" name="bt_pyq.png" path="/images/"/>
+    <image id="oiag6c" name="bt_wx.png" path="/images/"/>
+    <image id="oiag6d" name="bt_next.png" path="/images/"/>
+    <image id="oiag6e" name="button_share.png" path="/images/"/>
+    <image id="oiag6f" name="over_banker.png" path="/images/"/>
+    <image id="oiag6g" name="result_draw.png" path="/images/"/>
+    <image id="oiag6h" name="result_lose.png" path="/images/"/>
+    <image id="oiag6i" name="result_win.png" path="/images/"/>
+    <image id="oiag6j" name="winner.png" path="/images/"/>
+    <component id="oiag6k" name="GameOverItemComponent.xml" path="/component/"/>
+    <component id="oiag6l" name="GameOverCardItemComponent.xml" path="/component/"/>
+    <image id="oiag6m" name="n2.png" path="/images/"/>
+    <image id="oiag6n" name="im_close.png" path="/images/"/>
+    <image id="oiag6p" name="big_button.png" path="/images/"/>
+    <image id="oiag6q" name="clock.png" path="/images/"/>
+    <image id="oiag6r" name="close_btn.png" path="/images/"/>
+    <image id="oiag6s" name="small_button.png" path="/images/"/>
+    <image id="oiag6u" name="btn_next_game.png" path="/images/"/>
+    <component id="fda66v" name="GameOverHeadItemComponent.xml" path="/component/"/>
+    <component id="ruof6x" name="MahjongVideoLayer.xml" path="/" exported="true"/>
+    <image id="ruof6y" name="rec_pause.png" path="/images/video/" exported="true"/>
+    <image id="ruof6z" name="rec_play.png" path="/images/video/" exported="true"/>
+    <image id="ruof70" name="rec_exit.png" path="/images/video/"/>
+    <image id="ruof71" name="rec_play_bg.png" path="/images/video/"/>
+    <image id="ruof72" name="rec_backward.png" path="/images/video/"/>
+    <image id="ruof73" name="rec_forward.png" path="/images/video/"/>
+    <image id="xtij74" name="gameover_bg.png" path="/images/"/>
+    <image id="xtij75" name="base_loser.png" path="/images/"/>
+    <image id="xtij76" name="base_winner.png" path="/images/"/>
+    <image id="xtij77" name="bt_back.png" path="/images/"/>
+    <image id="xtij78" name="bt_sharePYQ.png" path="/images/"/>
+    <image id="xtij79" name="bt_shares.png" path="/images/"/>
+    <image id="xtij7a" name="im_daili.png" path="/images/"/>
+    <image id="xtij7b" name="im_fangzhu.png" path="/images/"/>
+    <image id="xtij7c" name="result1.png" path="/images/"/>
+    <image id="xtij7d" name="result2.png" path="/images/"/>
+    <image id="xtij7e" name="win.png" path="/images/"/>
+    <component id="xtij7f" name="EndItemComponent.xml" path="/component/"/>
+    <image id="s2fl7g" name="LeaveButton.png" path="/images/" scale=""/>
+    <image id="s2fl7h" name="bt_diss_agree.png" path="/images/vote/"/>
+    <image id="s2fl7i" name="bt_diss_refuse.png" path="/images/vote/"/>
+    <image id="s2fl7j" name="im_diss_clock.png" path="/images/vote/"/>
+    <image id="s2fl7k" name="im_diss_number.png" path="/images/vote/"/>
+    <image id="s2fl7l" name="imscale9_alertbg.png" path="/images/vote/"/>
+    <component id="s2fl7m" name="VoteItemComponent.xml" path="/component/" exported="true"/>
+    <image id="s2fl7n" name="0.png" path="/fonts/num/"/>
+    <image id="s2fl7o" name="1.png" path="/fonts/num/"/>
+    <image id="s2fl7p" name="2.png" path="/fonts/num/"/>
+    <image id="s2fl7q" name="3.png" path="/fonts/num/"/>
+    <image id="s2fl7r" name="4.png" path="/fonts/num/"/>
+    <image id="s2fl7s" name="5.png" path="/fonts/num/"/>
+    <image id="s2fl7t" name="6.png" path="/fonts/num/"/>
+    <image id="s2fl7u" name="7.png" path="/fonts/num/"/>
+    <image id="s2fl7v" name="8.png" path="/fonts/num/"/>
+    <image id="s2fl7w" name="9.png" path="/fonts/num/"/>
+    <font id="s2fl7x" name="NumFont.fnt" path="/fonts/" exported="true"/>
+  </resources>
+  <publish name="mahjong"/>
+</packageDescription>

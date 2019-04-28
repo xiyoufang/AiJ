@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="270,448">
+  <displayList>
+    <image id="n88_xtij" name="n88" src="xtij75" fileName="images/base_loser.png" xy="0,0"/>
+    <image id="n91_xtij" name="n91" src="xtij7d" fileName="images/result2.png" xy="16,394"/>
+    <text id="n92_xtij" name="n92" xy="40,158" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="自摸次数"/>
+    <text id="n93_xtij" name="n93" xy="40,192" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="接炮次数"/>
+    <text id="n94_xtij" name="n94" xy="40,226" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="点炮次数"/>
+    <text id="n97_xtij" name="n97" xy="40,260" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="暗杠次数"/>
+    <text id="n98_xtij" name="n98" xy="40,294" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="明杠次数"/>
+    <text id="n99_xtij" name="n99" xy="40,327" size="120,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="点杠次数"/>
+    <image id="n100_xtij" name="n100" src="j8ud5w" fileName="images/head_bg.png" xy="60,54"/>
+    <image id="n115_s2fl" name="n115" src="j8ud5x" fileName="images/nohead.png" xy="67,61"/>
+    <loader id="n101_xtij" name="AvatarLoader" xy="68,61" size="76,76" url="ui://04bgp3gtj8ud5x" fill="scale" shrinkOnly="true"/>
+    <text id="n102_xtij" name="NickNameText" xy="39,7" size="193,29" fontSize="22" color="#660000" align="center" vAlign="middle" autoSize="none" bold="true" text="嘻嘻嘻哈哈哈"/>
+    <image id="n103_s2fl" name="WinnerImage" src="xtij7e" fileName="images/win.png" xy="195,359"/>
+    <image id="n105_s2fl" name="AgentImage" src="xtij7a" fileName="images/im_daili.png" xy="40,96"/>
+    <image id="n106_s2fl" name="OwnerImage" src="xtij7b" fileName="images/im_fangzhu.png" xy="130,43"/>
+    <text id="n107_s2fl" name="UserIdText" xy="158,111" size="104,30" fontSize="18" color="#660000" vAlign="middle" autoSize="none" bold="true" text="100000001"/>
+    <text id="n108_s2fl" name="0Text" xy="176,158" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n109_s2fl" name="1Text" xy="176,192" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n110_s2fl" name="2Text" xy="176,226" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n111_s2fl" name="3Text" xy="176,260" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n112_s2fl" name="4Text" xy="176,294" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n113_s2fl" name="5Text" xy="176,327" size="60,32" fontSize="22" color="#660000" vAlign="middle" autoSize="none" bold="true" text="0"/>
+    <text id="n114_s2fl" name="ScoreText" xy="127,394" size="121,43" fontSize="32" color="#660000" vAlign="bottom" leading="0" autoSize="none" bold="true" text="+100"/>
+  </displayList>
+</component>

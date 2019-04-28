@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="rjmp6w1t" jpegQuality="80" compressPNG="true">
+  <resources>
+    <component id="m0rf0" name="WelcomeLayer.xml" path="/" exported="true"/>
+    <image id="m0rf1" name="im_login_bg.png" path="/images/"/>
+    <image id="m0rf2" name="im_bg.png" path="/images/"/>
+    <image id="m0rf3" name="bt_load.png" path="/images/"/>
+    <component id="m0rf1g" name="Button4.xml" path="/component/"/>
+  </resources>
+  <publish name="welcome"/>
+</packageDescription>

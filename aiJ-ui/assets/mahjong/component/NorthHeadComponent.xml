@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="91,114">
+  <displayList>
+    <image id="n42_j8ud" name="n42" src="j8ud5w" fileName="images/head_bg.png" xy="0,0"/>
+    <image id="n51_j8ud" name="n43" src="j8ud5x" fileName="images/nohead.png" xy="8,7" size="76,76"/>
+    <loader id="n43_j8ud" name="avatar" xy="8,7" size="76,76" url="ui://04bgp3gtj8ud5x" fill="scale" shrinkOnly="true"/>
+    <image id="n44_j8ud" name="n44" src="j8ud5y" fileName="images/im_score.png" xy="5,91" size="80,23"/>
+    <text id="n45_j8ud" name="scoreText" xy="19,94" size="53,19" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="+100"/>
+    <text id="n46_j8ud" name="nickName" xy="-31,116" size="154,23" fontSize="16" align="center" vAlign="middle" autoSize="none" bold="true" autoClearText="true" text="尘世间一迷途小书童"/>
+    <image id="n48_j8ud" name="OfflineImage" src="j8ud65" fileName="images/off_line_sign.png" xy="39,58" visible="false"/>
+    <image id="n49_j8ud" name="TalkImage" src="j8ud64" fileName="images/img_talk.png" xy="-64,0" visible="false"/>
+    <image id="n50_j8ud" name="SitDownImage" src="j8ud63" fileName="images/im_status_ready.png" xy="-49,67" visible="false"/>
+  </displayList>
+</component>

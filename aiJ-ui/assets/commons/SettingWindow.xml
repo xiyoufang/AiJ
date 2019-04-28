@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="871,511">
+  <displayList>
+    <component id="n0_atbb" name="frame" src="atbb18" fileName="component/SettingFrame.xml" xy="0,0"/>
+    <image id="n1_atbb" name="n1" src="atbb16" fileName="images/setting/im_music.png" xy="91,211"/>
+    <image id="n2_atbb" name="n2" src="atbb17" fileName="images/setting/im_sound.png" xy="511,211"/>
+    <component id="n5_atbb" name="MusicToggleButton" src="atbb19" fileName="component/ToggleButton.xml" xy="214,209">
+      <Button checked="true"/>
+    </component>
+    <component id="n6_atbb" name="SoundToggleButton" src="atbb19" fileName="component/ToggleButton.xml" xy="640,209">
+      <Button checked="true"/>
+    </component>
+    <component id="n7_atbb" name="AccountToggleButton" src="atbb1e" fileName="component/IconButton.xml" xy="180,323" size="222,93" group="n11_atbb">
+      <Button icon="ui://zpyz66ctatbb1d"/>
+    </component>
+    <component id="n8_atbb" name="ExitGameButton" src="atbb1e" fileName="component/IconButton.xml" xy="501,323" size="222,93" group="n11_atbb">
+      <Button icon="ui://zpyz66ctatbb1c"/>
+    </component>
+    <group id="n11_atbb" name="AccountGroup" xy="180,323" size="543,93" advanced="true"/>
+  </displayList>
+</component>

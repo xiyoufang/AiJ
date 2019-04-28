@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="834,297">
+  <displayList>
+    <image id="n0_j57n" name="n0" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="0,0"/>
+    <image id="n1_j57n" name="n1" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="75,0"/>
+    <image id="n2_j57n" name="n2" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="151,0"/>
+    <image id="n3_j57n" name="n3" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="227,0"/>
+    <image id="n4_j57n" name="n4" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="303,0"/>
+    <image id="n5_j57n" name="n5" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="379,0"/>
+    <image id="n6_j57n" name="n6" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="455,0"/>
+    <image id="n7_j57n" name="n7" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="531,0"/>
+    <image id="n8_j57n" name="n8" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="756,91"/>
+    <image id="n10_j57n" name="n10" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="1,92"/>
+    <image id="n11_j57n" name="n11" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="76,92"/>
+    <image id="n12_j57n" name="n12" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="152,92"/>
+    <image id="n13_j57n" name="n13" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="228,92"/>
+    <image id="n14_j57n" name="n14" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="304,92"/>
+    <image id="n15_j57n" name="n15" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="380,92"/>
+    <image id="n16_j57n" name="n16" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="456,92"/>
+    <image id="n17_j57n" name="n17" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="532,92"/>
+    <image id="n18_j57n" name="n18" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="608,92"/>
+    <image id="n19_j57n" name="n19" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="684,92"/>
+    <image id="n20_j57n" name="n20" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="1,179"/>
+    <image id="n21_j57n" name="n21" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="76,179"/>
+    <image id="n22_j57n" name="n22" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="152,179"/>
+    <image id="n23_j57n" name="n23" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="228,179"/>
+    <image id="n24_j57n" name="n24" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="304,179"/>
+    <image id="n25_j57n" name="n25" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="380,179"/>
+    <image id="n26_j57n" name="n26" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="456,179"/>
+    <image id="n27_j57n" name="n27" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="532,179"/>
+    <image id="n28_j57n" name="n28" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="608,179"/>
+    <image id="n29_j57n" name="n29" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="684,179"/>
+    <image id="n30_j57n" name="n30" src="pjrl3o" fileName="images/mahjong/2/s_mingmah_11.png" xy="758,179"/>
+  </displayList>
+</component>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <controller name="c1" pages="0,,1," selected="1"/>
+  <displayList>
+    <image id="n0_covu" name="n0" src="jhjbh" fileName="images/plaza_bg.png" xy="0,0"/>
+    <image id="n13_xtij" name="n13" src="xtij2f" fileName="images/video/im_bg2.png" xy="17,29"/>
+    <image id="n17_xtij" name="n17" src="xtij2l" fileName="images/video/n17.png" xy="87,70"/>
+    <list id="n7_covu" name="RoomRecordList" xy="87,143" size="1105,438" overflow="scroll">
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+      <item url="ui://qlq5e6a6xtij2k"/>
+    </list>
+    <component id="n34_xtij" name="BackButton" src="g256k" fileName="component/IconButton.xml" xy="559,585" size="162,85">
+      <Button icon="ui://qlq5e6a6covu2a"/>
+    </component>
+    <image id="n38_xtij" name="n38" src="xtij2f" fileName="images/video/im_bg2.png" xy="17,29" group="n39_xtij"/>
+    <list id="n61_xtij" name="RoomRecordItemList" xy="47,78" size="1176,565" group="n39_xtij" layout="row" overflow="scroll" scroll="horizontal" colGap="5" renderOrder="descent">
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+      <item url="ui://qlq5e6a6xtij2o"/>
+    </list>
+    <component id="n63_xtij" name="n63" src="g256k" fileName="component/IconButton.xml" xy="1203,9" size="73,73" group="n39_xtij">
+      <Button icon="ui://qlq5e6a6xtij2j" controller="c1" page="0"/>
+    </component>
+    <group id="n39_xtij" name="RoomRecordItemGroup" xy="17,9" size="1259,681" advanced="true">
+      <gearDisplay controller="c1" pages="1"/>
+    </group>
+  </displayList>
+</component>
