@@ -3,7 +3,7 @@ export default class AppConfig {
     /**
      * 大厅URL
      */
-    static readonly PLAZA_WS_HOST: string = "192.168.0.196";
+    static readonly PLAZA_WS_HOST: string = "localhost";
     /**
      * 大厅端口
      */
@@ -11,7 +11,7 @@ export default class AppConfig {
     /**
      *
      */
-    static readonly PLATFORM_URL: string = "http://192.168.0.196:8090/";
+    static readonly PLATFORM_URL: string = "http://localhost:8090/";
     /**
      * WS名称
      */
