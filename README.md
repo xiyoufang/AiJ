@@ -14,12 +14,13 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 
 网络协议使用Websocket，以更好的支持多平台需求，计划同时支持Mysql、Oracle、SqlServer、Postgresql、Sqlite等多种数据库。
 
+#### 帮助文档
 
-#### 开发环境
+- [快速开始](./doc/aij_quick_start_dev.md)
+- 子游戏开发
+- 客户端调试
+- 未完待续...
 
-* JDK-1.8.0_181
-* zookeeper-3.5.4
-* 数据库（Mysql-5.7.24、sqlite3）
 
 #### 技术架构
 
@@ -53,12 +54,7 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
     * 报表统计
     * ...
 
-#### 安装教程
-1. 安装Zookeeper
-2. 安装CocosCreator
-3. 安装FairyGUI
-
-#### 使用说明
+#### 快速了解
 
 * UI编辑器
 

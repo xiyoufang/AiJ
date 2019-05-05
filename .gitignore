@@ -38,3 +38,4 @@ target/
 *.sqlite3
 # FairyGUI
 .objs
+aiJ-jslib/
