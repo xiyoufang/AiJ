@@ -1,3 +1,3 @@
-#namespace("mahjong")
+#namespace("room")
   #include("room.sql")
 #end

@@ -214,6 +214,13 @@ public abstract class RoomAiJStarter extends AiJStarter {
     @Override
     protected void configTimer(TimerSchedule schedule) {
         schedule.add(new MonitorTask(), 5 * 60 * 1000);    //5分钟监控一次
+        try {
+            Class<? extends RoomAiJRobot> roomAiJRobot = configRoomAiJRobot();
+            if (roomAiJRobot != null)
+                schedule.add(Reflection.constructor().in(roomAiJRobot).newInstance(), 2 * 1000);
+        } catch (Exception e) {
+            LOGGER.warn("机器人启动失败，机器人功能将无法使用！", e);
+        }
     }
 
     /**
@@ -226,12 +233,6 @@ public abstract class RoomAiJStarter extends AiJStarter {
             if (roomTester != null) Reflection.constructor().in(roomTester).newInstance().start();
         } catch (Exception e) {
             LOGGER.warn("房间测试工具启动失败，测试功能将无法使用！", e);
-        }
-        try {
-            Class<? extends RoomAiJRobot> roomAiJRobot = configRoomAiJRobot();
-            if (roomAiJRobot != null) Reflection.constructor().in(roomAiJRobot).newInstance().start();
-        } catch (Exception e) {
-            LOGGER.warn("机器人启动失败，机器人功能将无法使用！", e);
         }
         onRoomStart();
     }

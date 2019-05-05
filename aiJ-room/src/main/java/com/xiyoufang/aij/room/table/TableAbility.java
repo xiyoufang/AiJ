@@ -268,18 +268,18 @@ public abstract class TableAbility {
         long recordId = Id.nextId();    //游戏记录的ID
         String summaryInfo = getSummaryInfo();
         String nowTime = new DateTime().toString("yyyy-MM-dd HH:mm:ss");
-        AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("mahjong.save_room_record_detail", detailId, rule.toJson(), summaryInfo, endMessage.getDetail(), nowTime));
-        AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("mahjong.save_room_record", recordId, AppConfig.use().getInt(CoreConfig.SERVICE_ID), AppConfig.use().getStr(CoreConfig.SERVICE_NAME), this.table.getOwner().getUserId(), 0, 0, 0, this.table.getTableNo(), endMessage.getEndReason().name(), initializedTime, startedTime, nowTime, nowTime, detailId));//存储记录
+        AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("room.save_room_record_detail", detailId, rule.toJson(), summaryInfo, endMessage.getDetail(), nowTime));
+        AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("room.save_room_record", recordId, AppConfig.use().getInt(CoreConfig.SERVICE_ID), AppConfig.use().getStr(CoreConfig.SERVICE_NAME), this.table.getOwner().getUserId(), 0, 0, 0, this.table.getTableNo(), endMessage.getEndReason().name(), initializedTime, startedTime, nowTime, nowTime, detailId));//存储记录
         for (int i = 0; i < chairCount; i++) {              //设置游戏记录的玩家信息
             Hero hero = this.table.getHero(i);
             long recordUserId = Id.nextId();
-            AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("mahjong.save_room_record_user", recordUserId, recordId, hero.getUserId(), hero.getNickName(), i, readScore(i), nowTime));
+            AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("room.save_room_record_user", recordUserId, recordId, hero.getUserId(), hero.getNickName(), i, readScore(i), nowTime));
         }
         for (int i = 1; i < currGameNumber + 1; i++) {  //局数量从1开始计数
             for (int ii = 0; ii < chairCount; ii++) {
                 Hero hero = this.table.getHero(ii);
                 long recordScoreId = Id.nextId();
-                AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("mahjong.save_room_record_score", recordScoreId, recordId, hero.getUserId(), i, readScore(ii, i), nowTime));
+                AiJRoomDb.room().update(AiJRoomDb.room().getSqlPara("room.save_room_record_score", recordScoreId, recordId, hero.getUserId(), i, readScore(ii, i), nowTime));
             }
         }
     }

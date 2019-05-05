@@ -2,6 +2,7 @@ package com.xiyoufang.aij.room.robot;
 
 import com.xiyoufang.aij.core.AppConfig;
 import com.xiyoufang.aij.room.config.RoomConfig;
+import com.xiyoufang.aij.timer.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,29 +12,26 @@ import org.slf4j.LoggerFactory;
  *
  * @author 席有芳
  */
-public abstract class RoomAiJRobot implements Runnable {
+public abstract class RoomAiJRobot extends Task {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(RoomAiJRobot.class);
-
-    /**
-     * 开启
-     */
-    public void start() {
-        new Thread(this).start();
-    }
 
     /**
      *
      */
     @Override
     public void run() {
-        while (AppConfig.use().getConfig().getBool(RoomConfig.ENABLE_ANDROID)) {
-            try {
-                //检测房间
-                Thread.sleep(100);
-            } catch (Exception e) {
-                LOGGER.warn("interrupted exception", e);
-            }
+        if (AppConfig.use().getConfig().getBool(RoomConfig.ENABLE_ANDROID)) {
+            loadAndroid();  //加载机器人
+            //searchFreeTables();  //搜索桌子
+            //joinTables();        //加入桌子
         }
+    }
+
+    /**
+     * 加载机器人
+     */
+    private void loadAndroid() {
+
     }
 }

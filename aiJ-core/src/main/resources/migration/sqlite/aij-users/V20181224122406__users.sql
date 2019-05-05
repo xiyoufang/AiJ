@@ -15,6 +15,7 @@ CREATE TABLE user_profile
   cert_card      text, --身份证
   cert_type      text, --实名制类型
   cert_status    text, --实名制(-未验证,0验证中,1验证通过)
+  android        integer,      -- 机器人标识(1是，0否)
   geo_hash       text, --GeoHash（8位）
   longitude      real, --经度
   latitude       real, --纬度

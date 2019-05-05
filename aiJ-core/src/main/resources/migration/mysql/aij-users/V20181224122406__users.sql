@@ -15,6 +15,7 @@ CREATE TABLE user_profile
   cert_card      varchar(64),  -- 身份证
   cert_type      varchar(64),  -- 实名制类型
   cert_status    varchar(8),   -- 实名制(-未验证,0验证中,1验证通过)
+  android        integer,      -- 机器人标识(1是，0否)
   geo_hash       varchar(16),  -- GeoHash（8位）
   longitude      double,       -- 经度
   latitude       double,       -- 纬度

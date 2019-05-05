@@ -55,6 +55,11 @@ public class Hero {
      */
     private String certStatus;
     /**
+     * 机器人标识
+     */
+    private Integer android;
+
+    /**
      * 桌子编号
      */
     private int tableNo = Table.INVALID_TABLE;
@@ -153,5 +158,13 @@ public class Hero {
 
     public void setDistributorId(String distributorId) {
         this.distributorId = distributorId;
+    }
+
+    public Integer getAndroid() {
+        return android;
+    }
+
+    public void setAndroid(Integer android) {
+        this.android = android;
     }
 }
