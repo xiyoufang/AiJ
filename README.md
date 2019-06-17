@@ -31,6 +31,7 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 * 数据库版本管理flyway
 * 客户端游戏引擎CocosCreator
 * 客户端编辑器FairyGUI
+* NodeJs
 * 开发语言:java、typescript、javascript、sql
 
 ### 业务架构

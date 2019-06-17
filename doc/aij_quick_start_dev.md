@@ -13,6 +13,7 @@
 |  FairyGui  | 3.10.4  | 游戏UI编辑器 | http://www.fairygui.com/product/  |
 |  IntelliJ IDEA  | --  | 游戏服务器端开发工具 | https://www.jetbrains.com/  |
 |  WebStorm  | --  | 游戏客户端开发工具 | https://www.jetbrains.com/  |
+|  Node  | --  | 用于支持node_modules  | http://nodejs.cn/  |
 
 可以使用Eclipse等Java IDE工具代替IntelliJ IDEA，可使用VSCode代替WebStorm。
 
