@@ -1,13 +1,14 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.1",
   "uuid": "e28e1241-d7e5-45e0-9e16-9bb111a95535",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "platformSettings": {},
   "subMetas": {
     "plaza_atlas0_2": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "cb34295f-a3bb-463f-a9d9-7b1726a6576b",
       "rawTextureUuid": "e28e1241-d7e5-45e0-9e16-9bb111a95535",
       "trimType": "auto",

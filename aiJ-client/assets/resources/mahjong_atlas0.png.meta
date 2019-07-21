@@ -1,13 +1,14 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.1",
   "uuid": "2b121762-da54-42e3-9761-6a2cc1c0b610",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "platformSettings": {},
   "subMetas": {
     "mahjong_atlas0": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "fccda043-c890-4c11-940d-4fff6da3d4bf",
       "rawTextureUuid": "2b121762-da54-42e3-9761-6a2cc1c0b610",
       "trimType": "auto",

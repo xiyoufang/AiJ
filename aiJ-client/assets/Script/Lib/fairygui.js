@@ -1,18 +1,18 @@
 window.fgui = {};
-
-var __extends = (this && this.__extends) || (function () {
+window.__extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
 (function (fgui) {
     var AsyncOperation = /** @class */ (function () {
         function AsyncOperation() {
@@ -1170,7 +1170,15 @@ var __extends = (this && this.__extends) || (function () {
                 return this._tooltips;
             },
             set: function (value) {
+                if (this._tooltips) {
+                    this._node.off(fgui.Event.ROLL_OVER, this.onRollOver, this);
+                    this._node.off(fgui.Event.ROLL_OUT, this.onRollOut, this);
+                }
                 this._tooltips = value;
+                if (this._tooltips) {
+                    this._node.on(fgui.Event.ROLL_OVER, this.onRollOver, this);
+                    this._node.on(fgui.Event.ROLL_OUT, this.onRollOut, this);
+                }
             },
             enumerable: true,
             configurable: true
@@ -1767,6 +1775,15 @@ var __extends = (this && this.__extends) || (function () {
                 buffer.position = nextPos;
             }
         };
+        //toolTips support
+        GObject.prototype.onRollOver = function () {
+            this.root.showTooltips(this.tooltips);
+        };
+        ;
+        GObject.prototype.onRollOut = function () {
+            this.root.hideTooltips();
+        };
+        ;
         GObject.prototype.initDrag = function () {
             if (this._draggable) {
                 this.on(fgui.Event.TOUCH_BEGIN, this.onTouchBegin_0, this);
@@ -2392,6 +2409,7 @@ var __extends = (this && this.__extends) || (function () {
         GComponent.prototype.setMask = function (value, inverted) {
             if (this._maskContent) {
                 this._maskContent.node.off(cc.Node.EventType.POSITION_CHANGED, this.onMaskContentChanged, this);
+                this._maskContent.node.off(cc.Node.EventType.SIZE_CHANGED, this.onMaskContentChanged, this);
                 this._maskContent.node.off(cc.Node.EventType.SCALE_CHANGED, this.onMaskContentChanged, this);
                 this._maskContent.node.off(cc.Node.EventType.ANCHOR_CHANGED, this.onMaskContentChanged, this);
                 this._maskContent.visible = true;
@@ -2411,6 +2429,7 @@ var __extends = (this && this.__extends) || (function () {
                 }
                 value.visible = false;
                 value.node.on(cc.Node.EventType.POSITION_CHANGED, this.onMaskContentChanged, this);
+                value.node.on(cc.Node.EventType.SIZE_CHANGED, this.onMaskContentChanged, this);
                 value.node.on(cc.Node.EventType.SCALE_CHANGED, this.onMaskContentChanged, this);
                 value.node.on(cc.Node.EventType.ANCHOR_CHANGED, this.onMaskContentChanged, this);
                 this._customMask.inverted = inverted;
@@ -3772,10 +3791,15 @@ var __extends = (this && this.__extends) || (function () {
             if (this.dropdown.parent instanceof fgui.GRoot)
                 this.dropdown.parent.hidePopup();
             this._selectedIndex = index;
-            if (this._selectedIndex >= 0)
+            if (this._selectedIndex >= 0) {
                 this.text = this._items[this._selectedIndex];
-            else
+                this.icon = (this._icons != null && this._selectedIndex < this._icons.length) ? this._icons[this._selectedIndex] : null;
+            }
+            else {
                 this.text = "";
+                if (this._icons != null)
+                    this.icon = null;
+            }
             this._node.emit(fgui.Event.STATUS_CHANGED, this);
         };
         GComboBox.prototype.onRollOver_1 = function () {
@@ -4258,7 +4282,7 @@ var __extends = (this && this.__extends) || (function () {
             for (var i = 0; i < cnt; i++) {
                 var child = this._parent.getChildAt(i);
                 if (child.group == this)
-                    child.node.active = child._finalVisible;
+                    child.handleVisibleChanged();
             }
         };
         GGroup.prototype.setup_beforeAdd = function (buffer, beginPos) {
@@ -5463,8 +5487,8 @@ var __extends = (this && this.__extends) || (function () {
         };
         Object.defineProperty(GList.prototype, "numItems", {
             /// <summary>
-            /// Set the list item count.
-            /// If the list is not virtual, specified number of items will be created.
+            /// Set the list item count. 
+            /// If the list is not virtual, specified number of items will be created. 
             /// If the list is virtual, only items in view will be created.
             /// </summary>
             get: function () {
@@ -5497,7 +5521,7 @@ var __extends = (this && this.__extends) || (function () {
                             this._virtualItems[i].selected = false;
                     }
                     if (this._virtualListChanged != 0)
-                        this._partner.callLater(this._refreshVirtualList);
+                        this._partner.unschedule(this._refreshVirtualList);
                     //立即刷新
                     this._refreshVirtualList();
                 }
@@ -6703,7 +6727,8 @@ var __extends = (this && this.__extends) || (function () {
             _this._verticalAlign = fgui.VertAlignType.Top;
             _this._showErrorSign = true;
             _this._color = cc.Color.WHITE;
-            _this._container = new cc.PrivateNode("Image");
+            _this._container = new cc.Node("Image");
+            _this._container.setAnchorPoint(0, 1);
             _this._node.addChild(_this._container);
             _this._content = _this._container.addComponent(fgui.MovieClip);
             return _this;
@@ -7069,6 +7094,8 @@ var __extends = (this && this.__extends) || (function () {
             }
             this._contentWidth = this._contentSourceWidth;
             this._contentHeight = this._contentSourceHeight;
+            var pivotCorrectX = -this.pivotX * this._width;
+            var pivotCorrectY = this.pivotY * this._height;
             if (this._autoSize) {
                 this._updatingLayout = true;
                 if (this._contentWidth == 0)
@@ -7078,9 +7105,9 @@ var __extends = (this && this.__extends) || (function () {
                 this.setSize(this._contentWidth, this._contentHeight);
                 this._updatingLayout = false;
                 this._container.setContentSize(this._width, this._height);
-                this._container.setPosition(0, 0);
+                this._container.setPosition(pivotCorrectX, pivotCorrectY);
                 if (this._content2 != null) {
-                    this._content2.setPosition(-this._width / 2, -this._height / 2);
+                    this._content2.setPosition(pivotCorrectX - this._width / 2, pivotCorrectY - this._height / 2);
                     this._content2.setScale(1, 1);
                 }
                 if (this._contentWidth == this._width && this._contentHeight == this._height)
@@ -7119,23 +7146,24 @@ var __extends = (this && this.__extends) || (function () {
             }
             this._container.setContentSize(this._contentWidth, this._contentHeight);
             if (this._content2 != null) {
-                this._content2.setPosition(-this._width / 2, -this._height / 2);
+                this._content2.setPosition(pivotCorrectX - this._width / 2, pivotCorrectY - this._height / 2);
                 this._content2.setScale(sx, sy);
             }
             var nx, ny;
-            if (this._align == fgui.AlignType.Center)
+            if (this._align == fgui.AlignType.Left)
                 nx = 0;
-            else if (this._align == fgui.AlignType.Right)
+            else if (this._align == fgui.AlignType.Center)
                 nx = Math.floor((this._width - this._contentWidth) / 2);
             else
-                nx = -Math.floor((this._width - this._contentWidth) / 2);
-            if (this._verticalAlign == fgui.VertAlignType.Middle)
+                nx = this._width - this._contentWidth;
+            if (this._verticalAlign == fgui.VertAlignType.Top)
                 ny = 0;
-            else if (this._verticalAlign == fgui.VertAlignType.Bottom)
-                ny = -Math.floor((this._height - this._contentHeight) / 2);
-            else
+            else if (this._verticalAlign == fgui.VertAlignType.Middle)
                 ny = Math.floor((this._height - this._contentHeight) / 2);
-            this._container.setPosition(nx, ny);
+            else
+                ny = this._height - this._contentHeight;
+            ny = -ny;
+            this._container.setPosition(pivotCorrectX + nx, pivotCorrectY + ny);
         };
         GLoader.prototype.clearContent = function () {
             this.clearErrorState();
@@ -7149,11 +7177,17 @@ var __extends = (this && this.__extends) || (function () {
                 this._content2.dispose();
                 this._content2 = null;
             }
+            this._content.frames = null;
             this._content.spriteFrame = null;
             this._contentItem = null;
         };
         GLoader.prototype.handleSizeChanged = function () {
             _super.prototype.handleSizeChanged.call(this);
+            if (!this._updatingLayout)
+                this.updateLayout();
+        };
+        GLoader.prototype.handleAnchorChanged = function () {
+            _super.prototype.handleAnchorChanged.call(this);
             if (!this._updatingLayout)
                 this.updateLayout();
         };
@@ -7501,6 +7535,7 @@ var __extends = (this && this.__extends) || (function () {
             _this._touchDisabled = true;
             _this._text = "";
             _this._color = cc.Color.WHITE;
+            _this._strokeColor = cc.Color.BLACK;
             _this._templateVars = null;
             _this.createRenderer();
             _this.fontSize = 12;
@@ -7534,17 +7569,18 @@ var __extends = (this && this.__extends) || (function () {
                 return this._font;
             },
             set: function (value) {
-                if (this._font != value) {
+                if (this._font != value || !value) {
                     this._font = value;
                     this.markSizeChanged();
-                    if (fgui.ToolSet.startsWith(this._font, "ui://")) {
-                        var pi = fgui.UIPackage.getItemByURL(this._font);
+                    var newFont = value ? value : fgui.UIConfig.defaultFont;
+                    if (fgui.ToolSet.startsWith(newFont, "ui://")) {
+                        var pi = fgui.UIPackage.getItemByURL(newFont);
                         if (pi) {
                             this.updateFont(pi.owner.getItemAsset(pi));
                             return;
                         }
                     }
-                    this.updateFont(value);
+                    this.updateFont(newFont);
                 }
             },
             enumerable: true,
@@ -7674,8 +7710,10 @@ var __extends = (this && this.__extends) || (function () {
                         this._outline.enabled = false;
                 }
                 else {
-                    if (!this._outline)
+                    if (!this._outline) {
                         this._outline = this._node.addComponent(cc.LabelOutline);
+                        this.updateStrokeColor();
+                    }
                     else
                         this._outline.enabled = true;
                     this._outline.width = value;
@@ -7686,15 +7724,14 @@ var __extends = (this && this.__extends) || (function () {
         });
         Object.defineProperty(GTextField.prototype, "strokeColor", {
             get: function () {
-                return this._outline ? this._outline.color : cc.Color.BLACK;
+                return this._strokeColor;
             },
             set: function (value) {
-                if (!this._outline) {
-                    this._outline = this._node.addComponent(cc.LabelOutline);
-                    this._outline.enabled = false;
+                if (this._strokeColor != value) {
+                    this._strokeColor = value;
+                    this.updateGear(4);
+                    this.updateStrokeColor();
                 }
-                this._outline.color = value;
-                this.updateGear(4);
             },
             enumerable: true,
             configurable: true
@@ -7829,25 +7866,37 @@ var __extends = (this && this.__extends) || (function () {
             }
         };
         GTextField.prototype.updateFontColor = function () {
-            var font = this._label.font;
-            if (font instanceof cc.BitmapFont) {
-                if (font._fntConfig.canTint)
-                    this._node.color = this._color;
-                else
-                    this._node.color = cc.Color.WHITE;
+            var c = this._color;
+            if (this._label) {
+                var font = this._label.font;
+                if ((font instanceof cc.BitmapFont) && !(font._fntConfig.canTint))
+                    c = cc.Color.WHITE;
             }
+            if (this._grayed)
+                c = fgui.ToolSet.toGrayed(c);
+            this._node.color = c;
+        };
+        GTextField.prototype.updateStrokeColor = function () {
+            if (!this._outline)
+                return;
+            if (this._grayed)
+                this._outline.color = fgui.ToolSet.toGrayed(this._strokeColor);
             else
-                this._node.color = this._color;
+                this._outline.color = this._strokeColor;
         };
         GTextField.prototype.updateFontSize = function () {
-            var fontSize = this._fontSize;
             var font = this._label.font;
             if (font instanceof cc.BitmapFont) {
                 if (!font._fntConfig.resizable)
-                    fontSize = font._fntConfig.fontSize;
+                    this._label.fontSize = font._fntConfig.fontSize;
+                else
+                    this._label.fontSize = this._fontSize;
+                this._label.lineHeight = font._fntConfig.fontSize + this._leading + 4;
             }
-            this._label.fontSize = fontSize;
-            this._label.lineHeight = fontSize + this._leading;
+            else {
+                this._label.fontSize = this._fontSize;
+                this._label.lineHeight = this._fontSize + this._leading;
+            }
         };
         GTextField.prototype.updateOverflow = function () {
             if (this._autoSize == fgui.AutoSizeType.Both)
@@ -7893,6 +7942,10 @@ var __extends = (this && this.__extends) || (function () {
             }
             else if (this._autoSize == fgui.AutoSizeType.Height)
                 this._node.width = this._width;
+        };
+        GTextField.prototype.handleGrayedChanged = function () {
+            this.updateFontColor();
+            this.updateStrokeColor();
         };
         GTextField.prototype.setup_beforeAdd = function (buffer, beginPos) {
             _super.prototype.setup_beforeAdd.call(this, buffer, beginPos);
@@ -8064,8 +8117,10 @@ var __extends = (this && this.__extends) || (function () {
                 text2 = "<i>" + text2 + "</i>";
             if (this._underline)
                 text2 = "<u>" + text2 + "</u>";
-            if (this._color)
-                text2 = "<color=" + this._color.toHEX("#rrggbb") + ">" + text2 + "</color>";
+            var c = this._color;
+            if (this._grayed)
+                c = fgui.ToolSet.toGrayed(c);
+            text2 = "<color=" + c.toHEX("#rrggbb") + ">" + text2 + "</color>";
             if (this._autoSize == fgui.AutoSizeType.Both) {
                 if (this._richText.maxWidth != 0)
                     this._richText.maxWidth = 0;
@@ -8082,8 +8137,8 @@ var __extends = (this && this.__extends) || (function () {
             else
                 this._richText.font = null;
         };
+        //不支持使用Node的颜色，等CCC支持后可以删掉这个函数
         GRichTextField.prototype.updateFontColor = function () {
-            //RichText 2.0.5还不支持使用Node的颜色
             this.updateText();
         };
         GRichTextField.prototype.updateFontSize = function () {
@@ -8913,7 +8968,7 @@ var __extends = (this && this.__extends) || (function () {
                 ;
             },
             set: function (val) {
-                this._editBox.inputFlag = cc.EditBox.InputFlag.PASSWORD;
+                this._editBox.inputFlag = val ? cc.EditBox.InputFlag.PASSWORD : cc.EditBox.InputFlag.DEFAULT;
             },
             enumerable: true,
             configurable: true
@@ -10187,6 +10242,16 @@ var __extends = (this && this.__extends) || (function () {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ScrollPane.prototype, "mouseWheelEnabled", {
+            get: function () {
+                return this._mouseWheelEnabled;
+            },
+            set: function (value) {
+                this._mouseWheelEnabled = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(ScrollPane.prototype, "percX", {
             get: function () {
                 return this._overlapSize.x == 0 ? 0 : this._xPos / this._overlapSize.x;
@@ -11124,7 +11189,7 @@ var __extends = (this && this.__extends) || (function () {
         ScrollPane.prototype.onMouseWheel = function (evt) {
             if (!this._mouseWheelEnabled)
                 return;
-            var delta = evt.mouseWheelDelta > 0 ? 1 : -1;
+            var delta = evt.mouseWheelDelta > 0 ? -1 : 1;
             if (this._overlapSize.x > 0 && this._overlapSize.y == 0) {
                 if (this._pageMode)
                     this.setPosX(this._xPos + this._pageSize.x * delta, false);
@@ -12563,14 +12628,14 @@ var __extends = (this && this.__extends) || (function () {
         }
         TranslationHelper.loadFromXML = function (source) {
             TranslationHelper.strings = {};
-            var xml = new cc["SAXParser"]._parseXML(source).documentElement;
-            var nodes = xml.children;
+            var xml = new cc["SAXParser"]().parse(source).documentElement;
+            var nodes = xml.childNodes;
             var length1 = nodes.length;
             for (var i1 = 0; i1 < length1; i1++) {
                 var cxml = nodes[i1];
-                if (cxml.name == "string") {
-                    var key = cxml.attributes.name;
-                    var text = cxml.children.length > 0 ? cxml.children[0].text : "";
+                if (cxml.tagName == "string") {
+                    var key = cxml.getAttribute("name");
+                    var text = cxml.childNodes.length > 0 ? cxml.firstChild.nodeValue : "";
                     var i = key.indexOf("-");
                     if (i == -1)
                         continue;
@@ -12886,15 +12951,19 @@ var __extends = (this && this.__extends) || (function () {
             return UIPackage._instByName[name];
         };
         UIPackage.addPackage = function (url) {
+            var pkg = UIPackage._instById[url];
+            if (pkg)
+                return pkg;
             var asset = cc.loader.getRes(url);
             if (!asset)
                 throw "Resource '" + url + "' not ready";
             if (!asset.rawBuffer)
                 throw "Missing asset data. Call UIConfig.registerLoader first!";
-            var pkg = new UIPackage();
+            pkg = new UIPackage();
             pkg.loadPackage(new fgui.ByteBuffer(asset.rawBuffer), url);
             UIPackage._instById[pkg.id] = pkg;
             UIPackage._instByName[pkg.name] = pkg;
+            UIPackage._instById[pkg._url] = pkg;
             return pkg;
         };
         UIPackage.loadPackage = function (url, completeCallback) {
@@ -13878,7 +13947,7 @@ var __extends = (this && this.__extends) || (function () {
                     if (this._fillMethod != 0) {
                         this.type = cc.Sprite.Type.FILLED;
                         if (this._fillMethod <= 3)
-                            this.fillType = this._fillMethod;
+                            this.fillType = this._fillMethod - 1;
                         else
                             this.fillType = cc.Sprite.FillType.RADIAL;
                         this.fillCenter = new cc.Vec2(0.5, 0.5);
@@ -14004,21 +14073,23 @@ var __extends = (this && this.__extends) || (function () {
             },
             set: function (value) {
                 this._frames = value;
-                if (this._frames != null)
+                if (this._frames != null) {
                     this._frameCount = this._frames.length;
-                else
+                    if (this._end == -1 || this._end > this._frameCount - 1)
+                        this._end = this._frameCount - 1;
+                    if (this._endAt == -1 || this._endAt > this._frameCount - 1)
+                        this._endAt = this._frameCount - 1;
+                    if (this._frame < 0 || this._frame > this._frameCount - 1)
+                        this._frame = this._frameCount - 1;
+                    this.type = cc.Sprite.Type.SIMPLE;
+                    this.drawFrame();
+                    this._frameElapsed = 0;
+                    this._repeatedCount = 0;
+                    this._reversed = false;
+                }
+                else {
                     this._frameCount = 0;
-                if (this._end == -1 || this._end > this._frameCount - 1)
-                    this._end = this._frameCount - 1;
-                if (this._endAt == -1 || this._endAt > this._frameCount - 1)
-                    this._endAt = this._frameCount - 1;
-                if (this._frame < 0 || this._frame > this._frameCount - 1)
-                    this._frame = this._frameCount - 1;
-                this.type = cc.Sprite.Type.SIMPLE;
-                this.drawFrame();
-                this._frameElapsed = 0;
-                this._repeatedCount = 0;
-                this._reversed = false;
+                }
             },
             enumerable: true,
             configurable: true
@@ -14604,7 +14675,7 @@ var __extends = (this && this.__extends) || (function () {
         InputProcessor.prototype.mouseWheelHandler = function (evt) {
             var ti = this.updateInfo(0, evt.getLocation());
             ti.mouseWheelDelta = Math.max(evt.getScrollX(), evt.getScrollY());
-            var evt2 = this.getEvent(ti, ti.target, fgui.Event.MOUSE_WHEEL, false);
+            var evt2 = this.getEvent(ti, ti.target, fgui.Event.MOUSE_WHEEL, true);
             ti.target.node.dispatchEvent(evt2);
             fgui.Event._return(evt2);
         };
@@ -15886,10 +15957,10 @@ var __extends = (this && this.__extends) || (function () {
 })(fgui || (fgui = {}));
 // Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2014/07/19 14:11
-//
+// 
 // License Copyright (c) Daniele Giardini.
 // This work is subject to the terms at http://dotween.demigiant.com/license.php
-//
+// 
 // =============================================================
 // Contains Daniele Giardini's C# port of the easing equations created by Robert Penner
 // (all easing equations except for Flash, InFlash, OutFlash, InOutFlash,
@@ -17276,6 +17347,10 @@ var __extends = (this && this.__extends) || (function () {
         ToolSet.getTime = function () {
             var currentTime = new Date();
             return currentTime.getMilliseconds() / 1000;
+        };
+        ToolSet.toGrayed = function (c) {
+            var v = c.getR() * 0.299 + c.getG() * 0.587 + c.getB() * 0.114;
+            return new cc.Color(v, v, v, c.getA());
         };
         return ToolSet;
     }());
