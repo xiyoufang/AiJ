@@ -1,6 +1,5 @@
 import ccclass = cc._decorator.ccclass;
 import UIManger from "../UIManger";
-import WelcomeLayer from "../WelcomeLayer";
 import AppConfig from "../AppConfig";
 import RoomEvent from "../plazz/event/RoomEvent";
 import FireKit from "../fire/FireKit";
@@ -24,7 +23,6 @@ import UserAssetEventResponse from "./response/UserAssetEventResponse";
 import UserAssetEvent from "./event/UserAssetEvent";
 import HeroManager from "../hero/HeroManager";
 import UserInfoWindow from "../UserInfoWindow";
-import "lodash/common/lang";
 import UserAssetTransEvent from "./event/UserAssetTransEvent";
 import UserAssetTransEventResponse from "./response/UserAssetTransEventResponse";
 import RechargeRecordLayer from "./RechargeRecordLayer";
@@ -33,7 +31,6 @@ import RechargeRecordEvent from "./event/RechargeRecordEvent";
 import UserCertEvent from "./event/UserCertEvent";
 import {UserCertEventResponse} from "./response/UserCertEventResponse";
 import SettingWindow from "../SettingWindow";
-import AudioManager from "../AudioManager";
 
 @ccclass
 export default class PlazaLayer extends AiJCCComponent {
