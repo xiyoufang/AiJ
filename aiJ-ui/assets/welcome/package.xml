@@ -6,6 +6,8 @@
     <image id="m0rf2" name="im_bg.png" path="/images/"/>
     <image id="m0rf3" name="bt_load.png" path="/images/"/>
     <component id="m0rf1g" name="Button4.xml" path="/component/"/>
+    <image id="ybg91h" name="button1.png" path="/images/"/>
+    <component id="ybg91i" name="Button5.xml" path="/component/"/>
   </resources>
   <publish name="welcome"/>
 </packageDescription>

@@ -76,6 +76,12 @@ export default class WelcomeLayer extends AiJCCComponent {
                 AlertWindow.alert("提示信息", "未连接服务器，请稍后再试！");
             }
         }, this);
+        this._view.getChild("wx_login").asButton.onClick(() => {
+            //调用微信接口，实现微信登录
+            if (cc.sys.ANDROID) {
+                var o = jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "print", "()V")
+            }
+        }, this);
     }
 
 
