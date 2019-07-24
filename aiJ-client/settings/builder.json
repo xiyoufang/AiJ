@@ -7,6 +7,13 @@
     "scheme": "https",
     "skipRecord": false
   },
+  "appBundle": false,
+  "baidugame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "testappid",
+    "orientation": "portrait",
+    "subContext": ""
+  },
   "encryptJs": true,
   "excludeScenes": [],
   "fb-instant-games": {},
@@ -22,7 +29,7 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "com.xiyoufang.aij",
+  "packageName": "net.yw365.jiong",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
@@ -38,12 +45,5 @@
     "subContext": ""
   },
   "xxteaKey": "c56bd066-9a25-48",
-  "zipCompressJs": true,
-  "baidugame": {
-    "appid": "testappid",
-    "orientation": "portrait",
-    "REMOTE_SERVER_ROOT": "",
-    "subContext": ""
-  },
-  "appBundle": false
+  "zipCompressJs": true
 }

@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiyoufang.aij"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.yw365.jiong"
     android:installLocation="auto">
 
     <uses-feature android:glEsVersion="0x00020000" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- for mta statistics, not necessary-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher">
-        
+        tools:ignore="GoogleAppIndexingWarning">
+
         <!-- Tell Cocos2dxActivity the name of our .so -->
-        <meta-data android:name="android.app.lib_name"
-                   android:value="cocos2djs" />
-        
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="cocos2djs" />
+
         <activity
             android:name="org.cocos2dx.javascript.AppActivity"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:usesCleartextTraffic="true"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:launchMode="singleTask"
-            android:taskAffinity="" >
+            android:screenOrientation="sensorLandscape"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:usesCleartextTraffic="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wxapi.WXEntryActivity" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask"/>
     </application>
-    
+
 </manifest>

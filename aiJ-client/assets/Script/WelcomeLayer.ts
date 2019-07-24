@@ -79,7 +79,8 @@ export default class WelcomeLayer extends AiJCCComponent {
         this._view.getChild("wx_login").asButton.onClick(() => {
             //调用微信接口，实现微信登录
             if (cc.sys.ANDROID) {
-                var o = jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "print", "()V")
+                // var o = jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "print", "()V")
+                jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V")
             }
         }, this);
     }

@@ -35,3 +35,16 @@
 # keep anysdk for release. you can comment if you are not using anysdk
 -keep public class com.anysdk.** { *; }
 -dontwarn com.anysdk.**
+
+# weixin sdk
+-keep class com.tencent.mm.opensdk.** {
+    *;
+}
+
+-keep class com.tencent.wxop.** {
+    *;
+}
+
+-keep class com.tencent.mm.sdk.** {
+    *;
+}
