@@ -74,7 +74,8 @@ CREATE TABLE user_local_auth
 CREATE TABLE user_wx_auth
 (
   user_id      varchar(64) PRIMARY KEY, -- 用户ID
-  wx_openid    varchar(64),             -- 微信openid
+  open_id      varchar(64),             -- 微信openid
+  union_id     varchar(64),             -- 微信unionId
   enable       integer,                 -- 是否启用
   created_time datetime                 -- 启用时间
 );

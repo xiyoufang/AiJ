@@ -66,7 +66,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                             @Override
                             public void run() {
                                 //将code 传递到cocoscreator.
-                                Cocos2dxJavascriptJavaBridge.evalString("WxHelper.onWxLogin(\"" + code + "\")");
+                                Cocos2dxJavascriptJavaBridge.evalString("cc.log(\"code:" + code + "\")");
+                                Cocos2dxJavascriptJavaBridge.evalString("cc.WxHelper.onWxLogin(\"" + code + "\")");
                             }
                         });
 

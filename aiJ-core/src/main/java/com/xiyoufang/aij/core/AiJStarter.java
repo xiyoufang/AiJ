@@ -448,6 +448,8 @@ public abstract class AiJStarter {
         config.setRegisterPath("/aij/service");
         config.setDsUserCenter("aij-users");
         config.setDsPlatform("aij-platform");
+        config.setWxAppId("wx7da1c028a41aeaf3");
+        config.setWxSecret("61fca66cdaf99017bbd2f78c4393b84a");
     }
 
 

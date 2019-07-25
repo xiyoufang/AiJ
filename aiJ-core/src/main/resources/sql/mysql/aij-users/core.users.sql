@@ -22,3 +22,13 @@ FROM user_local_auth a
        left join distributor d on (u.user_id = d.user_id)
 WHERE (a.mobile = #p(0) and a.enable = 1 and u.status = 1)
 #end
+
+### 通过手机号码
+#sql("user_auth_by_wx")
+SELECT u.*, d.id as distributor_id
+FROM user_wx_auth a
+         left join user_profile u
+                   on (u.user_id = a.user_id)
+         left join distributor d on (u.user_id = d.user_id)
+WHERE (a.union_id = #p(0) and a.enable = 1 and u.status = 1)
+#end

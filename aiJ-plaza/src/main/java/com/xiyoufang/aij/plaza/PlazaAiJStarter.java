@@ -53,6 +53,7 @@ public class PlazaAiJStarter extends AiJStarter {
     protected void configRouter(Router router) {
         router.addRouter(1, 1, new PlazaMobileLoginEventHandler());
         router.addRouter(1, 2, new PlazaEmailLoginEventHandler());
+        router.addRouter(1, 3, new PlazaWeiXinLoginEventHandler());
         router.addRouter(2, 1, new NoticeEventHandler());
         router.addRouter(2, 2, new BroadcastEventHandler());
         router.addRouter(3, 1, new RoomServiceEventHandler());

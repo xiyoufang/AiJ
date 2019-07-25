@@ -5450,14 +5450,15 @@ window.__require = function e(t, n, r) {
   AppConfig: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "12cf41W7tlPzoLZVTcrbgP8", "AppConfig");
+    "use strict";
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var AppConfig = function() {
       function AppConfig() {}
-      AppConfig.PLAZA_WS_HOST = "localhost";
+      AppConfig.PLAZA_WS_HOST = "192.168.1.6";
       AppConfig.PLAZA_WS_PORT = 8082;
-      AppConfig.PLATFORM_URL = "http://localhost:8090/";
+      AppConfig.PLATFORM_URL = "http://192.168.1.6:8090/";
       AppConfig.PLAZA_WS_NAME = "PLAZA_WS";
       AppConfig.LOCAL_FIRE = "LOCAL_FIRE";
       AppConfig.PLAZA_FIRE = "PLAZA_FIRE";
@@ -9426,6 +9427,49 @@ window.__require = function e(t, n, r) {
   }, {
     "../../ws/AiJ": "AiJ"
   } ],
+  PlazaWeiXinLoginEvent: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "d12caDKsTBFO50sPctvNtoJ", "PlazaWeiXinLoginEvent");
+    "use strict";
+    var __extends = this && this.__extends || function() {
+      var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf || {
+          __proto__: []
+        } instanceof Array && function(d, b) {
+          d.__proto__ = b;
+        } || function(d, b) {
+          for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        };
+        return extendStatics(d, b);
+      };
+      return function(d, b) {
+        extendStatics(d, b);
+        function __() {
+          this.constructor = d;
+        }
+        d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __());
+      };
+    }();
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    var AiJ_1 = require("../../ws/AiJ");
+    var PlazaWeiXinLoginEvent = function(_super) {
+      __extends(PlazaWeiXinLoginEvent, _super);
+      function PlazaWeiXinLoginEvent(code) {
+        var _this = _super.call(this) || this;
+        _this.code = code;
+        _this.mainType = 1;
+        _this.subType = 3;
+        return _this;
+      }
+      return PlazaWeiXinLoginEvent;
+    }(AiJ_1.AiJ.AiJEvent);
+    exports.default = PlazaWeiXinLoginEvent;
+    cc._RF.pop();
+  }, {
+    "../../ws/AiJ": "AiJ"
+  } ],
   PlazaWsListener: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "2f07eMZunRE3JN8FW+9wuYA", "PlazaWsListener");
@@ -10434,6 +10478,7 @@ window.__require = function e(t, n, r) {
     var HeroManager_1 = require("./hero/HeroManager");
     var Hero_1 = require("./hero/Hero");
     var AudioManager_1 = require("./AudioManager");
+    var WxHelper_1 = require("./WxHelper");
     var WelcomeLayer = function(_super) {
       __extends(WelcomeLayer, _super);
       function WelcomeLayer() {
@@ -10480,7 +10525,7 @@ window.__require = function e(t, n, r) {
           } else AlertWindow_1.default.alert("\u63d0\u793a\u4fe1\u606f", "\u672a\u8fde\u63a5\u670d\u52a1\u5668\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01");
         }, this);
         this._view.getChild("wx_login").asButton.onClick(function() {
-          cc.sys.ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
+          WxHelper_1.default.wxLogin();
         }, this);
       };
       WelcomeLayer.prototype.username = function() {
@@ -10500,6 +10545,7 @@ window.__require = function e(t, n, r) {
     "./AppConfig": "AppConfig",
     "./AudioManager": "AudioManager",
     "./UIManger": "UIManger",
+    "./WxHelper": "WxHelper",
     "./fire/FireKit": "FireKit",
     "./hero/Hero": "Hero",
     "./hero/HeroManager": "HeroManager",
@@ -10508,26 +10554,50 @@ window.__require = function e(t, n, r) {
   } ],
   WxHelper: [ function(require, module, exports) {
     "use strict";
-    cc._RF.push(module, "dbba9kkFEpBzoVR0m147CmM", "WxHelper");
+    cc._RF.push(module, "2df913Ps7BMyZmC4wfyLsXJ", "WxHelper");
     "use strict";
-    var __decorate = this && this.__decorate || function(decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : null === desc ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if ("object" === typeof Reflect && "function" === typeof Reflect.decorate) r = Reflect.decorate(decorators, target, key, desc); else for (var i = decorators.length - 1; i >= 0; i--) (d = decorators[i]) && (r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r);
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var ccclass = cc._decorator.ccclass;
+    var AiJKit_1 = require("./ws/AiJKit");
+    var AppConfig_1 = require("./AppConfig");
+    var PlazaWeiXinLoginEvent_1 = require("./plazz/event/PlazaWeiXinLoginEvent");
+    var PlazaConfig_1 = require("./plazz/PlazaConfig");
+    var AlertWindow_1 = require("./AlertWindow");
     var WxHelper = function() {
-      function WxHelper() {}
-      WxHelper.onWxLogin = function(token) {
-        cc.log("token:" + token);
+      function WxHelper() {
+        this.appId = "wx7da1c028a41aeaf3";
+        this.secret = "61fca66cdaf99017bbd2f78c4393b84a";
+      }
+      WxHelper.wxLogin = function() {
+        cc.sys.ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
       };
-      WxHelper = __decorate([ ccclass ], WxHelper);
+      WxHelper.prototype.onWxLogin = function(code) {
+        cc.log("code:" + code);
+        PlazaConfig_1.default.getInst()._aiJPro.isOpen() ? AiJKit_1.default.use(AppConfig_1.default.PLAZA_WS_NAME).send(new PlazaWeiXinLoginEvent_1.default(code)) : AlertWindow_1.default.alert("\u63d0\u793a\u4fe1\u606f", "\u672a\u8fde\u63a5\u670d\u52a1\u5668\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01");
+      };
+      WxHelper.get = function(url, callback) {
+        var request = cc.loader.getXMLHttpRequest();
+        request.open("GET", url, true);
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.onreadystatechange = function() {
+          if (4 == request.readyState) {
+            var httpStatus = request.statusText;
+            null != callback && callback.perform(request.responseText);
+          }
+        };
+        request.send();
+      };
       return WxHelper;
     }();
     exports.default = WxHelper;
+    cc["WxHelper"] = new WxHelper();
     cc._RF.pop();
-  }, {} ]
-}, {}, [ "AiJApp", "AiJCCComponent", "AlertWindow", "AppConfig", "AudioManager", "GameServiceManager", "LoadingWindow", "Setting", "SettingWindow", "UIManger", "UserInfoWindow", "WelcomeLayer", "WxHelper", "FireKit", "OnFire", "Hero", "HeroManager", "PlazaConfig", "PlazaLayer", "PlazaWsListener", "RechargeRecordLayer", "RoomRecordLayer", "BroadcastEvent", "PlazaMobileLoginEvent", "RechargeRecordEvent", "RoomEvent", "RoomRecordEvent", "UserAssetEvent", "UserAssetTransEvent", "UserCertEvent", "BroadcastEventResponseHandler", "PlazaCommonResponseHandler", "PlazaLoginHandler", "RechargeRecordEventResponseHandler", "RoomEventResponseHandler", "RoomRecordEventResponseHandler", "UserAssetEventResponseHandler", "UserAssetTransEventResponseHandler", "UserCertEventResponseHandler", "BroadcastEventResponse", "PlazaLoginEventResponse", "RechargeRecordEventResponse", "RoomRecordEventResponse", "RoomServiceEventResponse", "UserAssetEventResponse", "UserAssetTransEventResponse", "UserCertEventResponse", "AbstractRoomConfig", "RoomWsListener", "ClientReadyEvent", "CreateTableEvent", "DismissTableEvent", "DismissVoteTableEvent", "HeroProfileEvent", "JoinTableEvent", "LeaveTableEvent", "RoomMobileLoginEvent", "SitDownTableEvent", "StandUpTableEvent", "ChatEventResponseHandler", "CreateTableEventResponseHandler", "DismissVoteEventResponseHandler", "HeroEnterEventResponseHandler", "HeroLeaveEventResponseHandler", "HeroOfflineEventResponseHandler", "HeroOnlineEventResponseHandler", "HeroProfileEventResponseHandler", "HeroSceneResponseHandler", "HeroSitDownEventResponseHandler", "HeroStandUpEventResponseHandler", "JoinTableEventResponseHandler", "LoginNotifyResponseHandler", "RoomCommonResponseHandler", "RoomLoginResponseHandler", "MahjongGameEngine", "MahjongGameLayer", "MahjongRoomConfig", "MahjongVideoLayer", "MahjongOperateEvent", "MahjongOutCardEvent", "MahjongDispathCardResponseHandler", "MahjongEndEventResponseHandler", "MahjongErrorEventResponseHandler", "MahjongGameEndEventResponseHandler", "MahjongGameStartResponseHandler", "MahjongGameStatusResponseHandler", "MahjongOperateNotifyEventResponseHandler", "MahjongOperateResultEventResponseHandler", "MahjongOutCardResponseHandler", "MahjongPlayingGameSceneResponseHandler", "MahjongPrepareGameSceneResponseHandler", "MahjongAction", "MahjongGameActionRecord", "MahjongGameRecord", "MahjongGameStartRecord", "MahjongPlayerRecord", "MahjongRecord", "MahjongDispatchCardEventResponse", "MahjongEndEventResponse", "MahjongErrorEventResponse", "MahjongGameEndEventResponse", "MahjongGameStartEventResponse", "MahjongGameStatusResponse", "MahjongOperateNotifyEventResponse", "MahjongOperateResultEventResponse", "MahjongOutCardEventResponse", "MahjongPlayingGameSceneResponse", "MahjongPrepareGameSceneResponse", "MahjongWeaveItem", "MahjongWeaveType", "CreateTableEventResponse", "DismissVoteEventResponse", "HeroEnterEventResponse", "HeroLeaveEventResponse", "HeroOfflineEventResponse", "HeroOnlineEventResponse", "HeroProfileEventResponse", "HeroSceneResponse", "HeroSitDownEventResponse", "HeroStandUpEventResponse", "JoinTableEventResponse", "RoomLoginEventResponse", "AiJ", "AiJKit", "AiJPro" ]);
+  }, {
+    "./AlertWindow": "AlertWindow",
+    "./AppConfig": "AppConfig",
+    "./plazz/PlazaConfig": "PlazaConfig",
+    "./plazz/event/PlazaWeiXinLoginEvent": "PlazaWeiXinLoginEvent",
+    "./ws/AiJKit": "AiJKit"
+  } ]
+}, {}, [ "AiJApp", "AiJCCComponent", "AlertWindow", "AppConfig", "AudioManager", "GameServiceManager", "LoadingWindow", "Setting", "SettingWindow", "UIManger", "UserInfoWindow", "WelcomeLayer", "WxHelper", "FireKit", "OnFire", "Hero", "HeroManager", "PlazaConfig", "PlazaLayer", "PlazaWsListener", "RechargeRecordLayer", "RoomRecordLayer", "BroadcastEvent", "PlazaMobileLoginEvent", "PlazaWeiXinLoginEvent", "RechargeRecordEvent", "RoomEvent", "RoomRecordEvent", "UserAssetEvent", "UserAssetTransEvent", "UserCertEvent", "BroadcastEventResponseHandler", "PlazaCommonResponseHandler", "PlazaLoginHandler", "RechargeRecordEventResponseHandler", "RoomEventResponseHandler", "RoomRecordEventResponseHandler", "UserAssetEventResponseHandler", "UserAssetTransEventResponseHandler", "UserCertEventResponseHandler", "BroadcastEventResponse", "PlazaLoginEventResponse", "RechargeRecordEventResponse", "RoomRecordEventResponse", "RoomServiceEventResponse", "UserAssetEventResponse", "UserAssetTransEventResponse", "UserCertEventResponse", "AbstractRoomConfig", "RoomWsListener", "ClientReadyEvent", "CreateTableEvent", "DismissTableEvent", "DismissVoteTableEvent", "HeroProfileEvent", "JoinTableEvent", "LeaveTableEvent", "RoomMobileLoginEvent", "SitDownTableEvent", "StandUpTableEvent", "ChatEventResponseHandler", "CreateTableEventResponseHandler", "DismissVoteEventResponseHandler", "HeroEnterEventResponseHandler", "HeroLeaveEventResponseHandler", "HeroOfflineEventResponseHandler", "HeroOnlineEventResponseHandler", "HeroProfileEventResponseHandler", "HeroSceneResponseHandler", "HeroSitDownEventResponseHandler", "HeroStandUpEventResponseHandler", "JoinTableEventResponseHandler", "LoginNotifyResponseHandler", "RoomCommonResponseHandler", "RoomLoginResponseHandler", "MahjongGameEngine", "MahjongGameLayer", "MahjongRoomConfig", "MahjongVideoLayer", "MahjongOperateEvent", "MahjongOutCardEvent", "MahjongDispathCardResponseHandler", "MahjongEndEventResponseHandler", "MahjongErrorEventResponseHandler", "MahjongGameEndEventResponseHandler", "MahjongGameStartResponseHandler", "MahjongGameStatusResponseHandler", "MahjongOperateNotifyEventResponseHandler", "MahjongOperateResultEventResponseHandler", "MahjongOutCardResponseHandler", "MahjongPlayingGameSceneResponseHandler", "MahjongPrepareGameSceneResponseHandler", "MahjongAction", "MahjongGameActionRecord", "MahjongGameRecord", "MahjongGameStartRecord", "MahjongPlayerRecord", "MahjongRecord", "MahjongDispatchCardEventResponse", "MahjongEndEventResponse", "MahjongErrorEventResponse", "MahjongGameEndEventResponse", "MahjongGameStartEventResponse", "MahjongGameStatusResponse", "MahjongOperateNotifyEventResponse", "MahjongOperateResultEventResponse", "MahjongOutCardEventResponse", "MahjongPlayingGameSceneResponse", "MahjongPrepareGameSceneResponse", "MahjongWeaveItem", "MahjongWeaveType", "CreateTableEventResponse", "DismissVoteEventResponse", "HeroEnterEventResponse", "HeroLeaveEventResponse", "HeroOfflineEventResponse", "HeroOnlineEventResponse", "HeroProfileEventResponse", "HeroSceneResponse", "HeroSitDownEventResponse", "HeroStandUpEventResponse", "JoinTableEventResponse", "RoomLoginEventResponse", "AiJ", "AiJKit", "AiJPro" ]);

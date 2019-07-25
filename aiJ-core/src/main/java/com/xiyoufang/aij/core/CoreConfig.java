@@ -67,6 +67,15 @@ public class CoreConfig extends Config {
      */
     public static final String DEFAULT_CACHE_NAME = "$default_cache_name";
 
+    /**
+     * 微信app ID
+     */
+    public static final String WX_APP_ID = "$wx_app_id";
+    /**
+     * 微信secret
+     */
+    public static final String WX_SECRET = "$wx_secret";
+
     public CoreConfig() {
     }
 
@@ -205,4 +214,21 @@ public class CoreConfig extends Config {
         setStr(DEFAULT_CACHE_NAME, cacheName);
     }
 
+    /**
+     * 设置微信APP ID
+     *
+     * @param wxAppId wxAppId
+     */
+    public void setWxAppId(String wxAppId) {
+        setStr(WX_APP_ID, wxAppId);
+    }
+
+    /**
+     * 设置微信Secret
+     *
+     * @param wxSecret wxSecret
+     */
+    public void setWxSecret(String wxSecret) {
+        setStr(WX_SECRET, wxSecret);
+    }
 }

@@ -11,6 +11,7 @@ import HeroManager from "./hero/HeroManager";
 import Hero from "./hero/Hero";
 import PlazaLoginEventResponse from "./plazz/response/PlazaLoginEventResponse";
 import AudioManager from "./AudioManager";
+import WxHelper from "./WxHelper";
 
 @ccclass
 export default class WelcomeLayer extends AiJCCComponent {
@@ -77,11 +78,7 @@ export default class WelcomeLayer extends AiJCCComponent {
             }
         }, this);
         this._view.getChild("wx_login").asButton.onClick(() => {
-            //调用微信接口，实现微信登录
-            if (cc.sys.ANDROID) {
-                // var o = jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "print", "()V")
-                jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V")
-            }
+            WxHelper.wxLogin(); //调用微信接口，实现微信登录
         }, this);
     }
 

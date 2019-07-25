@@ -6,9 +6,11 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.xiyoufang.aij.core.AiJCoreDb;
+import com.xiyoufang.aij.core.Id;
 import org.joda.time.DateTime;
 
 import java.text.MessageFormat;
+import java.util.Date;
 
 /**
  * Created by 席有芳 on 2019-02-19.
@@ -125,5 +127,35 @@ public class UserService {
         record.set("created_time", new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
         AiJCoreDb.uc().saveZipper("user_cert", "user_id,ended_time", record);
         return AiJCoreDb.uc().updateByUnique("user_profile", "user_id", new Record().set("user_id", userId).set("cert_status", 0));
+    }
+
+    /**
+     * 注册微信用户
+     *
+     * @param unionId  unionId
+     * @param openId   openId
+     * @param avatar   avatar
+     * @param sex      sex
+     * @param nickName nickName
+     * @return record
+     */
+    @Before(Tx.class)
+    public Record registerWeiXinUser(String unionId, String openId, String avatar, int sex, String nickName) {
+        long userId = Id.nextId();
+        AiJCoreDb.uc().save("user_wx_auth", "user_id",
+                new Record().set("user_id", userId)
+                        .set("union_id", unionId)
+                        .set("open_id", openId)
+                        .set("enable", 1).set("created_time", new Date()));
+        AiJCoreDb.uc().save("user_profile", "id",
+                new Record().set("user_id", userId)
+                        .set("user_name", nickName)
+                        .set("nick_name", nickName)
+                        .set("gender", sex)
+                        .set("avatar", avatar)
+                        .set("status", 1)
+                        .set("created_source", "wx")
+                        .set("created_time", new Date()));
+        return AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_wx", unionId));
     }
 }
