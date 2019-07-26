@@ -10572,7 +10572,7 @@ window.__require = function e(t, n, r) {
       WxHelper.wxLogin = function() {
         cc.sys.ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
       };
-      WxHelper.prototype.onWxLogin = function(code) {
+      WxHelper.onWxLogin = function(code) {
         cc.log("code:" + code);
         PlazaConfig_1.default.getInst()._aiJPro.isOpen() ? AiJKit_1.default.use(AppConfig_1.default.PLAZA_WS_NAME).send(new PlazaWeiXinLoginEvent_1.default(code)) : AlertWindow_1.default.alert("\u63d0\u793a\u4fe1\u606f", "\u672a\u8fde\u63a5\u670d\u52a1\u5668\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01");
       };

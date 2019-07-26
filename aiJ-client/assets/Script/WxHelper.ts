@@ -10,11 +10,11 @@ export default class WxHelper {
     /**
      * 微信APP ID
      */
-    public appId: string = 'wx7da1c028a41aeaf3';
+    public static appId: string = 'wx7da1c028a41aeaf3';
     /**
      * 微信secret
      */
-    public secret: string = '61fca66cdaf99017bbd2f78c4393b84a';
+    public static secret: string = '61fca66cdaf99017bbd2f78c4393b84a';
 
     /**
      * 微信登录
@@ -29,7 +29,7 @@ export default class WxHelper {
      * 登录
      * @param code
      */
-    public onWxLogin(code) {
+    public static onWxLogin(code) {
         cc.log("code:" + code);
         if (PlazaConfig.getInst()._aiJPro.isOpen()) {
             AiJKit.use(AppConfig.PLAZA_WS_NAME).send(new PlazaWeiXinLoginEvent(code));
@@ -81,4 +81,4 @@ export default class WxHelper {
     }
 
 }
-cc['WxHelper'] = new WxHelper();
+cc['WxHelper'] = WxHelper;
