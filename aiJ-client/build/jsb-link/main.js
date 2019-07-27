@@ -155,7 +155,7 @@ window.boot = function () {
             jsList = [bundledScript];
         }
     }
-    
+
     var option = {
         id: 'GameCanvas',
         scenes: settings.scenes,
@@ -200,7 +200,7 @@ if (false) {
     qqPlayDownloader.REMOTE_SERVER_ROOT = "";
     var prevPipe = cc.loader.md5Pipe || cc.loader.assetLoader;
     cc.loader.insertPipeAfter(prevPipe, qqPlayDownloader);
-    
+
     window.boot();
 }
 else if (window.jsb) {
@@ -216,7 +216,10 @@ else if (window.jsb) {
         require('src/cocos2d-jsb.js');
         require('jsb-adapter/jsb-engine.js');
     }
-
+    var hotUpdateSearchPaths = localStorage.getItem('HotUpdateSearchPaths');
+    if (hotUpdateSearchPaths) {
+        jsb.fileUtils.setSearchPaths(JSON.parse(hotUpdateSearchPaths));
+    }
     cc.macro.CLEANUP_IMAGE_CACHE = true;
     window.boot();
 }

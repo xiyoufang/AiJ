@@ -12,6 +12,7 @@ import Hero from "./hero/Hero";
 import PlazaLoginEventResponse from "./plazz/response/PlazaLoginEventResponse";
 import AudioManager from "./AudioManager";
 import WxHelper from "./WxHelper";
+import HotUpdateManager from "./hotupdate/HotUpdateManager";
 
 @ccclass
 export default class WelcomeLayer extends AiJCCComponent {
@@ -40,6 +41,9 @@ export default class WelcomeLayer extends AiJCCComponent {
     protected onInitAiJCom(objs: any): void {
         PlazaConfig.init(AppConfig.PLAZA_WS_HOST, AppConfig.PLAZA_WS_PORT);
         AudioManager.play_music("commons", "bgm");
+        if (cc.sys.isNative) {
+            HotUpdateManager.checkUpdate(); //检验更新
+        }
     }
 
     loginSuccessCb = (resp: PlazaLoginEventResponse) => {

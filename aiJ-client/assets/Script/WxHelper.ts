@@ -20,7 +20,7 @@ export default class WxHelper {
      * 微信登录
      */
     public static wxLogin() {
-        if (cc.sys.ANDROID) {
+        if (cc.sys.os == cc.sys.OS_ANDROID) {
             jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V")
         }
     }

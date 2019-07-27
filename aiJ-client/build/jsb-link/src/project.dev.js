@@ -10565,10 +10565,7 @@ window.__require = function e(t, n, r) {
     var PlazaConfig_1 = require("./plazz/PlazaConfig");
     var AlertWindow_1 = require("./AlertWindow");
     var WxHelper = function() {
-      function WxHelper() {
-        this.appId = "wx7da1c028a41aeaf3";
-        this.secret = "61fca66cdaf99017bbd2f78c4393b84a";
-      }
+      function WxHelper() {}
       WxHelper.wxLogin = function() {
         cc.sys.ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
       };
@@ -10588,10 +10585,12 @@ window.__require = function e(t, n, r) {
         };
         request.send();
       };
+      WxHelper.appId = "wx7da1c028a41aeaf3";
+      WxHelper.secret = "61fca66cdaf99017bbd2f78c4393b84a";
       return WxHelper;
     }();
     exports.default = WxHelper;
-    cc["WxHelper"] = new WxHelper();
+    cc["WxHelper"] = WxHelper;
     cc._RF.pop();
   }, {
     "./AlertWindow": "AlertWindow",
