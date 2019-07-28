@@ -21,7 +21,14 @@ export default class WelcomeLayer extends AiJCCComponent {
      * UI
      */
     private _view: fgui.GComponent;
-
+    /**
+     * 热更新组
+     */
+    private _hotUpdateGroup: fgui.GGroup;
+    /**
+     * 热更新的进度条
+     */
+    private _hotUpdateProgressBar: fgui.GProgressBar;
 
     /**
      * 加载
@@ -32,6 +39,8 @@ export default class WelcomeLayer extends AiJCCComponent {
         this.loadPackage("welcome", () => {
                 fgui.UIPackage.addPackage("welcome");
                 this._view = fgui.UIPackage.createObject("welcome", "WelcomeLayer").asCom;
+                this._hotUpdateGroup = this._view.getChild("hotUpdateGroup").asGroup;
+                this._hotUpdateProgressBar = this._view.getChildInGroup("hotUpdateProgressBar", this._hotUpdateGroup).asProgress;
                 this.initView();
                 fgui.GRoot.inst.addChild(this._view);
             }
@@ -43,7 +52,22 @@ export default class WelcomeLayer extends AiJCCComponent {
         AudioManager.play_music("commons", "bgm");
         if (cc.sys.isNative) {
             cc.log("hot update manager check");
-            HotUpdateManager.getInst().checkUpdate(); //检验更新
+            HotUpdateManager.getInst().checkAndUpdate((event) => {
+                switch (event['code']) {
+                    case 0: //发现新版本
+                        this._view.getControllerAt(0).setSelectedIndex(1);  //显示更新的界面
+                        break;
+                    case 1: //更新进度
+                        let downloaded = event['downloaded'];
+                        let total = event['total'];
+                        this._hotUpdateProgressBar.max = total;
+                        this._hotUpdateProgressBar.value = downloaded;
+                        break;
+                    case 2: //更新完成
+                        this._view.getControllerAt(0).setSelectedIndex(0);
+                        break;
+                }
+            }); //检验更新
         }
     }
 

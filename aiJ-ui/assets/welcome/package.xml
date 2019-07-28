@@ -8,6 +8,8 @@
     <component id="m0rf1g" name="Button4.xml" path="/component/"/>
     <image id="ybg91h" name="button1.png" path="/images/"/>
     <component id="ybg91i" name="Button5.xml" path="/component/"/>
+    <image id="a2pw1j" name="window_bg.png" path="/images/"/>
+    <component id="a2pw1k" name="ProgressBar1.xml" path="/component/"/>
   </resources>
   <publish name="welcome"/>
 </packageDescription>

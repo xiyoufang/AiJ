@@ -6283,6 +6283,7 @@ window.__require = function e(t, n, r) {
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
+    var AlertWindow_1 = require("../AlertWindow");
     var HotUpdateManager = function() {
       function HotUpdateManager() {
         this._updating = false;
@@ -6306,12 +6307,13 @@ window.__require = function e(t, n, r) {
         null == HotUpdateManager.inst && (HotUpdateManager.inst = new HotUpdateManager());
         return HotUpdateManager.inst;
       };
-      HotUpdateManager.prototype.checkUpdate = function() {
+      HotUpdateManager.prototype.checkAndUpdate = function(callback) {
         var _this = this;
         if (this._updating) {
           cc.log("Checking or updating ...");
           return;
         }
+        this._callback = callback;
         if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
           cc.log("load project.manifest");
           cc.loader.loadRes("project", function(err, res) {
@@ -6320,6 +6322,7 @@ window.__require = function e(t, n, r) {
             _this._am.loadLocalManifest(manifest, _this._storagePath);
             if (!_this._am.getLocalManifest() || !_this._am.getLocalManifest().isLoaded()) {
               cc.log("Failed to load local manifest ...");
+              AlertWindow_1.default.alert("\u51fa\u9519\u4e86", "\u52a0\u8f7d\u672c\u5730\u7684manifest\u6587\u4ef6\u5931\u8d25,\u8bf7\u91cd\u65b0\u5b89\u88c5\u5ba2\u6237\u7aef.");
               return;
             }
             _this._am.setEventCallback(_this.checkCb.bind(_this));
@@ -6333,11 +6336,13 @@ window.__require = function e(t, n, r) {
         switch (event.getEventCode()) {
          case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
           cc.log("No local manifest file found, hot update skipped.");
+          AlertWindow_1.default.alert("\u51fa\u9519\u4e86", "\u52a0\u8f7d\u672c\u5730\u7684manifest\u6587\u4ef6\u5931\u8d25,\u66f4\u65b0\u5931\u8d25.");
           break;
 
          case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
          case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
           cc.log("Fail to download manifest file, hot update skipped.");
+          AlertWindow_1.default.alert("\u51fa\u9519\u4e86", "\u4e0b\u8f7dmanifest\u6587\u4ef6\u5931\u8d25,\u66f4\u65b0\u5931\u8d25.");
           break;
 
          case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
@@ -6346,6 +6351,9 @@ window.__require = function e(t, n, r) {
 
          case jsb.EventAssetsManager.NEW_VERSION_FOUND:
           cc.log("New version found, please try to update.");
+          this._callback({
+            code: 0
+          });
           this._am.setEventCallback(this.updateCb.bind(this));
           this._am.update();
           this._updating = true;
@@ -6364,10 +6372,16 @@ window.__require = function e(t, n, r) {
         switch (event.getEventCode()) {
          case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
           cc.log("No local manifest file found, hot update skipped.");
+          AlertWindow_1.default.alert("\u51fa\u9519\u4e86", "\u52a0\u8f7d\u672c\u5730\u7684manifest\u6587\u4ef6\u5931\u8d25,\u66f4\u65b0\u5931\u8d25.");
           failed = true;
           break;
 
          case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+          this._callback({
+            code: 1,
+            downloaded: event.getDownloadedFiles(),
+            total: event.getTotalFiles()
+          });
           cc.log("downloaded:" + event.getDownloadedFiles() + " / " + event.getTotalFiles());
           var msg = event.getMessage();
           msg && cc.log("Updated file: " + msg);
@@ -6386,6 +6400,9 @@ window.__require = function e(t, n, r) {
 
          case jsb.EventAssetsManager.UPDATE_FINISHED:
           cc.log("Update finished. " + event.getMessage());
+          this._callback({
+            code: 2
+          });
           needRestart = true;
           break;
 
@@ -6422,7 +6439,9 @@ window.__require = function e(t, n, r) {
     }();
     exports.default = HotUpdateManager;
     cc._RF.pop();
-  }, {} ],
+  }, {
+    "../AlertWindow": "AlertWindow"
+  } ],
   JoinTableEventResponseHandler: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "236b75l/31JOr5fUmWGNVAT", "JoinTableEventResponseHandler");
@@ -10647,16 +10666,35 @@ window.__require = function e(t, n, r) {
         this.loadPackage("welcome", function() {
           fgui.UIPackage.addPackage("welcome");
           _this._view = fgui.UIPackage.createObject("welcome", "WelcomeLayer").asCom;
+          _this._hotUpdateGroup = _this._view.getChild("hotUpdateGroup").asGroup;
+          _this._hotUpdateProgressBar = _this._view.getChildInGroup("hotUpdateProgressBar", _this._hotUpdateGroup).asProgress;
           _this.initView();
           fgui.GRoot.inst.addChild(_this._view);
         });
       };
       WelcomeLayer.prototype.onInitAiJCom = function(objs) {
+        var _this = this;
         PlazaConfig_1.default.init(AppConfig_1.default.PLAZA_WS_HOST, AppConfig_1.default.PLAZA_WS_PORT);
         AudioManager_1.default.play_music("commons", "bgm");
         if (cc.sys.isNative) {
           cc.log("hot update manager check");
-          HotUpdateManager_1.default.getInst().checkUpdate();
+          HotUpdateManager_1.default.getInst().checkAndUpdate(function(event) {
+            switch (event["code"]) {
+             case 0:
+              _this._view.getControllerAt(0).setSelectedIndex(1);
+              break;
+
+             case 1:
+              var downloaded = event["downloaded"];
+              var total = event["total"];
+              _this._hotUpdateProgressBar.max = total;
+              _this._hotUpdateProgressBar.value = downloaded;
+              break;
+
+             case 2:
+              _this._view.getControllerAt(0).setSelectedIndex(0);
+            }
+          });
         }
       };
       WelcomeLayer.prototype.onDestroy = function() {

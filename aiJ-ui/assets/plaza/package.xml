@@ -108,6 +108,7 @@
     <component id="kz7r3e" name="RechargeRecordLayer.xml" path="/" exported="true"/>
     <component id="kz7r3f" name="RechargeRecordComponent.xml" path="/component/" exported="true"/>
     <image id="kz7r3g" name="n17.png" path="/images/"/>
+    <image id="a2pw3h" name="window_bg.png" path="/images/"/>
   </resources>
   <publish name="plaza"/>
 </packageDescription>

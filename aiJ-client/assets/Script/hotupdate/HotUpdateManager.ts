@@ -2,6 +2,7 @@
  * 热更新管理器
  */
 import TextAsset = cc.TextAsset;
+import AlertWindow from "../AlertWindow";
 
 export default class HotUpdateManager {
 
@@ -26,6 +27,10 @@ export default class HotUpdateManager {
      * 重试状态
      */
     private _canRetry: boolean = false;
+    /**
+     * 回调函数
+     */
+    private _callback: any;
 
     /**
      * 获取实例
@@ -68,11 +73,12 @@ export default class HotUpdateManager {
     /**
      * 校验版本
      */
-    public checkUpdate() {
-        if (this._updating) {
+    public checkAndUpdate(callback) {
+        if (this._updating) { //正在更新
             cc.log('Checking or updating ...');
             return;
         }
+        this._callback = callback;
         if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
             cc.log("load project.manifest");
             cc.loader.loadRes("project", (err, res) => {
@@ -81,6 +87,7 @@ export default class HotUpdateManager {
                 this._am.loadLocalManifest(manifest, this._storagePath);
                 if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) {
                     cc.log('Failed to load local manifest ...');
+                    AlertWindow.alert("出错了", "加载本地的manifest文件失败,请重新安装客户端.");
                     return;
                 }
                 this._am.setEventCallback(this.checkCb.bind(this));
@@ -99,10 +106,12 @@ export default class HotUpdateManager {
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 cc.log("No local manifest file found, hot update skipped.");
+                AlertWindow.alert("出错了", "加载本地的manifest文件失败,更新失败.");
                 break;
             case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
             case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
                 cc.log("Fail to download manifest file, hot update skipped.");
+                AlertWindow.alert("出错了", "下载manifest文件失败,更新失败.");
                 break;
             case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
                 cc.log("Already up to date with the latest remote version.");
@@ -110,6 +119,7 @@ export default class HotUpdateManager {
             case jsb.EventAssetsManager.NEW_VERSION_FOUND:
                 cc.log('New version found, please try to update.');
                 //发现新版本
+                this._callback({'code': 0});
                 this._am.setEventCallback(this.updateCb.bind(this));
                 this._am.update();
                 this._updating = true;
@@ -132,9 +142,11 @@ export default class HotUpdateManager {
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 cc.log("No local manifest file found, hot update skipped.");
+                AlertWindow.alert("出错了", "加载本地的manifest文件失败,更新失败.");
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+                this._callback({'code': 1, 'downloaded': event.getDownloadedFiles(), 'total': event.getTotalFiles()});
                 cc.log("downloaded:" + event.getDownloadedFiles() + ' / ' + event.getTotalFiles());
                 var msg = event.getMessage();
                 if (msg) {
@@ -152,6 +164,7 @@ export default class HotUpdateManager {
                 break;
             case jsb.EventAssetsManager.UPDATE_FINISHED:
                 cc.log("Update finished. " + event.getMessage());
+                this._callback({'code': 2});
                 needRestart = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FAILED:
