@@ -84,6 +84,14 @@ window._CCSettings = {
                 "plaza_atlas0_2.png",
                 "cc.Texture2D"
             ],
+            "03jj6FrCNOqp9T8lpV6oRB": [
+                "project.manifest",
+                "cc.Asset"
+            ],
+            "6eS+sUqQNIU4Z/F4Zu/Npe": [
+                "version.manifest",
+                "cc.Asset"
+            ],
             c2HrkOs4BLLosdBsFACKy4: [
                 "welcome.bin",
                 "cc.BufferAsset"

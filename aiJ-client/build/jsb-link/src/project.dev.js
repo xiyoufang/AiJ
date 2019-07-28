@@ -6276,6 +6276,153 @@ window.__require = function e(t, n, r) {
   }, {
     "../AppConfig": "AppConfig"
   } ],
+  HotUpdateManager: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "afd03NcMeNAfbZBiq5ALqlY", "HotUpdateManager");
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    var HotUpdateManager = function() {
+      function HotUpdateManager() {
+        this._updating = false;
+        this._canRetry = false;
+        this._storagePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-asset";
+        cc.log("storagePath:" + this._storagePath);
+        this._am = new jsb.AssetsManager("", this._storagePath, function(versionA, versionB) {
+          cc.log("JS Custom Version Compare: version A is " + versionA + ", version B is " + versionB);
+          var vA = versionA.split(".");
+          var vB = versionB.split(".");
+          for (var i = 0; i < vA.length; ++i) {
+            var a = parseInt(vA[i]);
+            var b = parseInt(vB[i] || 0);
+            if (a != b) return a - b;
+          }
+          return vB.length > vA.length ? -1 : 0;
+        });
+        cc.sys.os == cc.sys.OS_ANDROID && this._am.setMaxConcurrentTask(2);
+      }
+      HotUpdateManager.getInst = function() {
+        null == HotUpdateManager.inst && (HotUpdateManager.inst = new HotUpdateManager());
+        return HotUpdateManager.inst;
+      };
+      HotUpdateManager.prototype.checkUpdate = function() {
+        var _this = this;
+        if (this._updating) {
+          cc.log("Checking or updating ...");
+          return;
+        }
+        if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+          cc.log("load project.manifest");
+          cc.loader.loadRes("project", function(err, res) {
+            cc.log(res._$nativeAsset);
+            var manifest = new jsb.Manifest(res._$nativeAsset, _this._storagePath);
+            _this._am.loadLocalManifest(manifest, _this._storagePath);
+            if (!_this._am.getLocalManifest() || !_this._am.getLocalManifest().isLoaded()) {
+              cc.log("Failed to load local manifest ...");
+              return;
+            }
+            _this._am.setEventCallback(_this.checkCb.bind(_this));
+            _this._am.checkUpdate();
+            _this._updating = true;
+          });
+        }
+      };
+      HotUpdateManager.prototype.checkCb = function(event) {
+        cc.log("checkCb Code: " + event.getEventCode());
+        switch (event.getEventCode()) {
+         case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
+          cc.log("No local manifest file found, hot update skipped.");
+          break;
+
+         case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
+         case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
+          cc.log("Fail to download manifest file, hot update skipped.");
+          break;
+
+         case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
+          cc.log("Already up to date with the latest remote version.");
+          break;
+
+         case jsb.EventAssetsManager.NEW_VERSION_FOUND:
+          cc.log("New version found, please try to update.");
+          this._am.setEventCallback(this.updateCb.bind(this));
+          this._am.update();
+          this._updating = true;
+          cc.log("call update.");
+          break;
+
+         default:
+          return;
+        }
+        this._updating = false;
+      };
+      HotUpdateManager.prototype.updateCb = function(event) {
+        var needRestart = false;
+        var failed = false;
+        cc.log("updateCb Code: " + event.getEventCode());
+        switch (event.getEventCode()) {
+         case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
+          cc.log("No local manifest file found, hot update skipped.");
+          failed = true;
+          break;
+
+         case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+          cc.log("downloaded:" + event.getDownloadedFiles() + " / " + event.getTotalFiles());
+          var msg = event.getMessage();
+          msg && cc.log("Updated file: " + msg);
+          break;
+
+         case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
+         case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
+          cc.log("Fail to download manifest file, hot update skipped.");
+          failed = true;
+          break;
+
+         case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
+          cc.log("Already up to date with the latest remote version.");
+          failed = true;
+          break;
+
+         case jsb.EventAssetsManager.UPDATE_FINISHED:
+          cc.log("Update finished. " + event.getMessage());
+          needRestart = true;
+          break;
+
+         case jsb.EventAssetsManager.UPDATE_FAILED:
+          cc.log("Update failed. " + event.getMessage());
+          this._updating = false;
+          this._canRetry = true;
+          break;
+
+         case jsb.EventAssetsManager.ERROR_UPDATING:
+          cc.log("Asset update error: " + event.getAssetId() + ", " + event.getMessage());
+          break;
+
+         case jsb.EventAssetsManager.ERROR_DECOMPRESS:
+          cc.log(event.getMessage());
+        }
+        if (failed) {
+          this._am.setEventCallback(null);
+          this._updating = false;
+        }
+        if (needRestart) {
+          this._am.setEventCallback(null);
+          var searchPaths = jsb.fileUtils.getSearchPaths();
+          var newPaths = this._am.getLocalManifest().getSearchPaths();
+          console.log(JSON.stringify(newPaths));
+          Array.prototype.unshift.apply(searchPaths, newPaths);
+          cc.sys.localStorage.setItem("HotUpdateSearchPaths", JSON.stringify(searchPaths));
+          jsb.fileUtils.setSearchPaths(searchPaths);
+          cc.audioEngine.stopAll();
+          cc.game.restart();
+        }
+      };
+      return HotUpdateManager;
+    }();
+    exports.default = HotUpdateManager;
+    cc._RF.pop();
+  }, {} ],
   JoinTableEventResponseHandler: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "236b75l/31JOr5fUmWGNVAT", "JoinTableEventResponseHandler");
@@ -10479,6 +10626,7 @@ window.__require = function e(t, n, r) {
     var Hero_1 = require("./hero/Hero");
     var AudioManager_1 = require("./AudioManager");
     var WxHelper_1 = require("./WxHelper");
+    var HotUpdateManager_1 = require("./hotupdate/HotUpdateManager");
     var WelcomeLayer = function(_super) {
       __extends(WelcomeLayer, _super);
       function WelcomeLayer() {
@@ -10506,6 +10654,10 @@ window.__require = function e(t, n, r) {
       WelcomeLayer.prototype.onInitAiJCom = function(objs) {
         PlazaConfig_1.default.init(AppConfig_1.default.PLAZA_WS_HOST, AppConfig_1.default.PLAZA_WS_PORT);
         AudioManager_1.default.play_music("commons", "bgm");
+        if (cc.sys.isNative) {
+          cc.log("hot update manager check");
+          HotUpdateManager_1.default.getInst().checkUpdate();
+        }
       };
       WelcomeLayer.prototype.onDestroy = function() {
         FireKit_1.default.use(AppConfig_1.default.PLAZA_FIRE).offGroup(this);
@@ -10549,6 +10701,7 @@ window.__require = function e(t, n, r) {
     "./fire/FireKit": "FireKit",
     "./hero/Hero": "Hero",
     "./hero/HeroManager": "HeroManager",
+    "./hotupdate/HotUpdateManager": "HotUpdateManager",
     "./plazz/PlazaConfig": "PlazaConfig",
     "./plazz/PlazaLayer": "PlazaLayer"
   } ],
@@ -10567,7 +10720,7 @@ window.__require = function e(t, n, r) {
     var WxHelper = function() {
       function WxHelper() {}
       WxHelper.wxLogin = function() {
-        cc.sys.ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
+        cc.sys.os == cc.sys.OS_ANDROID && jsb.reflection.callStaticMethod("com/xiyoufang/aij/wx/WxHelper", "wxLogin", "()V");
       };
       WxHelper.onWxLogin = function(code) {
         cc.log("code:" + code);
@@ -10599,4 +10752,4 @@ window.__require = function e(t, n, r) {
     "./plazz/event/PlazaWeiXinLoginEvent": "PlazaWeiXinLoginEvent",
     "./ws/AiJKit": "AiJKit"
   } ]
-}, {}, [ "AiJApp", "AiJCCComponent", "AlertWindow", "AppConfig", "AudioManager", "GameServiceManager", "LoadingWindow", "Setting", "SettingWindow", "UIManger", "UserInfoWindow", "WelcomeLayer", "WxHelper", "FireKit", "OnFire", "Hero", "HeroManager", "PlazaConfig", "PlazaLayer", "PlazaWsListener", "RechargeRecordLayer", "RoomRecordLayer", "BroadcastEvent", "PlazaMobileLoginEvent", "PlazaWeiXinLoginEvent", "RechargeRecordEvent", "RoomEvent", "RoomRecordEvent", "UserAssetEvent", "UserAssetTransEvent", "UserCertEvent", "BroadcastEventResponseHandler", "PlazaCommonResponseHandler", "PlazaLoginHandler", "RechargeRecordEventResponseHandler", "RoomEventResponseHandler", "RoomRecordEventResponseHandler", "UserAssetEventResponseHandler", "UserAssetTransEventResponseHandler", "UserCertEventResponseHandler", "BroadcastEventResponse", "PlazaLoginEventResponse", "RechargeRecordEventResponse", "RoomRecordEventResponse", "RoomServiceEventResponse", "UserAssetEventResponse", "UserAssetTransEventResponse", "UserCertEventResponse", "AbstractRoomConfig", "RoomWsListener", "ClientReadyEvent", "CreateTableEvent", "DismissTableEvent", "DismissVoteTableEvent", "HeroProfileEvent", "JoinTableEvent", "LeaveTableEvent", "RoomMobileLoginEvent", "SitDownTableEvent", "StandUpTableEvent", "ChatEventResponseHandler", "CreateTableEventResponseHandler", "DismissVoteEventResponseHandler", "HeroEnterEventResponseHandler", "HeroLeaveEventResponseHandler", "HeroOfflineEventResponseHandler", "HeroOnlineEventResponseHandler", "HeroProfileEventResponseHandler", "HeroSceneResponseHandler", "HeroSitDownEventResponseHandler", "HeroStandUpEventResponseHandler", "JoinTableEventResponseHandler", "LoginNotifyResponseHandler", "RoomCommonResponseHandler", "RoomLoginResponseHandler", "MahjongGameEngine", "MahjongGameLayer", "MahjongRoomConfig", "MahjongVideoLayer", "MahjongOperateEvent", "MahjongOutCardEvent", "MahjongDispathCardResponseHandler", "MahjongEndEventResponseHandler", "MahjongErrorEventResponseHandler", "MahjongGameEndEventResponseHandler", "MahjongGameStartResponseHandler", "MahjongGameStatusResponseHandler", "MahjongOperateNotifyEventResponseHandler", "MahjongOperateResultEventResponseHandler", "MahjongOutCardResponseHandler", "MahjongPlayingGameSceneResponseHandler", "MahjongPrepareGameSceneResponseHandler", "MahjongAction", "MahjongGameActionRecord", "MahjongGameRecord", "MahjongGameStartRecord", "MahjongPlayerRecord", "MahjongRecord", "MahjongDispatchCardEventResponse", "MahjongEndEventResponse", "MahjongErrorEventResponse", "MahjongGameEndEventResponse", "MahjongGameStartEventResponse", "MahjongGameStatusResponse", "MahjongOperateNotifyEventResponse", "MahjongOperateResultEventResponse", "MahjongOutCardEventResponse", "MahjongPlayingGameSceneResponse", "MahjongPrepareGameSceneResponse", "MahjongWeaveItem", "MahjongWeaveType", "CreateTableEventResponse", "DismissVoteEventResponse", "HeroEnterEventResponse", "HeroLeaveEventResponse", "HeroOfflineEventResponse", "HeroOnlineEventResponse", "HeroProfileEventResponse", "HeroSceneResponse", "HeroSitDownEventResponse", "HeroStandUpEventResponse", "JoinTableEventResponse", "RoomLoginEventResponse", "AiJ", "AiJKit", "AiJPro" ]);
+}, {}, [ "AiJApp", "AiJCCComponent", "AlertWindow", "AppConfig", "AudioManager", "GameServiceManager", "LoadingWindow", "Setting", "SettingWindow", "UIManger", "UserInfoWindow", "WelcomeLayer", "WxHelper", "FireKit", "OnFire", "Hero", "HeroManager", "HotUpdateManager", "PlazaConfig", "PlazaLayer", "PlazaWsListener", "RechargeRecordLayer", "RoomRecordLayer", "BroadcastEvent", "PlazaMobileLoginEvent", "PlazaWeiXinLoginEvent", "RechargeRecordEvent", "RoomEvent", "RoomRecordEvent", "UserAssetEvent", "UserAssetTransEvent", "UserCertEvent", "BroadcastEventResponseHandler", "PlazaCommonResponseHandler", "PlazaLoginHandler", "RechargeRecordEventResponseHandler", "RoomEventResponseHandler", "RoomRecordEventResponseHandler", "UserAssetEventResponseHandler", "UserAssetTransEventResponseHandler", "UserCertEventResponseHandler", "BroadcastEventResponse", "PlazaLoginEventResponse", "RechargeRecordEventResponse", "RoomRecordEventResponse", "RoomServiceEventResponse", "UserAssetEventResponse", "UserAssetTransEventResponse", "UserCertEventResponse", "AbstractRoomConfig", "RoomWsListener", "ClientReadyEvent", "CreateTableEvent", "DismissTableEvent", "DismissVoteTableEvent", "HeroProfileEvent", "JoinTableEvent", "LeaveTableEvent", "RoomMobileLoginEvent", "SitDownTableEvent", "StandUpTableEvent", "ChatEventResponseHandler", "CreateTableEventResponseHandler", "DismissVoteEventResponseHandler", "HeroEnterEventResponseHandler", "HeroLeaveEventResponseHandler", "HeroOfflineEventResponseHandler", "HeroOnlineEventResponseHandler", "HeroProfileEventResponseHandler", "HeroSceneResponseHandler", "HeroSitDownEventResponseHandler", "HeroStandUpEventResponseHandler", "JoinTableEventResponseHandler", "LoginNotifyResponseHandler", "RoomCommonResponseHandler", "RoomLoginResponseHandler", "MahjongGameEngine", "MahjongGameLayer", "MahjongRoomConfig", "MahjongVideoLayer", "MahjongOperateEvent", "MahjongOutCardEvent", "MahjongDispathCardResponseHandler", "MahjongEndEventResponseHandler", "MahjongErrorEventResponseHandler", "MahjongGameEndEventResponseHandler", "MahjongGameStartResponseHandler", "MahjongGameStatusResponseHandler", "MahjongOperateNotifyEventResponseHandler", "MahjongOperateResultEventResponseHandler", "MahjongOutCardResponseHandler", "MahjongPlayingGameSceneResponseHandler", "MahjongPrepareGameSceneResponseHandler", "MahjongAction", "MahjongGameActionRecord", "MahjongGameRecord", "MahjongGameStartRecord", "MahjongPlayerRecord", "MahjongRecord", "MahjongDispatchCardEventResponse", "MahjongEndEventResponse", "MahjongErrorEventResponse", "MahjongGameEndEventResponse", "MahjongGameStartEventResponse", "MahjongGameStatusResponse", "MahjongOperateNotifyEventResponse", "MahjongOperateResultEventResponse", "MahjongOutCardEventResponse", "MahjongPlayingGameSceneResponse", "MahjongPrepareGameSceneResponse", "MahjongWeaveItem", "MahjongWeaveType", "CreateTableEventResponse", "DismissVoteEventResponse", "HeroEnterEventResponse", "HeroLeaveEventResponse", "HeroOfflineEventResponse", "HeroOnlineEventResponse", "HeroProfileEventResponse", "HeroSceneResponse", "HeroSitDownEventResponse", "HeroStandUpEventResponse", "JoinTableEventResponse", "RoomLoginEventResponse", "AiJ", "AiJKit", "AiJPro" ]);

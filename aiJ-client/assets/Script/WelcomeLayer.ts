@@ -42,7 +42,8 @@ export default class WelcomeLayer extends AiJCCComponent {
         PlazaConfig.init(AppConfig.PLAZA_WS_HOST, AppConfig.PLAZA_WS_PORT);
         AudioManager.play_music("commons", "bgm");
         if (cc.sys.isNative) {
-            HotUpdateManager.checkUpdate(); //检验更新
+            cc.log("hot update manager check");
+            HotUpdateManager.getInst().checkUpdate(); //检验更新
         }
     }
 
