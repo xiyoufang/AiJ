@@ -1,0 +1,6 @@
+build/*.js
+src/
+src/assets
+public
+dist
+

@@ -38,3 +38,5 @@ target/
 # FairyGUI
 .objs
 aiJ-jslib/
+**/node_modules/
+**/dist/
