@@ -13,10 +13,9 @@ INSERT INTO user_local_auth (user_id, mobile, email, password, salt, enable, cre
 INSERT INTO user_local_auth (user_id, mobile, email, password, salt, enable, created_time) VALUES ('4', '15000000004', null, 'b2b04eb97e9f4d4bfde1aefce8726aba2df5285e', '594f0002a2a3e32c', 1, '2018-12-26 17:35:06');
 INSERT INTO user_local_auth (user_id, mobile, email, password, salt, enable, created_time) VALUES ('5', '15000000005', null, 'b2b04eb97e9f4d4bfde1aefce8726aba2df5285e', '594f0002a2a3e32c', 1, '2018-12-26 17:35:06');
 INSERT INTO user_local_auth (user_id, mobile, email, password, salt, enable, created_time) VALUES ('6', '15000000006', null, 'b2b04eb97e9f4d4bfde1aefce8726aba2df5285e', '594f0002a2a3e32c', 1, '2018-12-26 17:35:06');
-INSERT INTO user_permission (user_id, permission) VALUES ('1','["hero","admin"]');
-INSERT INTO user_permission (user_id, permission) VALUES ('2','["hero","distributor"]');
-INSERT INTO user_permission (user_id, permission) VALUES ('3','["hero"]');
-INSERT INTO user_permission (user_id, permission) VALUES ('4','["hero"]');
-INSERT INTO user_permission (user_id, permission) VALUES ('5','["hero"]');
-INSERT INTO user_permission (user_id, permission) VALUES ('6','["hero"]');
 INSERT INTO distributor (user_id, parent_id, level, status, created_time) VALUES ('4', 0, 1, 'active', '2019-02-25 23:05:49');
+INSERT INTO role (name, permissions, description, created_time) VALUES ('administrator', '[]', '系统管理员', '2020-03-18 00:00:00');
+INSERT INTO role (name, permissions, description, created_time) VALUES ('distributor', '[]', '经销商（代理）', '2020-03-18 00:00:00');
+INSERT INTO role (name, permissions, description, created_time) VALUES ('player', '[]', '玩家(默认用户都为此角色)', '2020-03-18 00:00:00');
+INSERT INTO user_role(user_id, role_name, created_time) VALUES ('1','administrator', '2020-03-18 00:00:00');
+INSERT INTO user_role(user_id, role_name, created_time) VALUES ('4','distributor', '2020-03-18 00:00:00');

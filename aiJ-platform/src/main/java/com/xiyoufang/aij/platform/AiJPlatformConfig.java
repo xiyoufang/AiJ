@@ -2,12 +2,15 @@ package com.xiyoufang.aij.platform;
 
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.json.FastJsonFactory;
 import com.jfinal.template.Engine;
 import com.jfinal.template.ext.directive.RandomDirective;
 import com.xiyoufang.aij.platform.controller.*;
 import com.xiyoufang.jfinal.directive.VersionDirective;
+import com.xiyoufang.jfinal.handler.AllowCrossHandler;
+import com.xiyoufang.jfinal.handler.TrimParameterHandler;
+import com.xiyoufang.jfinal.handler.UrlFilterHandler;
 import com.xiyoufang.jfinal.shiro.ShiroInterceptor;
-import com.xiyoufang.jfinal.trim.TrimParameterHandler;
 import com.xiyoufang.jfinal.zk.ZkPlugin;
 
 /**
@@ -28,6 +31,7 @@ public class AiJPlatformConfig extends JFinalConfig {
     public void configConstant(Constants me) {
         loadPropertyFile("main.properties");
         me.setDevMode(getPropertyToBoolean("platform.devMode"));
+        me.setJsonFactory(new FastJsonFactory());
     }
 
     /**
@@ -37,14 +41,14 @@ public class AiJPlatformConfig extends JFinalConfig {
      */
     @Override
     public void configRoute(Routes me) {
-        me.add("/", LoginController.class);
-        me.add("/login", LoginController.class);
+        // 授权
+        me.add("/authorization", AuthorizationController.class);
         me.add("/admin", AdminController.class);
         me.add("/views", ViewsController.class);
         me.add("/service", ServiceController.class);
         me.add("/plaza", PlazaController.class);
         me.add("/room", RoomController.class);
-        me.add("/users", UsersController.class);
+        me.add("/user", UserController.class);
         me.add("/avatar", AvatarController.class);  //头像服务
     }
 
@@ -89,6 +93,8 @@ public class AiJPlatformConfig extends JFinalConfig {
      */
     @Override
     public void configHandler(Handlers me) {
+        me.add(new UrlFilterHandler("/sockjs-node/*.*"));
+        me.add(new AllowCrossHandler());
         me.add(new TrimParameterHandler());
         me.add(new ContextPathHandler());
     }

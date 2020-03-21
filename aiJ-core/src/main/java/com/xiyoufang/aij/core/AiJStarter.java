@@ -24,6 +24,7 @@ import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.RetryOneTime;
 import org.fest.reflect.core.Reflection;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.FlywayException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -426,7 +427,15 @@ public abstract class AiJStarter {
                         .table(aiJDs.getTable())
                         .locations(aiJDs.getLocation())
                         .baselineOnMigrate(true).load();
-                flyway.migrate();
+                try {
+                    flyway.migrate();
+                } catch (FlywayException e) {
+                    if (devMode) {
+                        LOGGER.warn("开发过程中初始化SQL执行错误不处理，手动维护", e);
+                    } else {
+                        throw e;
+                    }
+                }
             }
         }
     }
