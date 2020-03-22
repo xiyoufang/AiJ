@@ -13,8 +13,7 @@ import com.xiyoufang.jfinal.aop.Header;
 import com.xiyoufang.jfinal.aop.HeaderInject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-
-import java.util.UUID;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
  * Created by 席有芳 on 2018-12-30.
@@ -31,7 +30,8 @@ public class AuthorizationController extends BaseController {
         Record record = UserService.me().findUserByMobile(loginFormDTO.getUsername());
         if (UserService.me().authenticate(loginFormDTO.getPassword(), record)) {
             SecurityUtils.getSubject().login(new AiJAuthenticationToken(record));
-            renderOk(Kv.create().set("data", new TokenVO().setToken(UUID.randomUUID().toString())));
+            String token = (String) SecurityUtils.getSubject().getSession().getId();
+            renderOk(Kv.create().set("data", new TokenVO().setToken(token)));
         } else {
             renderWithCode(50002, Kv.create().set("message", "failure."));
         }
@@ -43,6 +43,7 @@ public class AuthorizationController extends BaseController {
     @RequiresAuthentication
     @Before(HeaderInject.class)
     public void logout(@Header("X-Token") String token) {
+        SecurityUtils.getSubject().logout();
         renderOk(Kv.create().set("data", "success"));
     }
 

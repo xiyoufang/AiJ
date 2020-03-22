@@ -22,3 +22,11 @@ FROM user_local_auth a
        left join distributor d on (u.user_id = d.user_id)
 WHERE (a.mobile = #p(0) and a.enable = 1 and u.status = 1)
 #end
+
+### 通过用户ID查询角色权限
+#sql("find_roles_by_user")
+SELECT r.name, r.permissions
+FROM user_role ur
+         left join role r on (ur.role_name = r.name)
+WHERE ur.user_id = #p(0)
+#end

@@ -1,5 +1,9 @@
 package com.xiyoufang.aij.platform.shiro;
 
+import com.alibaba.fastjson.JSONArray;
+import com.jfinal.json.FastJsonFactory;
+import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.user.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,6 +13,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -62,8 +68,12 @@ public class AiJRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Set<String> roleNames = null;
-        Set<String> permissions = null;
+        Record user = (Record) principals.getPrimaryPrincipal();
+        List<Record> records = UserService.me().findRolesByUser(user);
+        Set<String> roleNames = new HashSet<>();
+        records.forEach(record -> roleNames.add(record.getStr("name")));
+        Set<String> permissions = new HashSet<>();
+        records.forEach(record -> permissions.addAll(FastJsonFactory.me().getJson().parse(record.getStr("permissions"), JSONArray.class).toJavaList(String.class)));
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
         info.setStringPermissions(permissions);
         return info;

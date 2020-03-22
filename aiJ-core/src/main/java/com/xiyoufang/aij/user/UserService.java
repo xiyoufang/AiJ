@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 席有芳 on 2019-02-19.
@@ -208,4 +209,15 @@ public class UserService {
         String salt = user.getStr("salt");
         return Pbkdf2.authenticate(password, encryptedPassword, salt);
     }
+
+    /**
+     * 通过用户获取角色
+     *
+     * @param user user
+     * @return Roles
+     */
+    public List<Record> findRolesByUser(Record user) {
+        return AiJCoreDb.uc().find(AiJCoreDb.uc().getSqlPara("core.find_roles_by_user", user.getStr("user_id")));
+    }
+
 }

@@ -11,6 +11,7 @@ import com.xiyoufang.aij.platform.vo.LoginVO;
 import com.xiyoufang.jfinal.datatables.Datatable;
 import com.xiyoufang.jfinal.datatables.DatatableInjector;
 import com.xiyoufang.jfinal.datatables.DatatableUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 
 import java.util.Arrays;
 
@@ -24,6 +25,7 @@ public class UserController extends BaseController {
     /**
      * 获取用户信息
      */
+    @RequiresAuthentication
     public void info(String token) {
         renderOk(Kv.by("data", new LoginVO()
                 .setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
