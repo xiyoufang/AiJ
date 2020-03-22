@@ -2,11 +2,13 @@ package com.xiyoufang.aij.user;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.xiyoufang.aij.core.AiJCoreDb;
 import com.xiyoufang.aij.core.Id;
+import com.xiyoufang.aij.utils.Pbkdf2;
 import org.joda.time.DateTime;
 
 import java.text.MessageFormat;
@@ -157,5 +159,53 @@ public class UserService {
                         .set("created_source", "wx")
                         .set("created_time", new Date()));
         return AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_wx", unionId));
+    }
+
+    /**
+     * 通过邮箱获取用户信息
+     *
+     * @param email email
+     * @return recode
+     */
+    public Record findUserByEmail(String email) {
+        return AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_email", email));
+    }
+
+    /**
+     * 通过微信的unionId获取用户信息
+     *
+     * @param unionId unionId
+     * @return Record
+     */
+    public Record findUserByWeiXin(String unionId) {
+        return AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_wx", unionId));
+    }
+
+
+    /**
+     * 通过手机号码登录
+     *
+     * @param mobile mobile
+     * @return Record
+     */
+    public Record findUserByMobile(String mobile) {
+        return AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_mobile", mobile));
+    }
+
+
+    /**
+     * 密码鉴定
+     *
+     * @param password password
+     * @param user     用户信息
+     * @return boolean
+     */
+    public boolean authenticate(String password, Record user) {
+        if (user == null || StrKit.isBlank(password)) {
+            return false;
+        }
+        String encryptedPassword = user.getStr("password");
+        String salt = user.getStr("salt");
+        return Pbkdf2.authenticate(password, encryptedPassword, salt);
     }
 }

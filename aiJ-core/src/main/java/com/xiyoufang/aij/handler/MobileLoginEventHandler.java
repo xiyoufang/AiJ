@@ -6,6 +6,7 @@ import com.xiyoufang.aij.core.AppConfig;
 import com.xiyoufang.aij.core.ResponseFactory;
 import com.xiyoufang.aij.event.MobileLoginEvent;
 import com.xiyoufang.aij.response.CommonResponse;
+import com.xiyoufang.aij.user.UserService;
 import com.xiyoufang.aij.utils.Pbkdf2;
 import org.tio.core.ChannelContext;
 import org.tio.core.Tio;
@@ -30,7 +31,7 @@ public abstract class MobileLoginEventHandler extends LoginEventHandler<MobileLo
      */
     @Override
     protected void handle(MobileLoginEvent event, ChannelContext channelContext) {
-        Record record = AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_mobile", event.getMobile()));
+        Record record = UserService.me().findUserByMobile(event.getMobile());
         if (record == null) {
             Tio.send(channelContext, WsResponse.fromText(ResponseFactory.error(CommonResponse.class, "手机号码没有绑定账号,请绑定或者注册!").toJson(), AppConfig.use().getCharset()));
             return;
@@ -47,8 +48,6 @@ public abstract class MobileLoginEventHandler extends LoginEventHandler<MobileLo
      */
     @Override
     protected boolean authenticate(String key, Record record) {
-        String encryptedPassword = record.getStr("password");
-        String salt = record.getStr("salt");
-        return Pbkdf2.authenticate(key, encryptedPassword, salt);
+        return UserService.me().authenticate(key, record);
     }
 }

@@ -1,4 +1,4 @@
-package com.xiyoufang.jfinal.body;
+package com.xiyoufang.jfinal.aop;
 
 
 import com.jfinal.aop.Interceptor;
@@ -10,11 +10,11 @@ import java.lang.annotation.Annotation;
 
 /**
  * Created by 席有芳 on 2020-03-21.
- * Body 请求拦截器
+ * Body 注入
  *
  * @author 席有芳
  */
-public class BodyRequest implements Interceptor {
+public class BodyInject implements Interceptor {
 
     @Override
     public void intercept(Invocation inv) {
@@ -24,13 +24,15 @@ public class BodyRequest implements Interceptor {
             Object o = FastJsonFactory.me().getJson().parse(controller.getRawData(), parameterTypes[0]);
             inv.setArg(0, o);
         } else {
-            Annotation[] annotations = inv.getMethod().getAnnotations();
+            Annotation[][] parameterAnnotations = inv.getMethod().getParameterAnnotations();
             for (int i = 0; i < parameterTypes.length; i++) {
-                for (Annotation annotation : annotations) {
-                    if (annotation.annotationType() == Body.class) {
-                        Object o = FastJsonFactory.me().getJson().parse(controller.getRawData(), parameterTypes[i]);
-                        inv.setArg(i, o);
-                        break;
+                for (Annotation[] annotations : parameterAnnotations) {
+                    for (Annotation annotation : annotations) {
+                        if (annotation.annotationType() == Body.class) {
+                            Object o = FastJsonFactory.me().getJson().parse(controller.getRawData(), parameterTypes[i]);
+                            inv.setArg(i, o);
+                            break;
+                        }
                     }
                 }
             }

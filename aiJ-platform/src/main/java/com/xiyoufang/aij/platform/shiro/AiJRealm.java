@@ -1,20 +1,14 @@
 package com.xiyoufang.aij.platform.shiro;
 
-import com.jfinal.kit.JsonKit;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,6 +17,39 @@ import java.util.Set;
  * @author 席有芳
  */
 public class AiJRealm extends AuthorizingRealm {
+
+    /**
+     * 数据源
+     */
+    private String dataSource;
+
+    /**
+     * Convenience implementation that returns
+     * <tt>getAuthenticationTokenClass().isAssignableFrom( token.getClass() );</tt>.  Can be overridden
+     * by subclasses for more complex token checking.
+     * <p>Most configurations will only need to set a different class via
+     * {@link #setAuthenticationTokenClass}, as opposed to overriding this method.
+     *
+     * @param token the token being submitted for authentication.
+     * @return true if this authentication realm can process the submitted token instance of the class, false otherwise.
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof AiJAuthenticationToken;
+    }
+
+    /**
+     * 授权，外部进行权限校验
+     *
+     * @param token token
+     * @return AuthenticationInfo
+     * @throws AuthenticationException AuthenticationException
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        AiJAuthenticationToken aiJToken = (AiJAuthenticationToken) token;
+        return new SimpleAuthenticationInfo(aiJToken.getPrincipal(), aiJToken.getCredentials(), getName());
+    }
 
     /**
      * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
@@ -35,27 +62,18 @@ public class AiJRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+        Set<String> roleNames = null;
+        Set<String> permissions = null;
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
+        info.setStringPermissions(permissions);
+        return info;
     }
 
-    /**
-     * Retrieves authentication data from an implementation-specific datasource (RDBMS, LDAP, etc) for the given
-     * authentication token.
-     * <p/>
-     * For most datasources, this means just 'pulling' authentication data for an associated subject/user and nothing
-     * more and letting Shiro do the rest.  But in some systems, this method could actually perform EIS specific
-     * log-in logic in addition to just retrieving data - it is up to the Realm implementation.
-     * <p/>
-     * A {@code null} return value means that no account could be associated with the specified token.
-     *
-     * @param token the authentication token containing the user's principal and credentials.
-     * @return an {@link AuthenticationInfo} object containing account data resulting from the
-     * authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
-     * @throws AuthenticationException if there is an error acquiring data or performing
-     *                                 realm-specific authentication logic for the specified <tt>token</tt>
-     */
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        return null;
+    public String getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
     }
 }

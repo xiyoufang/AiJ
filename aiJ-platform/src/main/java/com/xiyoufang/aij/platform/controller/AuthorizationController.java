@@ -2,12 +2,19 @@ package com.xiyoufang.aij.platform.controller;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
+import com.jfinal.plugin.activerecord.Record;
 import com.xiyoufang.aij.platform.dto.LoginFormDTO;
-import com.xiyoufang.aij.platform.vo.LoginVO;
-import com.xiyoufang.jfinal.body.Body;
-import com.xiyoufang.jfinal.body.BodyRequest;
+import com.xiyoufang.aij.platform.shiro.AiJAuthenticationToken;
+import com.xiyoufang.aij.platform.vo.TokenVO;
+import com.xiyoufang.aij.user.UserService;
+import com.xiyoufang.jfinal.aop.Body;
+import com.xiyoufang.jfinal.aop.BodyInject;
+import com.xiyoufang.jfinal.aop.Header;
+import com.xiyoufang.jfinal.aop.HeaderInject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 
-import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * Created by 席有芳 on 2018-12-30.
@@ -19,21 +26,24 @@ public class AuthorizationController extends BaseController {
     /**
      * 登录
      */
-    @Before(BodyRequest.class)
+    @Before(BodyInject.class)
     public void login(@Body LoginFormDTO loginFormDTO) {
-        renderOk(Kv.by("data", new LoginVO()
-                .setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
-                .setPermissions(Arrays.asList("administrator", "player"))
-                .setIntroduction("I am a super administrator")
-                .setName("Super Admin")
-        ));
+        Record record = UserService.me().findUserByMobile(loginFormDTO.getUsername());
+        if (UserService.me().authenticate(loginFormDTO.getPassword(), record)) {
+            SecurityUtils.getSubject().login(new AiJAuthenticationToken(record));
+            renderOk(Kv.create().set("data", new TokenVO().setToken(UUID.randomUUID().toString())));
+        } else {
+            renderWithCode(50002, Kv.create().set("message", "failure."));
+        }
     }
 
     /**
      * 退出登录
      */
-    public void logout() {
-
+    @RequiresAuthentication
+    @Before(HeaderInject.class)
+    public void logout(@Header("X-Token") String token) {
+        renderOk(Kv.create().set("data", "success"));
     }
 
 }

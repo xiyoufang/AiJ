@@ -106,6 +106,17 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     /**
+     * 配置核心数据源
+     *
+     * @param coreDs coreDs
+     * @return coreDs
+     */
+    @Override
+    protected CoreDs configDs(CoreDs coreDs) {
+        return coreDs;
+    }
+
+    /**
      * 配置注册中
      *
      * @param registryCenter 注册中心
@@ -131,7 +142,11 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     public static void main(String[] args) {
-        UndertowServer.create(AiJPlatformConfig.class).start();
+        UndertowServer.create(AiJPlatformConfig.class).configWeb(builder -> {
+            builder.addListener("org.apache.shiro.web.env.EnvironmentLoaderListener");
+            builder.addFilter("shiro", "org.apache.shiro.web.servlet.ShiroFilter");
+            builder.addFilterUrlMapping("shiro", "/*");
+        }).start();
     }
 
 }

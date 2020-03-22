@@ -13,8 +13,9 @@ public class BaseController extends Controller {
 
     /**
      * body 转成对象
+     *
      * @param clazz clazz
-     * @param <T> T
+     * @param <T>   T
      * @return T
      */
     protected <T> T body(Class<T> clazz) {
@@ -25,19 +26,29 @@ public class BaseController extends Controller {
     /**
      * ok 状态
      *
-     * @param data data
+     * @param kv kv
      */
-    protected void renderOk(Object data) {
-        renderByCode(20000, data);
+    protected void renderOk(Kv kv) {
+        renderWithCode(20000, kv);
     }
 
     /**
      * 指定Code方式的渲染
      *
      * @param code code
-     * @param data data
+     * @param kv   附加的信息
      */
-    protected void renderByCode(int code, Object data) {
-        renderJson(Kv.by("code", code).set("data", data));
+    protected void renderWithCode(int code, Kv kv) {
+        renderJson(Kv.by("code", code).set(kv));
     }
+
+    /**
+     * 通过KV渲染
+     *
+     * @param kv kv
+     */
+    protected void renderKv(Kv kv) {
+        renderJson(kv);
+    }
+
 }
