@@ -1,6 +1,6 @@
 package com.xiyoufang.aij.platform.shiro;
 
-import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.domain.UserDO;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
@@ -13,10 +13,10 @@ public class AiJAuthenticationToken implements AuthenticationToken {
     /**
      * 授权信息
      */
-    private Record record;
+    private UserDO userDO;
 
-    public AiJAuthenticationToken(Record record) {
-        this.record = record;
+    public AiJAuthenticationToken(UserDO userDO) {
+        this.userDO = userDO;
     }
 
     /**
@@ -26,7 +26,7 @@ public class AiJAuthenticationToken implements AuthenticationToken {
      */
     @Override
     public Object getPrincipal() {
-        return this.record;
+        return this.userDO;
     }
 
     /**
@@ -34,6 +34,6 @@ public class AiJAuthenticationToken implements AuthenticationToken {
      */
     @Override
     public Object getCredentials() {
-        return this.record;
+        return this.userDO;
     }
 }

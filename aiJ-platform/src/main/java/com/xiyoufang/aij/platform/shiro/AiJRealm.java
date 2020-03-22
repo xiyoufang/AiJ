@@ -3,6 +3,7 @@ package com.xiyoufang.aij.platform.shiro;
 import com.alibaba.fastjson.JSONArray;
 import com.jfinal.json.FastJsonFactory;
 import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.domain.UserDO;
 import com.xiyoufang.aij.user.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -54,7 +55,15 @@ public class AiJRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         AiJAuthenticationToken aiJToken = (AiJAuthenticationToken) token;
-        return new SimpleAuthenticationInfo(aiJToken.getPrincipal(), aiJToken.getCredentials(), getName());
+        UserDO userDO = (UserDO) aiJToken.getPrincipal();
+        List<Record> records = UserService.me().findRolesByUser(userDO.getRecord());
+        Set<String> roleNames = new HashSet<>();
+        records.forEach(record -> roleNames.add(record.getStr("name")));
+        Set<String> permissions = new HashSet<>();
+        records.forEach(record -> permissions.addAll(FastJsonFactory.me().getJson().parse(record.getStr("permissions"), JSONArray.class).toJavaList(String.class)));
+        userDO.setRoles(roleNames);             // 注入权限与用户
+        userDO.setPermissions(permissions);
+        return new SimpleAuthenticationInfo(userDO, userDO, getName());
     }
 
     /**
@@ -68,14 +77,9 @@ public class AiJRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Record user = (Record) principals.getPrimaryPrincipal();
-        List<Record> records = UserService.me().findRolesByUser(user);
-        Set<String> roleNames = new HashSet<>();
-        records.forEach(record -> roleNames.add(record.getStr("name")));
-        Set<String> permissions = new HashSet<>();
-        records.forEach(record -> permissions.addAll(FastJsonFactory.me().getJson().parse(record.getStr("permissions"), JSONArray.class).toJavaList(String.class)));
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
-        info.setStringPermissions(permissions);
+        UserDO userDO = (UserDO) principals.getPrimaryPrincipal();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(userDO.getRoles());
+        info.setStringPermissions(userDO.getPermissions());
         return info;
     }
 

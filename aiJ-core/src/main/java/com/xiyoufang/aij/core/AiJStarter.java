@@ -2,7 +2,6 @@ package com.xiyoufang.aij.core;
 
 import com.jfinal.kit.Prop;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.activerecord.IDbProFactory;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
@@ -400,12 +399,7 @@ public abstract class AiJStarter {
                 ActiveRecordPlugin arp = new ActiveRecordPlugin(entry.getKey(), aiJDs.getDataSource());
                 SqlReporter.setLog(devMode);
                 arp.setDevMode(devMode);
-                arp.setDbProFactory(new IDbProFactory() {
-                    @Override
-                    public AiJDbPro getDbPro(String configName) {
-                        return new AiJDbPro(configName);
-                    }
-                });
+                arp.setDbProFactory(AiJDbPro::new);
                 arp.setShowSql(devMode);
                 arp.setDialect(aiJDs.getDialect());
                 if (arp.getConfig().getDialect() instanceof Sqlite3Dialect) {

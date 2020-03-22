@@ -24,6 +24,7 @@ CREATE TABLE user_profile
     referrer_id    text,    --介绍人ID
     device_id      text,    --设备ID
     status         int,     --状态(-1禁用,0未激活,1正常)
+    introduction   text,    -- 自我介绍
     remark         text,    --备注
     created_source text,    --注册来源
     created_time   text,    --注册时间

@@ -3,6 +3,7 @@ package com.xiyoufang.aij.platform.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.domain.UserDO;
 import com.xiyoufang.aij.platform.dto.LoginFormDTO;
 import com.xiyoufang.aij.platform.shiro.AiJAuthenticationToken;
 import com.xiyoufang.aij.platform.vo.TokenVO;
@@ -13,7 +14,6 @@ import com.xiyoufang.jfinal.aop.Header;
 import com.xiyoufang.jfinal.aop.HeaderInject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
  * Created by 席有芳 on 2018-12-30.
@@ -29,7 +29,7 @@ public class AuthorizationController extends BaseController {
     public void login(@Body LoginFormDTO loginFormDTO) {
         Record record = UserService.me().findUserByMobile(loginFormDTO.getUsername());
         if (UserService.me().authenticate(loginFormDTO.getPassword(), record)) {
-            SecurityUtils.getSubject().login(new AiJAuthenticationToken(record));
+            SecurityUtils.getSubject().login(new AiJAuthenticationToken(new UserDO(record)));
             String token = (String) SecurityUtils.getSubject().getSession().getId();
             renderOk(Kv.create().set("data", new TokenVO().setToken(token)));
         } else {

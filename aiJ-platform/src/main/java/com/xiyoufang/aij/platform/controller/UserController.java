@@ -1,19 +1,13 @@
 package com.xiyoufang.aij.platform.controller;
 
-import com.jfinal.json.Json;
 import com.jfinal.kit.Kv;
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.xiyoufang.aij.core.AppConfig;
-import com.xiyoufang.aij.core.CoreConfig;
+import com.xiyoufang.aij.platform.config.AiJPlatformDb;
+import com.xiyoufang.aij.platform.domain.UserDO;
 import com.xiyoufang.aij.platform.vo.LoginVO;
-import com.xiyoufang.jfinal.datatables.Datatable;
-import com.xiyoufang.jfinal.datatables.DatatableInjector;
-import com.xiyoufang.jfinal.datatables.DatatableUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-
-import java.util.Arrays;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
  * Created by 席有芳 on 2018-12-30.
@@ -26,22 +20,24 @@ public class UserController extends BaseController {
      * 获取用户信息
      */
     @RequiresAuthentication
-    public void info(String token) {
+    public void info() {
+        UserDO userDO = userDO();
         renderOk(Kv.by("data", new LoginVO()
-                .setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
-                .setRoles(Arrays.asList("admin", "player"))
-                .setIntroduction("I am a super administrator")
-                .setName("Super Admin")
-                .setPermissions(Arrays.asList("view", "edit", "add"))
+                .setAvatar(userDO.getAvatar())
+                .setRoles(userDO.getRoles())
+                .setIntroduction(userDO.getIntroduction())
+                .setName(userDO.getUserName())
+                .setPermissions(userDO.getPermissions())
         ));
     }
 
-    public void page() {
-        Datatable datatable = DatatableInjector.getDatatable(getRequest());
-        Page<Record> page = Db.use(AppConfig.use().getStr(CoreConfig.DS_USER_CENTER)).paginateByFullSql(datatable.getPage(), datatable.getLength(), "select count(1) from user_profile",
-                "select * from user_profile");
-        renderJson(Json.getJson().toJson(DatatableUtils.getDataTableRender(page, datatable.getDraw(), Record.class)));
+    /**
+     * 获取用户列表
+     */
+    @RequiresRoles({"administrator"})
+    public void page(int limit, int page, String sort) {
+        Page<Record> recordPage = AiJPlatformDb.uc().paginateByFullSql(page, limit, "select count(1) from user_profile", "select * from user_profile");
+        renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
     }
-
 
 }

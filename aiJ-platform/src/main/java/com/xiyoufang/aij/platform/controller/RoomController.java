@@ -1,10 +1,7 @@
 package com.xiyoufang.aij.platform.controller;
 
-import com.jfinal.json.Json;
 import com.xiyoufang.aij.core.ServiceType;
-import com.xiyoufang.jfinal.datatables.Datatable;
-import com.xiyoufang.jfinal.datatables.DatatableInjector;
-import com.xiyoufang.jfinal.datatables.DatatableUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
  * Created by 席有芳 on 2018-12-31.
@@ -13,8 +10,8 @@ import com.xiyoufang.jfinal.datatables.DatatableUtils;
  */
 public class RoomController extends ServiceDetailController {
 
-    public void page() {
-        Datatable datatable = DatatableInjector.getDatatable(getRequest());
-        renderJson(Json.getJson().toJson(DatatableUtils.getDataTableRender(getPage(datatable, ServiceType.ROOM), datatable.getDraw())));
+    @RequiresRoles("administrator")
+    public void page(int limit, int page) {
+        getPage(limit, page, ServiceType.ROOM);
     }
 }

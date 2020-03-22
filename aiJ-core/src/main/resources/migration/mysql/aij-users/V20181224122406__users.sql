@@ -24,6 +24,7 @@ CREATE TABLE user_profile
     referrer_id    varchar(64),  -- 介绍人ID
     device_id      varchar(64),  -- 设备ID
     status         integer,      -- 状态(-1禁用,0未激活,1正常)
+    introduction   text,         -- 自我介绍
     remark         text,         -- 备注
     created_source varchar(64),  -- 注册来源
     created_time   datetime,     -- 注册时间

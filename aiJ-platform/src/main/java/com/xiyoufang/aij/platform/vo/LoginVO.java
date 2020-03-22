@@ -3,7 +3,7 @@ package com.xiyoufang.aij.platform.vo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by 席有芳 on 2020-03-21.
@@ -23,7 +23,7 @@ public class LoginVO {
     /**
      * 角色信息
      */
-    private List<String> roles;
+    private Set<String> roles;
     /**
      * 介绍
      */
@@ -39,6 +39,6 @@ public class LoginVO {
     /**
      * 权限
      */
-    private List<String> permissions;
+    private Set<String> permissions;
 
 }

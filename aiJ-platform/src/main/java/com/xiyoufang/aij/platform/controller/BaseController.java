@@ -3,6 +3,8 @@ package com.xiyoufang.aij.platform.controller;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.Kv;
+import com.xiyoufang.aij.platform.domain.UserDO;
+import org.apache.shiro.SecurityUtils;
 
 /**
  * Created by 席有芳 on 2020-03-21.
@@ -21,6 +23,15 @@ public class BaseController extends Controller {
     protected <T> T body(Class<T> clazz) {
         return JsonKit.parse(getRawData(), clazz);
 
+    }
+
+    /**
+     * 用户信息
+     *
+     * @return UserDO
+     */
+    protected UserDO userDO() {
+        return (UserDO) SecurityUtils.getSubject().getPrincipal();
     }
 
     /**
