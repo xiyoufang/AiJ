@@ -5,7 +5,7 @@ CREATE TABLE user_profile
     user_id        text,    --用户ID
     user_name      text,    --用户名称
     nick_name      text,    --用户昵称
-    gender         int,     --性别(0男,1女,3未知)
+    gender         int,     -- 性别(1男,2女,3未知) //普通用户性别，1为男性，2为女性
     email          text,    --邮箱
     email_status   int,     --邮箱状态(0待验证,1正常)
     mobile         text,    --手机

@@ -1,10 +1,11 @@
 package com.xiyoufang.aij.platform.render;
 
-import com.jfinal.kit.LogKit;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
+import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by 席有芳 on 2019-02-23.
@@ -14,15 +15,15 @@ import java.io.*;
 public class ImageRender extends Render {
 
     /**
-     * 图片文件
+     * 流
      */
-    private File image;
+    private InputStream in;
 
     /**
-     * @param image image
+     * @param in in
      */
-    public ImageRender(File image) {
-        this.image = image;
+    public ImageRender(InputStream in) {
+        this.in = in;
     }
 
     /**
@@ -34,40 +35,10 @@ public class ImageRender extends Render {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setDateHeader("Expires", 0);
         response.setContentType("image/png");
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        try {
-            inputStream = new BufferedInputStream(new FileInputStream(image));
-            outputStream = response.getOutputStream();
-            byte[] buffer = new byte[1024];
-            for (int len = -1; (len = inputStream.read(buffer)) != -1; ) {
-                outputStream.write(buffer, 0, len);
-            }
-            outputStream.flush();
-        } catch (IOException e) {    // ClientAbortException、EofException 直接或间接继承自 IOException
-            String name = e.getClass().getSimpleName();
-            if (name.equals("ClientAbortException") || name.equals("EofException")) {
-                LogKit.warn(name);
-            } else {
-                throw new RenderException(e);
-            }
+        try (OutputStream out = response.getOutputStream(); InputStream in = this.in) {
+            IOUtils.copy(in, out);
         } catch (Exception e) {
             throw new RenderException(e);
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    LogKit.error(e.getMessage(), e);
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    LogKit.error(e.getMessage(), e);
-                }
-            }
         }
     }
 }

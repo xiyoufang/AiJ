@@ -5,7 +5,7 @@ CREATE TABLE user_profile
     user_id        varchar(64),  -- 用户ID
     user_name      varchar(128), -- 用户名称
     nick_name      varchar(128), -- 用户昵称
-    gender         integer,      -- 性别(0男,1女,3未知)
+    gender         integer,      -- 性别(1男,2女,3未知) //普通用户性别，1为男性，2为女性
     email          varchar(128), -- 邮箱
     email_status   integer,      -- 邮箱状态(0待验证,1正常)
     mobile         varchar(64),  -- 手机

@@ -1,12 +1,9 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.title" placeholder="Title" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-select v-model="listQuery.importance" placeholder="Imp" clearable style="width: 90px" class="filter-item">
-        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
-      </el-select>
-      <el-select v-model="listQuery.type" placeholder="Type" clearable class="filter-item" style="width: 130px">
-        <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key" />
+      <el-input v-model="listQuery.user_name" placeholder="用户名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 90px" class="filter-item" @change="handleFilter">
+        <el-option v-for="item in statusOptions" :key="item.key" :label="item.label" :value="item.key" />
       </el-select>
       <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
@@ -14,15 +11,6 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        Add
-      </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
-        Export
-      </el-button>
-      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
-        reviewer
-      </el-checkbox>
     </div>
 
     <el-table
@@ -35,32 +23,34 @@
             style="width: 100%;"
             @sort-change="sortChange"
     >
-      <el-table-column label="ID" prop="id" sortable="custom" align="center" width="80" :class-name="getSortClass('id')">
+      <el-table-column label="头像" prop="user_name" align="center" width="80" fixed="left">
         <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
+          <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
         </template>
       </el-table-column>
-      <el-table-column label="头像" prop="user_name" align="center" width="80">
+      <el-table-column label="用户ID" prop="user_id" align="center" width="100" fixed="left" show-overflow-tooltip >
         <template slot-scope="{row}">
-          <img :src="row.avatar" alt="" width="48" height="48" class="user-avatar">
+          <span>{{ row.user_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户名称" prop="user_name" sortable="custom" align="center" width="160">
+      <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.user_name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="昵称" prop="nick_name" sortable="custom" align="center" width="160">
+      <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.nick_name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" prop="gender" sortable="custom" align="center" width="160">
+      <el-table-column label="性别" prop="gender" align="center" width="80">
         <template slot-scope="{row}">
-          <span>{{ row.gender === 0 ? '男' :'女' }}</span>
+          <span v-if="row.gender === 1 ">男</span>
+          <span v-else-if="row.gender === 2 ">女</span>
+          <span v-else>未知</span>
         </template>
       </el-table-column>
-      <el-table-column label="账号状态" prop="status" sortable="custom" align="center" width="160">
+      <el-table-column label="账号状态" prop="status"  align="center" width="160">
         <template slot-scope="{row}">
           <span v-if="row.status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.status === 0 "><el-tag type="warning">待激活</el-tag></span>
@@ -72,7 +62,7 @@
           <span>{{ row.activated_time }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="IP地址" prop="ip" sortable="custom" align="center" width="160">
+      <el-table-column label="IP地址" prop="ip" align="center" width="160">
         <template slot-scope="{row}">
           <span>{{ row.ip }}</span>
         </template>
@@ -82,18 +72,18 @@
           <span>{{ row.created_time }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="注册渠道" prop="created_source" sortable="custom" align="center" width="160">
+      <el-table-column label="注册渠道" prop="created_source" align="center" width="160">
         <template slot-scope="{row}">
           <span>{{ row.created_source }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
         <template slot-scope="{row}">
-          <el-button size="mini">Edit</el-button>
-          <el-button size="mini" type="danger" >Delete</el-button>
+          <el-button size="mini">编辑</el-button>
+          <el-button v-if="row.status === 1" size="mini" type="danger">禁用</el-button>
+          <el-button v-else size="mini" type="success">启用</el-button>
         </template>
       </el-table-column>
-
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
@@ -113,7 +103,7 @@
         </el-form-item>
         <el-form-item label="Status">
           <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+            <el-option v-for="item in statusOptions" :key="item.key" :label="item.label" :value="item.key" />
           </el-select>
         </el-form-item>
         <el-form-item label="Imp">
@@ -184,6 +174,7 @@
     },
     data() {
       return {
+        baseURL: process.env.VUE_APP_BASE_API,
         tableKey: 0,
         list: null,
         total: 0,
@@ -191,15 +182,14 @@
         listQuery: {
           page: 1,
           limit: 20,
-          importance: undefined,
-          title: undefined,
+          user_name: undefined,
+          status: undefined,
           type: undefined,
           sort: '+id'
         },
-        importanceOptions: [1, 2, 3],
+        statusOptions: [{ label: '禁用', key: '-1' }, { label: '待激活', key: '0' }, { label: '正常', key: '1' }],
         calendarTypeOptions,
         sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-        statusOptions: ['published', 'draft', 'deleted'],
         showReviewer: false,
         temp: {
           id: undefined,
@@ -377,3 +367,11 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  .user-avatar {
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+  }
+</style>
