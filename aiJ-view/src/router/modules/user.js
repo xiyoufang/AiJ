@@ -9,7 +9,7 @@ const userRouter = {
   name: 'userRouter',
   meta: {
     title: '用户管理',
-    icon: 'component'
+    icon: 'peoples'
   },
   children: [
     {
