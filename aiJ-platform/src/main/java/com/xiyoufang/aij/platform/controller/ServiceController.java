@@ -8,6 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
  * Created by 席有芳 on 2018-12-31.
+ * 服务类型信息
  *
  * @author 席有芳
  */

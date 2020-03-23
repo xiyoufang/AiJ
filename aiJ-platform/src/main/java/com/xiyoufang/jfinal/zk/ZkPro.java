@@ -1,6 +1,7 @@
 package com.xiyoufang.jfinal.zk;
 
 import com.jfinal.kit.Prop;
+import com.xiyoufang.aij.core.ServiceType;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -61,7 +62,6 @@ public class ZkPro {
         zkClient.close();
     }
 
-
     /**
      * 服务发现
      *
@@ -99,4 +99,19 @@ public class ZkPro {
         }
     }
 
+    /**
+     * 发现所有服务
+     *
+     * @param cls      cls
+     * @param basePath basePath
+     * @return List
+     */
+    public <T> List<T> discovery(Class<T> cls, String basePath) {
+        List<T> nodes = new ArrayList<>();
+        for (ServiceType serviceType : ServiceType.values()) {
+            nodes.addAll(discovery(cls, basePath, serviceType.name()));
+        }
+        return nodes;
+    }
+    
 }
