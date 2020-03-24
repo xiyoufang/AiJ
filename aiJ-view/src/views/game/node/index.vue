@@ -16,13 +16,20 @@
             style="width: 100%;"
             @sort-change="sortChange"
     >
-      <el-table-column label="服务ID" prop="serviceId" align="center" width="120"></el-table-column>
-      <el-table-column label="服务CODE" prop="serviceCode" align="center" width="160"></el-table-column>
+      <el-table-column label="服务CODE" prop="serviceCode" align="center" width="120"></el-table-column>
       <el-table-column label="类型" prop="serviceType" align="center" width="160"></el-table-column>
-      <el-table-column label="服务名" prop="name"  align="center" width="240" show-overflow-tooltip></el-table-column>
+      <el-table-column label="服务名" prop="serviceName"  align="center" width="160" show-overflow-tooltip></el-table-column>
+      <el-table-column label="节点名称" prop="nodeName"  align="center" width="160" show-overflow-tooltip fixed="left"></el-table-column>
+      <el-table-column label="节点描述" prop="nodeDescription"  align="center" width="160" show-overflow-tooltip></el-table-column>
+      <el-table-column label="节点TOKEN" prop="nodeToken"  align="center" width="240" show-overflow-tooltip></el-table-column>
       <el-table-column label="IP" prop="address" align="center" width="160"></el-table-column>
-      <el-table-column label="端口" prop="port"  align="center" width=120"></el-table-column>
-      <el-table-column label="状态" prop="enable" align="center" width="120"></el-table-column>
+      <el-table-column label="端口" prop="port"  align="center" width="120"></el-table-column>
+      <el-table-column label="状态" prop="enable" align="center" width="120">
+        <template slot-scope="{row}">
+          <span v-if="row.enable"><el-tag type="success">启用</el-tag></span>
+          <span v-else><el-tag type="danger">停用</el-tag></span>
+        </template>
+      </el-table-column>
       <el-table-column label="注册时间" prop="registered" align="center" width="160"></el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
