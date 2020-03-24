@@ -24,7 +24,6 @@ import org.apache.curator.retry.RetryOneTime;
 import org.fest.reflect.core.Reflection;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.FlywayException;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.server.ServerGroupContext;
@@ -36,6 +35,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -61,18 +61,18 @@ public abstract class AiJStarter {
 
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
-     * @return service name
+     * @return node name
      */
-    protected abstract String configServiceName();
+    protected abstract String configNodeName();
 
     /**
-     * 服务描述
+     * 节点描述
      *
      * @return description
      */
-    protected abstract String configServiceDescription();
+    protected abstract String configNodeDescription();
 
     /**
      * 配置指令路由
@@ -228,7 +228,9 @@ public abstract class AiJStarter {
         //获取服务ID
         ServiceInfo serviceInfo = registryService();
         config.setServiceId(serviceInfo.getId());
-        config.setServiceToken(serviceInfo.getToken());
+        config.setServiceName(serviceInfo.getName());
+        config.setServiceDescription(serviceInfo.getDescription());
+        config.setNodeToken(UUID.randomUUID().toString());
         //初始化Id生成器
         Id.init();
         //初始化路由
@@ -267,28 +269,16 @@ public abstract class AiJStarter {
      */
     private ServiceInfo registryService() {
         ServiceInfo serviceInfo = new ServiceInfo();
-        Record record = AiJCoreDb.platform().findFirst("select * from service s WHERE s.type = ? and s.code = ?",
-                AppConfig.use().getStr(CoreConfig.SERVICE_TYPE), AppConfig.use().getInt(CoreConfig.SERVICE_CODE));
+        int serviceCode = AppConfig.use().getInt(CoreConfig.SERVICE_CODE);
+        String serviceType = AppConfig.use().getStr(CoreConfig.SERVICE_TYPE);
+        Record record = AiJCoreDb.platform().findByUnique("service", "type, code", serviceType, serviceCode);
         if (record == null) {
-            record = new Record().set("type", AppConfig.use().getStr(CoreConfig.SERVICE_TYPE))
-                    .set("code", AppConfig.use().getInt(CoreConfig.SERVICE_CODE))
-                    .set("name", AppConfig.use().getStr(CoreConfig.SERVICE_NAME))
-                    .set("description", AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION))
-                    .set("token", UUID.randomUUID().toString())
-                    .set("created_time", new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
-            AiJCoreDb.platform().save("service", record);
-        } else {
-            AiJCoreDb.platform().update("service",
-                    new Record().set("id", record.get("id"))
-                            .set("type", AppConfig.use().getStr(CoreConfig.SERVICE_TYPE))
-                            .set("code", AppConfig.use().getInt(CoreConfig.SERVICE_CODE))
-                            .set("name", AppConfig.use().getStr(CoreConfig.SERVICE_NAME))
-                            .set("description", AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION))
-                            .set("modified_time", new DateTime().toString("yyyy-MM-dd HH:mm:ss")));
+            String message = MessageFormat.format("CODE为:{0}的{1}服务，没有在数据库中添加，请校验service表是否存在对应的服务信息", serviceCode, serviceType);
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
         serviceInfo.setId(record.getInt("id"));
         serviceInfo.setDescription(record.getStr("description"));
-        serviceInfo.setToken(record.getStr("token"));
         serviceInfo.setName(record.getStr("name"));
         serviceInfo.setCode(record.getInt("code"));
         serviceInfo.setType(ServiceType.valueOf(record.getStr("type")));
@@ -336,8 +326,12 @@ public abstract class AiJStarter {
                             payload.setAddress(AppConfig.use().getStr(CoreConfig.WS_PROXY_ADDRESS));
                             payload.setPort(AppConfig.use().getInt(CoreConfig.WS_PROXY_PORT));
                             payload.setServiceType(ServiceType.valueOf(AppConfig.use().getStr(CoreConfig.SERVICE_TYPE)));
-                            payload.setName(AppConfig.use().getStr(CoreConfig.SERVICE_NAME));
                             payload.setServiceCode(AppConfig.use().getInt(CoreConfig.SERVICE_CODE));
+                            payload.setServiceName(AppConfig.use().getStr(CoreConfig.SERVICE_NAME));
+                            payload.setServiceDescription(AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION));
+                            payload.setNodeName(AppConfig.use().getStr(CoreConfig.NODE_NAME));
+                            payload.setNodeDescription(AppConfig.use().getStr(CoreConfig.NODE_DESCRIPTION));
+                            payload.setNodeToken(AppConfig.use().getStr(CoreConfig.NODE_TOKEN));
                             payload.setRegistered(new Date());
                             registryCenter.registerService(payload, ServiceDetail.class);
                         } catch (Exception e) {
@@ -445,8 +439,8 @@ public abstract class AiJStarter {
         config.setWsProxyPort(config.getInt(CoreConfig.WS_PORT));
         config.setWsProxyAddress(config.getStr(CoreConfig.WS_ADDRESS));
         config.setServiceCode(configServiceCode());
-        config.setServiceName(configServiceName());
-        config.setServiceDescription(configServiceDescription());
+        config.setNodeName(configNodeName());
+        config.setNodeDescription(configNodeDescription());
         config.setDefaultCacheName("aij_simple_cache");
         config.setRegisterPath("/aij/service");
         config.setDsUserCenter("aij-users");

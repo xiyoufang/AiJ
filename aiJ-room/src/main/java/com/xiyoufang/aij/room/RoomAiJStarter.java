@@ -40,7 +40,7 @@ public abstract class RoomAiJStarter extends AiJStarter {
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "游戏房间服务";
     }
 

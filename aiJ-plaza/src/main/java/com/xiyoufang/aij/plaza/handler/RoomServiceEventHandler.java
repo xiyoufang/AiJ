@@ -49,9 +49,9 @@ public class RoomServiceEventHandler extends AuthorizedEventHandler<RoomServiceE
                     RoomServiceEventResponse.RoomItem roomItem = new RoomServiceEventResponse.RoomItem();
                     roomItem.setServiceId(payload.getServiceId());
                     roomItem.setServiceCode(payload.getServiceCode());
+                    roomItem.setName(payload.getServiceName());
                     roomItem.setAddress(payload.getAddress());
                     roomItem.setPort(payload.getPort());
-                    roomItem.setName(payload.getName());
                     roomItem.setEnable(payload.isEnable());
                     roomItems.add(roomItem);
                 }

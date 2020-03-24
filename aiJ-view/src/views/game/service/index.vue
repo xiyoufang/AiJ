@@ -5,6 +5,9 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
+      <el-button v-waves class="filter-item" type="success" icon="el-icon-plus" @click="add">
+        添加
+      </el-button>
     </div>
 
     <el-table
@@ -81,7 +84,7 @@
           // Just to simulate the time of the request
           setTimeout(() => {
             this.listLoading = false
-          }, 1.5 * 1000)
+          }, 0.5 * 1000)
         })
       },
       handleFilter() {
@@ -95,6 +98,9 @@
           type: 'success'
         })
         row.status = status
+      },
+      add() {
+
       }
     }
   }

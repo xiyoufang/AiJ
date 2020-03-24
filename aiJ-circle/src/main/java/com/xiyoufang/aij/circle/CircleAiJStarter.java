@@ -20,22 +20,22 @@ public class CircleAiJStarter extends AiJStarter {
     }
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
      * @return service name
      */
     @Override
-    protected String configServiceName() {
+    protected String configNodeName() {
         return "亲友圈";
     }
 
     /**
-     * 服务描述
+     * 节点描述
      *
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "亲友圈服务器";
     }
 

@@ -6,7 +6,6 @@ CREATE TABLE service
   code          integer,      -- 服务编码 1001
   name          varchar(128), -- 显示名称 麻将
   description   text,         -- 服务描述
-  token         varchar(128), -- 服务Token,用于与其他服务之间交互鉴权用
   created_time  datetime,     -- 创建时间
   modified_time datetime      -- 修改时间
 );

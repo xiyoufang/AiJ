@@ -30,7 +30,7 @@ public class PlazaAiJStarter extends AiJStarter {
      * @return service name
      */
     @Override
-    protected String configServiceName() {
+    protected String configNodeName() {
         return "游戏大厅";
     }
 
@@ -40,7 +40,7 @@ public class PlazaAiJStarter extends AiJStarter {
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "游戏大厅服务";
     }
 

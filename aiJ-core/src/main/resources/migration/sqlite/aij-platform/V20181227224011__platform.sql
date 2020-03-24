@@ -6,7 +6,6 @@ CREATE TABLE service
   code          int,  -- 服务编码 1001
   name          text, -- 显示名称 麻将
   description   text, -- 服务描述
-  token         text, -- 服务Token,用于与其他服务之间交互鉴权用
   created_time  text, -- 创建时间
   modified_time text  -- 修改时间
 );

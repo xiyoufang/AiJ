@@ -21,12 +21,12 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
      * @return service name
      */
     @Override
-    protected String configServiceName() {
+    protected String configNodeName() {
         return "运营平台";
     }
 
@@ -36,7 +36,7 @@ public class AiJPlatformStarter extends AiJStarter {
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "运营管理平台";
     }
 

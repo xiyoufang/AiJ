@@ -31,6 +31,14 @@ public class CoreConfig extends Config {
      */
     public static final String SERVICE_DESCRIPTION = "$service_description";
     /**
+     * 节点名称
+     */
+    public static final String NODE_NAME = "$node_name";
+    /**
+     * 节点描述
+     */
+    public static final String NODE_DESCRIPTION = "$node_description";
+    /**
      * 用户中心数据源
      */
     public static final String DS_USER_CENTER = "$ds_user_center";
@@ -57,7 +65,7 @@ public class CoreConfig extends Config {
     /**
      * 服务Token
      */
-    public static final String SERVICE_TOKEN = "$service_token";
+    public static final String NODE_TOKEN = "$node_token";
     /**
      * 服务器注册路径
      */
@@ -161,6 +169,15 @@ public class CoreConfig extends Config {
     }
 
     /**
+     * 节点名称
+     *
+     * @param name name
+     */
+    public void setNodeName(String name) {
+        setStr(NODE_NAME, name);
+    }
+
+    /**
      * 服务ID
      *
      * @param serviceId serviceId
@@ -183,8 +200,8 @@ public class CoreConfig extends Config {
      *
      * @param token token
      */
-    public void setServiceToken(String token) {
-        setStr(SERVICE_TOKEN, token);
+    public void setNodeToken(String token) {
+        setStr(NODE_TOKEN, token);
     }
 
     /**
@@ -194,6 +211,15 @@ public class CoreConfig extends Config {
      */
     public void setServiceDescription(String description) {
         setStr(SERVICE_DESCRIPTION, description);
+    }
+
+    /**
+     * 设置节点描述
+     *
+     * @param description description
+     */
+    public void setNodeDescription(String description) {
+        setStr(NODE_DESCRIPTION, description);
     }
 
     /**
