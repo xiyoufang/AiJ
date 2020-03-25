@@ -7,12 +7,8 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
-import userRouter from "./modules/user";
-import gameRouter from "./modules/game";
+import userRouter from './modules/user'
+import gameRouter from './modules/game'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
