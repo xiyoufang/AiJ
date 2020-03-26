@@ -40,7 +40,7 @@
       <el-table-column label="修改时间" prop="modified_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
         <template slot-scope="{row}">
-          <el-button size="mini" @click="handleModifyStatus(row)">编辑</el-button>
+          <el-button size="mini" @click="handleModify(row)">编辑</el-button>
           <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import { page } from '@/api/game/service'
+import { page, createService, updateService } from '@/api/game/service'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -148,9 +148,10 @@ export default {
       },
       statusOptions: ['published', 'draft', 'deleted'],
       typeOptions: [
+        { key: 'ROOM', display_name: '子游戏服' },
         { key: 'PLAZA', display_name: '游戏大厅服' },
-        { key: 'ROOM', display_name: '游戏房间服' },
-        { key: 'PLATFORM', display_name: '管理平台服' }
+        { key: 'PLATFORM', display_name: '管理平台服' },
+        { key: 'CIRCLE', display_name: '亲友圈' }
       ],
       rules: {
         type: [{ required: true, message: 'type is required', trigger: 'change' }],
@@ -188,17 +189,50 @@ export default {
       this.listQuery.page = 1
       this.getList()
     },
-    handleModifyStatus(row, status) {
-      this.$message({
-        message: '操作Success',
-        type: 'success'
+    handleModify(row) {
+      this.service = Object.assign({}, row) // copy obj
+      this.dialogFormVisible = true
+      this.dialogStatus = 'update'
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
       })
-      row.status = status
     },
     handleCreate() {
       this.resetService()
       this.dialogFormVisible = true
       this.dialogStatus = 'create'
+    },
+    createData() {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          createService(this.service).then((v) => {
+            this.dialogFormVisible = false
+            this.$notify({
+              title: 'Success',
+              message: 'Created Successfully',
+              type: 'success',
+              duration: 2000
+            })
+            this.getList()
+          })
+        }
+      })
+    },
+    updateData() {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          updateService(this.service).then((v) => {
+            this.dialogFormVisible = false
+            this.$notify({
+              title: 'Success',
+              message: 'Updated Successfully',
+              type: 'success',
+              duration: 2000
+            })
+            this.getList()
+          })
+        }
+      })
     }
   }
 }
