@@ -1,5 +1,11 @@
 <template>
   <div class="app-container">
+    <el-alert
+      title="提示"
+      type="warning"
+      description="界面上不提供服务删除功能"
+      show-icon
+    />
     <div class="filter-container">
       <el-input
         v-model="listQuery.name"
@@ -26,22 +32,15 @@
       style="width: 100%;"
     >
       <el-table-column label="ID" prop="id" align="center" width="80" />
-      <el-table-column label="类型" prop="type" align="center" width="120" />
-      <el-table-column label="CODE" prop="code" align="center" width="120" />
+      <el-table-column label="类型" prop="type" align="center" width="160" />
+      <el-table-column label="CODE" prop="code" align="center" width="160" />
       <el-table-column label="名称" prop="name" align="center" width="160" show-overflow-tooltip />
-      <el-table-column
-        label="描述"
-        prop="description"
-        align="center"
-        width="160"
-        show-overflow-tooltip
-      />
+      <el-table-column label="描述" prop="description" align="center" width="240" show-overflow-tooltip />
       <el-table-column label="创建时间" prop="created_time" align="center" width="160" />
       <el-table-column label="修改时间" prop="modified_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
         <template slot-scope="{row}">
           <el-button size="mini" @click="handleModify(row)">编辑</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -148,10 +147,10 @@ export default {
       },
       statusOptions: ['published', 'draft', 'deleted'],
       typeOptions: [
-        { key: 'ROOM', display_name: '子游戏服' },
-        { key: 'PLAZA', display_name: '游戏大厅服' },
-        { key: 'PLATFORM', display_name: '管理平台服' },
-        { key: 'CIRCLE', display_name: '亲友圈' }
+        { key: 'ROOM', display_name: 'ROOM' },
+        { key: 'PLAZA', display_name: 'PLAZA' },
+        { key: 'PLATFORM', display_name: 'PLATFORM' },
+        { key: 'CIRCLE', display_name: 'CIRCLE' }
       ],
       rules: {
         type: [{ required: true, message: 'type is required', trigger: 'change' }],
@@ -238,8 +237,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    .el-select {
-      width: 100%;
-    }
+  .el-select {
+    width: 100%;
+  }
+  .el-alert {
+    margin-bottom: 10px;
+  }
 </style>
 

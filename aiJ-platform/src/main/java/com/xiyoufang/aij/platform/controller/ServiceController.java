@@ -7,6 +7,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.dto.ServiceDTO;
 import com.xiyoufang.aij.platform.service.ServiceService;
+import com.xiyoufang.aij.platform.validate.ServiceValidator;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresRoles("administrator")
-    @Before(BodyInject.class)
+    @Before({BodyInject.class, ServiceValidator.class})
     public void create(@Body ServiceDTO serviceDTO) {
         Record record = ServiceService.me.save(serviceDTO);
         renderOk(Kv.by("data", record));
@@ -52,7 +53,7 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresRoles("administrator")
-    @Before(BodyInject.class)
+    @Before({BodyInject.class, ServiceValidator.class})
     public void update(@Body ServiceDTO serviceDTO) {
         Record record = ServiceService.me.update(serviceDTO);
         renderOk(Kv.by("data", record));

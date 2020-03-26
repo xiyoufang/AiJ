@@ -3,6 +3,7 @@ package com.xiyoufang.aij.platform.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.domain.UserDO;
 import com.xiyoufang.aij.platform.dto.LoginFormDTO;
 import com.xiyoufang.aij.platform.shiro.AiJAuthenticationToken;
@@ -33,7 +34,7 @@ public class AuthorizationController extends BaseController {
             String token = (String) SecurityUtils.getSubject().getSession().getId();
             renderOk(Kv.create().set("data", new TokenVO().setToken(token)));
         } else {
-            renderWithCode(50002, Kv.create().set("message", "failure."));
+            renderWithCode(ResponseStatusCode.LOGIN_FAILURE, Kv.create().set("message", "failure."));
         }
     }
 

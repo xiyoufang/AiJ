@@ -3,6 +3,7 @@ package com.xiyoufang.aij.platform.controller;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.Kv;
+import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.domain.UserDO;
 import org.apache.shiro.SecurityUtils;
 
@@ -40,7 +41,7 @@ public class BaseController extends Controller {
      * @param kv kv
      */
     protected void renderOk(Kv kv) {
-        renderWithCode(20000, kv);
+        renderWithCode(ResponseStatusCode.OK, kv);
     }
 
     /**
@@ -50,7 +51,7 @@ public class BaseController extends Controller {
      * @param kv   附加的信息
      */
     protected void renderWithCode(int code, Kv kv) {
-        renderJson(Kv.by("code", code).set(kv));
+        renderJson(Kv.by(ResponseStatusCode.CODE_KEY, code).set(kv));
     }
 
     /**

@@ -53,4 +53,24 @@ public class ServiceService {
         AiJPlatformDb.platform().update("service", "id", record);
         return record;
     }
+
+    /**
+     * 通过Code查询记录
+     *
+     * @param code code
+     * @return Record
+     */
+    public Record findByCode(String code) {
+        return AiJPlatformDb.platform().findByUnique("service", "code", code);
+    }
+
+    /**
+     * 通过ID查询
+     *
+     * @param id id
+     * @return Record
+     */
+    public Record findById(Integer id) {
+        return AiJPlatformDb.platform().findById("service", id);
+    }
 }

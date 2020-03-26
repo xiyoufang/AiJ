@@ -3,6 +3,11 @@ package com.xiyoufang.aij.platform;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.json.FastJsonFactory;
+import com.jfinal.kit.Kv;
+import com.jfinal.render.JsonRender;
+import com.jfinal.render.Render;
+import com.jfinal.render.RenderFactory;
+import com.jfinal.render.RenderManager;
 import com.jfinal.template.Engine;
 import com.jfinal.template.ext.directive.RandomDirective;
 import com.xiyoufang.aij.platform.controller.*;
@@ -32,6 +37,33 @@ public class AiJPlatformConfig extends JFinalConfig {
         loadPropertyFile("main.properties");
         me.setDevMode(getPropertyToBoolean("platform.devMode"));
         me.setJsonFactory(new FastJsonFactory());
+
+        RenderManager.me().setRenderFactory(new RenderFactory() {
+            @Override
+            public Render getErrorRender(int errorCode) {
+                String message;
+                switch (errorCode) {
+                    case 400:
+                        message = "400 Bad Request";
+                        break;
+                    case 401:
+                        message = "401 Unauthorized";
+                        break;
+                    case 403:
+                        message = "403 Forbidden";
+                        break;
+                    case 404:
+                        message = "404 Not Found";
+                        break;
+                    case 500:
+                        message = "Internal Server Error";
+                        break;
+                    default:
+                        message = "Error";
+                }
+                return new JsonRender(Kv.by("code", errorCode).set("message", message));
+            }
+        });
     }
 
     /**
