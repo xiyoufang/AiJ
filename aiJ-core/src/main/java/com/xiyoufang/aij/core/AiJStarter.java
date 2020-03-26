@@ -1,11 +1,13 @@
 package com.xiyoufang.aij.core;
 
 import com.jfinal.kit.Prop;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import com.xiyoufang.aij.cache.CacheProFactory;
 import com.xiyoufang.aij.cache.SimpleCachePro;
@@ -400,7 +402,9 @@ public abstract class AiJStarter {
                     arp.setTransactionLevel(Connection.TRANSACTION_SERIALIZABLE);   //SQLITE事物隔离级别
                 }
                 arp.setBaseSqlTemplatePath(aiJDs.getSqlPath());
-                arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
+                Engine engine = arp.getEngine();
+                engine.addSharedObject("StrKit", new StrKit());
+                engine.setSourceFactory(new ClassPathSourceFactory());
                 if (ClassResource.exist(ClassResource.buildFinalFileName(aiJDs.getSqlPath(), "core.sql"))) {
                     arp.addSqlTemplate("core.sql"); //约定的东西
                 }

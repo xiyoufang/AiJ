@@ -4,6 +4,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.SqlPara;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.dto.ServiceDTO;
 import com.xiyoufang.aij.platform.service.ServiceService;
@@ -30,8 +31,9 @@ public class ServiceController extends BaseController {
      * @param sort  排序
      */
     @RequiresRoles("administrator")
-    public void page(int limit, int page, String sort) {
-        Page<Record> recordPage = AiJPlatformDb.platform().paginateByFullSql(page, limit, "select count(1) from service", "select * from service");
+    public void page(int limit, int page, String sort, String name) {
+        SqlPara sqlPara = AiJPlatformDb.platform().getSqlPara("platform.get_service_page", Kv.by("name", name));
+        Page<Record> recordPage = AiJPlatformDb.platform().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
     }
 
