@@ -40,7 +40,7 @@
       <el-table-column label="修改时间" prop="modified_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
         <template slot-scope="{row}">
-          <el-button size="mini" @click="handleModify(row)">编辑</el-button>
+          <el-button size="mini" @click="handleUpdate(row)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -188,7 +188,7 @@ export default {
       this.listQuery.page = 1
       this.getList()
     },
-    handleModify(row) {
+    handleUpdate(row) {
       this.service = Object.assign({}, row) // copy obj
       this.dialogFormVisible = true
       this.dialogStatus = 'update'
@@ -200,6 +200,9 @@ export default {
       this.resetService()
       this.dialogFormVisible = true
       this.dialogStatus = 'create'
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     createData() {
       this.$refs['dataForm'].validate((valid) => {
