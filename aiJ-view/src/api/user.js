@@ -1,6 +1,5 @@
 import request from '@/utils/request'
 
-
 /**
  * 获取用户信息
  * @param token
@@ -22,5 +21,17 @@ export function page(query) {
     url: '/user/page',
     method: 'get',
     params: query
+  })
+}
+
+/**
+ * 更新用户状态
+ * @param data
+ */
+export function updateStatus(data) {
+  return request({
+    url: '/user/updateStatus',
+    method: 'post',
+    data
   })
 }

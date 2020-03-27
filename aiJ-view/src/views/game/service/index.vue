@@ -36,11 +36,16 @@
       <el-table-column label="CODE" prop="code" align="center" width="160" />
       <el-table-column label="名称" prop="name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="描述" prop="description" align="center" width="240" show-overflow-tooltip />
+      <el-table-column label="被保护" prop="protected" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="创建时间" prop="created_time" align="center" width="160" />
       <el-table-column label="修改时间" prop="modified_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
         <template slot-scope="{row}">
-          <el-button size="mini" @click="handleUpdate(row)">编辑</el-button>
+          <el-button
+            size="mini"
+            :disabled="row.protected === 'Y'"
+            @click="handleUpdate(row)"
+          >编辑</el-button>
         </template>
       </el-table-column>
     </el-table>

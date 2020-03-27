@@ -8,7 +8,9 @@ import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
+import com.jfinal.template.source.ClassPathSource;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import com.jfinal.template.source.ISource;
 import com.xiyoufang.aij.cache.CacheProFactory;
 import com.xiyoufang.aij.cache.SimpleCachePro;
 import com.xiyoufang.aij.handler.HeadEventHandler;
@@ -404,7 +406,17 @@ public abstract class AiJStarter {
                 arp.setBaseSqlTemplatePath(aiJDs.getSqlPath());
                 Engine engine = arp.getEngine();
                 engine.addSharedObject("StrKit", new StrKit());
-                engine.setSourceFactory(new ClassPathSourceFactory());
+                engine.setSourceFactory(new ClassPathSourceFactory() {
+                    @Override
+                    public ISource getSource(String baseTemplatePath, String fileName, String encoding) {
+                        return new ClassPathSource(baseTemplatePath, fileName, encoding) {
+                            @Override
+                            public boolean isModified() {
+                                return devMode; //开发模式热更新
+                            }
+                        };
+                    }
+                });
                 if (ClassResource.exist(ClassResource.buildFinalFileName(aiJDs.getSqlPath(), "core.sql"))) {
                     arp.addSqlTemplate("core.sql"); //约定的东西
                 }

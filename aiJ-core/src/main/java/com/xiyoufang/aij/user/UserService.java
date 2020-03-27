@@ -220,4 +220,14 @@ public class UserService {
         return AiJCoreDb.uc().find(AiJCoreDb.uc().getSqlPara("core.find_roles_by_user", user.getStr("user_id")));
     }
 
+    /**
+     * 通过用户ID更新用户状态
+     *
+     * @param id     id
+     * @param status status
+     * @return boolean
+     */
+    public boolean updateStatusById(Integer id, Integer status) {
+        return AiJCoreDb.uc().update("user_profile", "id", new Record().set("id", id).set("status", status));
+    }
 }

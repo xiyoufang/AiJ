@@ -63,17 +63,17 @@ export default {
     SizeSelect,
     Search
   },
+  data() {
+    return {
+      baseURL: process.env.VUE_APP_BASE_API
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
       'avatar',
       'device'
     ])
-  },
-  data() {
-    return {
-      baseURL: process.env.VUE_APP_BASE_API
-    }
   },
   methods: {
     toggleSideBar() {

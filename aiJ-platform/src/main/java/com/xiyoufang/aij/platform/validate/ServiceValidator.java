@@ -36,8 +36,15 @@ public class ServiceValidator extends AiJValidator {
                     return;
                 }
                 byCode = ServiceService.me.findByCode(arg.getCode());
-                if (byCode != null && !byCode.getInt("id").equals(arg.getId())) {
-                    addError("service.code", "服务Code已经存在");
+                if (byCode != null) {
+                    if ("Y".equalsIgnoreCase(byCode.getStr("protected"))) {
+                        addError("service.protected", "服务受保护无法修改");
+                        return;
+                    }
+                    if (!byCode.getInt("id").equals(arg.getId())) {
+                        addError("service.code", "服务Code已经存在");
+                        return;
+                    }
                 }
                 commonValidate(arg);
                 break;

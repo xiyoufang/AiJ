@@ -49,6 +49,7 @@ public class ServiceService {
                 .set("code", serviceDTO.getCode())
                 .set("name", serviceDTO.getName())
                 .set("description", serviceDTO.getDescription())
+                .set("protected", 'N')
                 .set("modified_time", new Date());
         AiJPlatformDb.platform().update("service", "id", record);
         return record;

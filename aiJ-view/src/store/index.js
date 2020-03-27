@@ -22,13 +22,7 @@ const store = new Vuex.Store({
   getters,
   mutations: {
 
-  },
-  actions: {
-      login: function () {
-        console.log(arguments)
-          return {}
-      }
-    }
+  }
 })
 
 export default store

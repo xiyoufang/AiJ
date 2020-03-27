@@ -51,4 +51,8 @@ public class ResponseStatusCode {
      */
     public static final int REQUEST_VALIDATE_FAILURE = 50018;
 
+    /**
+     * operation failure
+     */
+    public static final int OPERATION_FAILURE = 50020;
 }
