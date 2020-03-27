@@ -1,4 +1,4 @@
-package com.xiyoufang.aij.platform.controller;
+package com.xiyoufang.aij.platform.controller.user;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.paragetter.Para;
@@ -8,12 +8,10 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.config.ResponseStatusCode;
-import com.xiyoufang.aij.platform.domain.UserDO;
-import com.xiyoufang.aij.platform.vo.LoginVO;
+import com.xiyoufang.aij.platform.controller.BaseController;
 import com.xiyoufang.aij.user.UserService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import java.util.HashMap;
@@ -23,22 +21,7 @@ import java.util.HashMap;
  *
  * @author 席有芳
  */
-public class UserController extends BaseController {
-
-    /**
-     * 获取用户信息
-     */
-    @RequiresAuthentication
-    public void info() {
-        UserDO userDO = userDO();
-        renderOk(Kv.by("data", new LoginVO()
-                .setAvatar(userDO.getAvatar())
-                .setRoles(userDO.getRoles())
-                .setIntroduction(userDO.getIntroduction())
-                .setName(userDO.getUserName())
-                .setPermissions(userDO.getPermissions())
-        ));
-    }
+public class PlayerController extends BaseController {
 
     /**
      * 获取用户列表
@@ -48,7 +31,7 @@ public class UserController extends BaseController {
                      @Para(value = "user_name") String userName,
                      Integer status,
                      String sort) {
-        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("users.get_user_page",
+        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("users.get_player_page",
                 Kv.by("user_name", userName).set("status", status));
         Page<Record> recordPage = AiJPlatformDb.uc().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));

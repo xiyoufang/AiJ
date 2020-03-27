@@ -11,6 +11,8 @@ import com.jfinal.render.RenderManager;
 import com.jfinal.template.Engine;
 import com.jfinal.template.ext.directive.RandomDirective;
 import com.xiyoufang.aij.platform.controller.*;
+import com.xiyoufang.aij.platform.controller.user.AdministratorController;
+import com.xiyoufang.aij.platform.controller.user.PlayerController;
 import com.xiyoufang.jfinal.directive.VersionDirective;
 import com.xiyoufang.jfinal.handler.AllowCrossHandler;
 import com.xiyoufang.jfinal.handler.TrimParameterHandler;
@@ -80,11 +82,17 @@ public class AiJPlatformConfig extends JFinalConfig {
         me.add("/views", ViewsController.class);
         me.add("/plaza", PlazaController.class);
         me.add("/room", RoomController.class);
-
         me.add("/service", ServiceController.class);
         me.add("/node", NodeController.class);
-        me.add("/user", UserController.class);
         me.add("/avatar", AvatarController.class);  //头像服务
+
+        me.add(new Routes() {   // 用户相关
+            @Override
+            public void config() {
+                me.add("/user/player", PlayerController.class);
+                me.add("/user/administrator", AdministratorController.class);
+            }
+        });
     }
 
     /**

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 席有芳 on 2018-12-19.
@@ -33,6 +34,18 @@ public class Json {
 
     public static <T> T toBean(String jsonString, Class<T> tt) {
         return JSON.parseObject(jsonString, tt);
+    }
+
+    /**
+     * JSON字符串转数据
+     *
+     * @param jsonString jsonString
+     * @param t          t
+     * @param <T>        T
+     * @return List
+     */
+    public static <T> List<T> toArray(String jsonString, Class<T> t) {
+        return JSON.parseArray(jsonString, t);
     }
 
     /**

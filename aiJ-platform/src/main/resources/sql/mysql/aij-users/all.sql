@@ -1,3 +1,4 @@
 #namespace("users")
-  #include("users.sql")
+  #include("player.sql")
+  #include("administrator.sql")
 #end

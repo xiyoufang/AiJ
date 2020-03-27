@@ -7,6 +7,7 @@ import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.domain.UserDO;
 import com.xiyoufang.aij.platform.dto.LoginFormDTO;
 import com.xiyoufang.aij.platform.shiro.AiJAuthenticationToken;
+import com.xiyoufang.aij.platform.vo.LoginVO;
 import com.xiyoufang.aij.platform.vo.TokenVO;
 import com.xiyoufang.aij.user.UserService;
 import com.xiyoufang.jfinal.aop.Body;
@@ -36,6 +37,21 @@ public class AuthorizationController extends BaseController {
         } else {
             renderWithCode(ResponseStatusCode.LOGIN_FAILURE, Kv.create().set("message", "failure."));
         }
+    }
+
+    /**
+     * 获取用户信息
+     */
+    @RequiresAuthentication
+    public void info() {
+        UserDO userDO = userDO();
+        renderOk(Kv.by("data", new LoginVO()
+                .setAvatar(userDO.getAvatar())
+                .setRoles(userDO.getRoles())
+                .setIntroduction(userDO.getIntroduction())
+                .setName(userDO.getUserName())
+                .setPermissions(userDO.getPermissions())
+        ));
     }
 
     /**

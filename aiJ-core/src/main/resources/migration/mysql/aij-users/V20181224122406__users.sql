@@ -1,35 +1,35 @@
 -- 用户基本信息表
 CREATE TABLE user_profile
 (
-    id             integer PRIMARY KEY AUTO_INCREMENT,
-    user_id        varchar(64),  -- 用户ID
-    user_name      varchar(128), -- 用户名称
-    nick_name      varchar(128), -- 用户昵称
-    gender         integer,      -- 性别(1男,2女,3未知) //普通用户性别，1为男性，2为女性
-    email          varchar(128), -- 邮箱
-    email_status   integer,      -- 邮箱状态(0待验证,1正常)
-    mobile         varchar(64),  -- 手机
-    mobile_status  integer,      -- 手机状态(0待验证,1正常)
-    avatar         varchar(512), -- 头像
-    cert_name      varchar(128), -- 实名
-    cert_card      varchar(64),  -- 身份证
-    cert_type      varchar(64),  -- 实名制类型
-    cert_status    varchar(8),   -- 实名制(-未验证,0验证中,1验证通过)
-    android        integer,      -- 机器人标识(1是，0否)
-    geo_hash       varchar(16),  -- GeoHash（8位）
-    longitude      double,       -- 经度
-    latitude       double,       -- 纬度
-    address        varchar(512), -- 地址
-    ip             varchar(64),  -- Ip地址
-    referrer_id    varchar(64),  -- 介绍人ID
-    device_id      varchar(64),  -- 设备ID
-    status         integer,      -- 状态(-1禁用,0未激活,1正常)
-    introduction   text,         -- 自我介绍
-    remark         text,         -- 备注
-    created_source varchar(64),  -- 注册来源
-    created_time   datetime,     -- 注册时间
-    login_time     datetime,     -- 登录时间
-    activated_time datetime,     -- 激活时间
+    id             integer PRIMARY KEY AUTO_INCREMENT, -- 显示用的ID（发生修改不影响业务）
+    user_id        varchar(64),                        -- 用户ID（数据关联用的ID）
+    user_name      varchar(128),                       -- 用户名称
+    nick_name      varchar(128),                       -- 用户昵称（一般显示都用昵称）
+    gender         integer,                            -- 性别(1男,2女,3未知) //普通用户性别，1为男性，2为女性
+    email          varchar(128),                       -- 邮箱
+    email_status   integer,                            -- 邮箱状态(0待验证,1正常)
+    mobile         varchar(64),                        -- 手机
+    mobile_status  integer,                            -- 手机状态(0待验证,1正常)
+    avatar         varchar(512),                       -- 头像
+    cert_name      varchar(128),                       -- 实名
+    cert_card      varchar(64),                        -- 身份证
+    cert_type      varchar(64),                        -- 实名制类型
+    cert_status    varchar(8),                         -- 实名制(-未验证,0验证中,1验证通过)
+    android        integer,                            -- 机器人标识(1是，0否)
+    geo_hash       varchar(16),                        -- GeoHash（8位）
+    longitude      double,                             -- 经度
+    latitude       double,                             -- 纬度
+    address        varchar(512),                       -- 地址
+    ip             varchar(64),                        -- Ip地址
+    referrer_id    varchar(64),                        -- 介绍人ID
+    device_id      varchar(64),                        -- 设备ID
+    status         integer,                            -- 状态(-1禁用,0未激活,1正常)
+    introduction   text,                               -- 自我介绍
+    remark         text,                               -- 备注
+    created_source varchar(64),                        -- 注册来源
+    created_time   datetime,                           -- 注册时间
+    login_time     datetime,                           -- 登录时间
+    activated_time datetime,                           -- 激活时间
     UNIQUE (user_id)
 );
 
@@ -48,6 +48,7 @@ CREATE TABLE user_cert
     created_time datetime      -- 创建时间
 );
 
+-- 用户活动记录
 CREATE TABLE user_activity
 (
     id           integer PRIMARY KEY AUTO_INCREMENT,
@@ -178,12 +179,12 @@ CREATE TABLE role
     UNIQUE (name)
 );
 
--- 用户角色表
+-- 用户角色表（分配了角色的用户具有后台管理系统的登录权限）
 CREATE TABLE user_role
 (
     id           integer PRIMARY KEY AUTO_INCREMENT,
     user_id      varchar(64), -- 用户ID
-    role_name    varchar(64), -- 角色名称
+    roles        text,        -- 角色数组（array）
     created_time datetime,    -- 创建时间
     INDEX IDX_1 (user_id)
 );

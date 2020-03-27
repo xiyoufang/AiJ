@@ -8,10 +8,12 @@ import com.jfinal.plugin.activerecord.SqlPara;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.xiyoufang.aij.core.AiJCoreDb;
 import com.xiyoufang.aij.core.Id;
+import com.xiyoufang.aij.utils.Json;
 import com.xiyoufang.aij.utils.Pbkdf2;
 import org.joda.time.DateTime;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -217,7 +219,14 @@ public class UserService {
      * @return Roles
      */
     public List<Record> findRolesByUser(Record user) {
-        return AiJCoreDb.uc().find(AiJCoreDb.uc().getSqlPara("core.find_roles_by_user", user.getStr("user_id")));
+        List<Record> records = new ArrayList<>();
+        Record roleRecord = AiJCoreDb.uc().findByUnique("user_role", "user_id", user.getStr("user_id"));
+        if (roleRecord == null) return records;
+        List<String> roles = Json.toArray(roleRecord.getStr("roles"), String.class); // 获取角色列表
+        roles.forEach(role -> {
+            records.add(AiJCoreDb.uc().findByUnique("role", "name", role));
+        });
+        return records;
     }
 
     /**

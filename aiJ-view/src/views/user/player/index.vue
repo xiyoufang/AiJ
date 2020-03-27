@@ -41,21 +41,14 @@
           <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
         </template>
       </el-table-column>
-      <el-table-column label="用户ID" prop="user_id" align="center" width="100" fixed="left" show-overflow-tooltip>
+      <el-table-column label="显示ID" prop="id" align="center" width="100" fixed="left" show-overflow-tooltip>
         <template slot-scope="{row}">
-          <span>{{ row.user_id }}</span>
+          <span>{{ row.id | idFilter }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip>
-        <template slot-scope="{row}">
-          <span>{{ row.user_name }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip>
-        <template slot-scope="{row}">
-          <span>{{ row.nick_name }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column label="用户ID" prop="user_id" align="center" width="100" show-overflow-tooltip />
+      <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="性别" prop="gender" align="center" width="80">
         <template slot-scope="{row}">
           <span v-if="row.gender === 1 ">男</span>
@@ -70,26 +63,12 @@
           <span v-if="row.status === 1 "><el-tag type="success">正常</el-tag></span>
         </template>
       </el-table-column>
-      <el-table-column label="活跃时间" prop="activated_time" sortable="custom" align="center" width="160">
-        <template slot-scope="{row}">
-          <span>{{ row.activated_time }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="IP地址" prop="ip" align="center" width="160">
-        <template slot-scope="{row}">
-          <span>{{ row.ip }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="注册时间" prop="created_time" sortable="custom" align="center" width="160">
-        <template slot-scope="{row}">
-          <span>{{ row.created_time }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="注册渠道" prop="created_source" align="center" width="160">
-        <template slot-scope="{row}">
-          <span>{{ row.created_source }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column label="活跃时间" prop="activated_time" sortable="custom" align="center" width="160" />
+      <el-table-column label="IP地址" prop="ip" align="center" width="160" />
+      <el-table-column label="注册时间" prop="created_time" sortable="custom" align="center" width="160" />
+      <el-table-column label="注册渠道" prop="created_source" align="center" width="120" />
+      <el-table-column label="自我介绍" prop="introduction" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="备注" prop="remark" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="操作" prop="id" align="center" width="210" fixed="right">
         <template slot-scope="{row}">
           <router-link to="/profile/index">
@@ -198,22 +177,17 @@
 </template>
 
 <script>
-import { page, update } from '@/api/user'
+import { page, update } from '@/api/user/player'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
-  name: 'ComplexTable',
+  name: 'UserPlayer',
   components: { Pagination },
   directives: { waves },
   filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+    idFilter(id) {
+      return ('' + id).padStart(8, '0')
     }
   },
   data() {
