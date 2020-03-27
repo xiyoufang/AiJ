@@ -9,13 +9,14 @@ import com.jfinal.plugin.activerecord.SqlPara;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.domain.UserDO;
-import com.xiyoufang.aij.platform.dto.UserDTO;
 import com.xiyoufang.aij.platform.vo.LoginVO;
 import com.xiyoufang.aij.user.UserService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+
+import java.util.HashMap;
 
 /**
  * Created by 席有芳 on 2018-12-30.
@@ -58,8 +59,9 @@ public class UserController extends BaseController {
      */
     @RequiresRoles({"administrator"})
     @Before(BodyInject.class)
-    public void updateStatus(@Body UserDTO userDTO) {
-        if (UserService.me().updateStatusById(userDTO.getId(), userDTO.getStatus())) {
+    public void update(@Body HashMap<String, Object> userDTO) {
+        Record record = new Record().setColumns(userDTO);
+        if (UserService.me().update(record)) {
             renderOk(Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "success"));
         } else {
             renderWithCode(ResponseStatusCode.OPERATION_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "operation failed"));

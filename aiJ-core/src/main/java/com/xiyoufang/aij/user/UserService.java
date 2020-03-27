@@ -223,11 +223,10 @@ public class UserService {
     /**
      * 通过用户ID更新用户状态
      *
-     * @param id     id
-     * @param status status
+     * @param record record
      * @return boolean
      */
-    public boolean updateStatusById(Integer id, Integer status) {
-        return AiJCoreDb.uc().update("user_profile", "id", new Record().set("id", id).set("status", status));
+    public boolean update(Record record) {
+        return AiJCoreDb.uc().update("user_profile", "id", record);
     }
 }

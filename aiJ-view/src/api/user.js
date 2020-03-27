@@ -28,9 +28,9 @@ export function page(query) {
  * 更新用户状态
  * @param data
  */
-export function updateStatus(data) {
+export function update(data) {
   return request({
-    url: '/user/updateStatus',
+    url: '/user/update',
     method: 'post',
     data
   })
