@@ -9,6 +9,7 @@ import Layout from '@/layout'
 /* Router Modules */
 import userRouter from './modules/user'
 import gameRouter from './modules/game'
+import dataRouter from './modules/data'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -157,6 +158,7 @@ export const asyncRoutes = [
   },
   userRouter,
   gameRouter,
+  dataRouter,
   {
     path: 'external-link',
     component: Layout,

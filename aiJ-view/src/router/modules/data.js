@@ -2,41 +2,35 @@
 
 import Layout from '@/layout'
 
-const userRouter = {
-  path: '/user',
+const dataRouter = {
+  path: '/data',
   component: Layout,
   redirect: 'noRedirect',
-  name: 'userRouter',
+  name: 'dataRouter',
   meta: {
-    title: '用户管理',
-    icon: 'peoples'
+    title: '数据中心',
+    icon: 'money'
   },
   children: [
     {
       path: 'player',
       component: () => import('@/views/user/player'),
       name: 'player',
-      meta: { title: '玩家管理' }
+      meta: { title: '用户数据' }
     },
     {
       path: 'administrator',
       component: () => import('@/views/user/administrator'),
       name: 'administrator',
-      meta: { title: '平台用户' }
+      meta: { title: '运营数据' }
     },
     {
       path: 'distributor',
       component: () => import('@/views/user/distributor'),
       name: '',
-      meta: { title: '代理管理' }
-    },
-    {
-      path: 'role',
-      component: () => import('@/views/user/role'),
-      name: '',
-      meta: { title: '角色权限' }
+      meta: { title: '游戏数据' }
     }
   ]
 }
 
-export default userRouter
+export default dataRouter
