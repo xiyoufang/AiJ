@@ -2,8 +2,8 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input
-        v-model="listQuery.user_name"
-        placeholder="用户名"
+        v-model="listQuery.nick_name"
+        placeholder="昵称"
         style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
@@ -39,7 +39,7 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column label="头像" prop="user_name" align="center" width="80" fixed="left">
+      <el-table-column label="头像" align="center" width="80" fixed="left">
         <template slot-scope="{row}">
           <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
         </template>
@@ -57,13 +57,6 @@
         <template slot-scope="{row}">
           <span v-if="row.role_status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.role_status === 1 "><el-tag type="success">正常</el-tag></span>
-        </template>
-      </el-table-column>
-      <el-table-column label="性别" prop="gender" align="center" width="80">
-        <template slot-scope="{row}">
-          <span v-if="row.gender === 1 ">男</span>
-          <span v-else-if="row.gender === 2 ">女</span>
-          <span v-else>未知</span>
         </template>
       </el-table-column>
       <el-table-column label="账号状态" prop="status" align="center" width="80">
@@ -208,15 +201,13 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        user_name: undefined,
+        nick_name: undefined,
         status: undefined,
         type: undefined,
         sort: '+id'
       },
       statusOptions: [{ label: '禁用', key: -1 }, { label: '正常', key: 1 }],
-      genderOptions: [{ label: '男', key: 1 }, { label: '女', key: 2 }],
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-      showReviewer: false,
       administrator: {
         id: undefined,
         user_id: undefined,
@@ -256,10 +247,10 @@ export default {
       getPlayerOptions({
         page: 1,
         limit: 100,
-        user_name: query
+        nick_name: query
       }).then(response => {
         this.playerOptions = response.data.items.map(item => {
-          return { key: item['user_id'], label: item['id'] + ':' + item['user_name'] }
+          return { key: item['user_id'], label: item['id'] + ':' + item['nick_name'] }
         })
         console.log(this.playerOptions)
         this.loading = false
@@ -314,11 +305,11 @@ export default {
     },
     handleUpdateStatus(row) {
       this.resetAdministrator()
-      this.$alert(row['status'] === 1 ? '确定禁用管理平台账号?' : '确定启用账号?', '提示', {
+      this.$alert(row.role_status === 1 ? '确定禁用管理平台账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
           this.administrator.user_id = row.user_id
-          this.administrator.status = row['status'] === 1 ? -1 : 1
+          this.administrator.status = row.role_status === 1 ? -1 : 1
           update(this.administrator).then(value => {
             this.getList()
           })
@@ -331,7 +322,7 @@ export default {
       this.administrator.user_id = row.user_id
       this.administrator.status = row.role_status
       this.rolesOptions = JSON.parse(row.roles).map(item => { return { key: item, label: item } })
-      this.playerOptions.push({ key: row.user_id, label: row.id + ':' + row.user_name })
+      this.playerOptions.push({ key: row.user_id, label: row.id + ':' + row.nick_name })
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {

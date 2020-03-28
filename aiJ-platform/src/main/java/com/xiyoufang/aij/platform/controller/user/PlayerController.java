@@ -28,11 +28,11 @@ public class PlayerController extends BaseController {
      */
     @RequiresRoles({"administrator"})
     public void page(int limit, int page,
-                     @Para(value = "user_name") String userName,
+                     @Para(value = "nick_name") String nickName,
                      Integer status,
                      String sort) {
         SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("uc.get_player_page",
-                Kv.by("user_name", userName).set("status", status));
+                Kv.by("nick_name", nickName).set("status", status));
         Page<Record> recordPage = AiJPlatformDb.uc().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
     }

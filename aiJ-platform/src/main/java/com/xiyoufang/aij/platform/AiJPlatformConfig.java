@@ -12,6 +12,7 @@ import com.jfinal.template.Engine;
 import com.jfinal.template.ext.directive.RandomDirective;
 import com.xiyoufang.aij.platform.controller.*;
 import com.xiyoufang.aij.platform.controller.user.AdministratorController;
+import com.xiyoufang.aij.platform.controller.user.DistributorController;
 import com.xiyoufang.aij.platform.controller.user.PlayerController;
 import com.xiyoufang.jfinal.directive.VersionDirective;
 import com.xiyoufang.jfinal.handler.AllowCrossHandler;
@@ -90,6 +91,7 @@ public class AiJPlatformConfig extends JFinalConfig {
             public void config() {
                 me.add("/user/player", PlayerController.class);
                 me.add("/user/administrator", AdministratorController.class);
+                me.add("/user/distributor", DistributorController.class);
             }
         });
     }

@@ -2,8 +2,8 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input
-        v-model="listQuery.user_name"
-        placeholder="用户名"
+        v-model="listQuery.nick_name"
+        placeholder="昵称"
         style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
@@ -36,7 +36,7 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column label="头像" prop="user_name" align="center" width="80" fixed="left">
+      <el-table-column label="头像" align="center" width="80" fixed="left">
         <template slot-scope="{row}">
           <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
         </template>
@@ -190,7 +190,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        user_name: undefined,
+        nick_name: undefined,
         status: undefined,
         type: undefined,
         sort: '+id'

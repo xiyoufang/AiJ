@@ -9,6 +9,7 @@ import com.jfinal.plugin.activerecord.SqlPara;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.controller.BaseController;
+import com.xiyoufang.aij.platform.service.DistributorService;
 import com.xiyoufang.aij.platform.service.RoleService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
@@ -21,7 +22,7 @@ import java.util.HashMap;
  *
  * @author 席有芳
  */
-public class AdministratorController extends BaseController {
+public class DistributorController extends BaseController {
 
     /**
      * 获取用户列表
@@ -31,21 +32,20 @@ public class AdministratorController extends BaseController {
                      @Para(value = "nick_name") String nickName,
                      Integer status,
                      String sort) {
-        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("uc.get_administrator_page",
+        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("uc.get_distributor_page",
                 Kv.by("nick_name", nickName).set("status", status));
         Page<Record> recordPage = AiJPlatformDb.uc().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
     }
 
-
     /**
-     * 更新平台状态
+     * 更新代理状态
      */
     @RequiresRoles({"administrator"})
     @Before(BodyInject.class)
-    public void update(@Body HashMap<String, Object> userRoleDTO) {
-        Record record = new Record().setColumns(userRoleDTO);
-        if (RoleService.me.update(record)) {
+    public void update(@Body HashMap<String, Object> distributorDTO) {
+        Record record = new Record().setColumns(distributorDTO);
+        if (DistributorService.me.update(record)) {
             renderOk(Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "success"));
         } else {
             renderWithCode(ResponseStatusCode.OPERATION_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "operation failed"));
@@ -53,15 +53,15 @@ public class AdministratorController extends BaseController {
     }
 
     /**
-     * 新增用户
+     * 新增代理
      *
-     * @param userRoleDTO userRoleDTO
+     * @param distributorDTO distributorDTO
      */
     @RequiresRoles({"administrator"})
     @Before(BodyInject.class)
-    public void create(@Body HashMap<String, Object> userRoleDTO) {
-        Record record = new Record().setColumns(userRoleDTO);
-        if (RoleService.me.save(record)) {
+    public void create(@Body HashMap<String, Object> distributorDTO) {
+        Record record = new Record().setColumns(distributorDTO);
+        if (DistributorService.me.save(record)) {
             renderOk(Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "success"));
         } else {
             renderWithCode(ResponseStatusCode.OPERATION_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "operation failed"));

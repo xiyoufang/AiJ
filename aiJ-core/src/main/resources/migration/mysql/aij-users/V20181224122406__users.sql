@@ -149,12 +149,14 @@ CREATE TABLE circle_member_change
 -- 代理人
 CREATE TABLE distributor
 (
-    id           integer PRIMARY KEY AUTO_INCREMENT,
-    user_id      varchar(64), -- 用户ID
-    parent_id    varchar(64), -- 上级ID
-    level        integer,     -- 级别
-    status       varchar(64), -- 状态
-    created_time datetime,    -- 创建时间
+    id            integer PRIMARY KEY AUTO_INCREMENT,
+    user_id       varchar(64), -- 用户ID
+    parent_id     varchar(64), -- 上级用户ID
+    level         integer,     -- 级别
+    status        integer,     -- 状态(1 ACTIVE\ -1 INACTIVE)
+    remark        text,        -- 备注
+    modified_time datetime,    -- 更新时间
+    created_time  datetime,    -- 创建时间
     UNIQUE (user_id)
 );
 
@@ -191,5 +193,5 @@ CREATE TABLE user_role
     status        integer,     -- 状态(-1禁用,1正常)
     modified_time datetime,    -- 更新时间
     created_time  datetime,    -- 创建时间
-    INDEX IDX_1 (user_id)
+    UNIQUE (user_id)
 );

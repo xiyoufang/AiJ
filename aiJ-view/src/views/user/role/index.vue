@@ -36,7 +36,7 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column label="头像" prop="user_name" align="center" width="80" fixed="left">
+      <el-table-column label="头像" align="center" width="80" fixed="left">
         <template slot-scope="{row}">
           <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
         </template>
@@ -190,7 +190,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        user_name: undefined,
+        nick_name: undefined,
         status: undefined,
         type: undefined,
         sort: '+id'
