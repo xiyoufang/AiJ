@@ -221,7 +221,7 @@ public class UserService {
     public List<Record> findRolesByUser(Record user) {
         List<Record> records = new ArrayList<>();
         Record roleRecord = AiJCoreDb.uc().findByUnique("user_role", "user_id", user.getStr("user_id"));
-        if (roleRecord == null) return records;
+        if (roleRecord == null || 1 != roleRecord.getInt("status")) return null;
         List<String> roles = Json.toArray(roleRecord.getStr("roles"), String.class); // 获取角色列表
         roles.forEach(role -> {
             records.add(AiJCoreDb.uc().findByUnique("role", "name", role));
@@ -236,6 +236,7 @@ public class UserService {
      * @return boolean
      */
     public boolean update(Record record) {
+        record.set("modified_time", new Date());
         return AiJCoreDb.uc().update("user_profile", "id", record);
     }
 }

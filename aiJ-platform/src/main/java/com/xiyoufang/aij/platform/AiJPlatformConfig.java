@@ -77,14 +77,13 @@ public class AiJPlatformConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         // 授权
         me.add("/authorization", AuthorizationController.class);
-
-        me.add("/admin", AdminController.class);
-        me.add("/views", ViewsController.class);
-        me.add("/plaza", PlazaController.class);
-        me.add("/room", RoomController.class);
+        me.add("/role", RoleController.class);
         me.add("/service", ServiceController.class);
         me.add("/node", NodeController.class);
         me.add("/avatar", AvatarController.class);  //头像服务
+
+        me.add("/admin", AdminController.class);
+        me.add("/views", ViewsController.class);
 
         me.add(new Routes() {   // 用户相关
             @Override

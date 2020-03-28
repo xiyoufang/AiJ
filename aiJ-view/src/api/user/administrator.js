@@ -23,3 +23,15 @@ export function update(data) {
     data
   })
 }
+
+/**
+ * 新增后台用户
+ * @param data
+ */
+export function create(data) {
+  return request({
+    url: '/user/administrator/create',
+    method: 'post',
+    data
+  })
+}

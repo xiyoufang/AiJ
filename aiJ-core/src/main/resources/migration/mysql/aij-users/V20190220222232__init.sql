@@ -17,5 +17,5 @@ INSERT INTO distributor (user_id, parent_id, level, status, created_time) VALUES
 INSERT INTO role (name, permissions, description, created_time) VALUES ('administrator', '[]', '系统管理员', '2020-03-18 00:00:00');
 INSERT INTO role (name, permissions, description, created_time) VALUES ('distributor', '[]', '经销商（代理）', '2020-03-18 00:00:00');
 INSERT INTO role (name, permissions, description, created_time) VALUES ('player', '[]', '玩家(默认用户都为此角色)', '2020-03-18 00:00:00');
-INSERT INTO user_role(user_id, roles, created_time) VALUES ('1','administrator', '2020-03-18 00:00:00');
-INSERT INTO user_role(user_id, roles, created_time) VALUES ('4','distributor', '2020-03-18 00:00:00');
+INSERT INTO user_role(user_id, roles, status, created_time) VALUES ('1','administrator', 1,'2020-03-18 00:00:00');
+INSERT INTO user_role(user_id, roles, status, created_time) VALUES ('4','distributor', 1,'2020-03-18 00:00:00');

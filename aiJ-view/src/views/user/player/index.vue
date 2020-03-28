@@ -163,16 +163,6 @@
         </el-button>
       </div>
     </el-dialog>
-
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -208,10 +198,9 @@ export default {
       statusOptions: [{ label: '禁用', key: -1 }, { label: '待激活', key: 0 }, { label: '正常', key: 1 }],
       genderOptions: [{ label: '男', key: 1 }, { label: '女', key: 2 }],
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-      showReviewer: false,
       user: {
         id: undefined,
-        status: 0,
+        status: undefined,
         user_name: undefined,
         nick_name: undefined,
         gender: undefined,
@@ -223,15 +212,12 @@ export default {
       textMap: {
         update: 'Edit'
       },
-      dialogPvVisible: false,
-      pvData: [],
       rules: {
         status: [{ required: true, message: 'status is required', trigger: 'change' }],
         gender: [{ required: true, message: 'gender is required', trigger: 'change' }],
         user_name: [{ required: true, message: 'user name is required', trigger: 'blur' }],
         nick_name: [{ required: true, message: 'nick name is required', trigger: 'blur' }]
-      },
-      downloadLoading: false
+      }
     }
   },
   created() {
@@ -267,7 +253,7 @@ export default {
     resetUser() {
       this.user = {
         id: undefined,
-        status: 0,
+        status: undefined,
         user_name: undefined,
         nick_name: undefined,
         gender: undefined,
@@ -275,16 +261,9 @@ export default {
         remark: undefined
       }
     },
-    handleCreate() {
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
     handleUpdateStatus(row) {
       this.resetUser()
-      this.$alert(row['status'] === 1 ? '确定禁用账号?' : '确定启用账号?', '提示', {
+      this.$alert(row['status'] === 1 ? '确定禁用玩家账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
           this.user.id = row.id
@@ -298,7 +277,6 @@ export default {
     handleUpdate(row) {
       this.resetUser()
       this.user = Object.assign({}, row) // copy obj
-      this.user.status = 1
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {

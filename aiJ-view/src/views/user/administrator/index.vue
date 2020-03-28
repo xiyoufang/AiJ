@@ -24,6 +24,9 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+        Add
+      </el-button>
     </div>
 
     <el-table
@@ -50,6 +53,12 @@
       <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="角色" prop="roles" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="角色状态" prop="status" align="center" width="80">
+        <template slot-scope="{row}">
+          <span v-if="row.role_status === -1 "><el-tag type="danger">禁用</el-tag></span>
+          <span v-if="row.role_status === 1 "><el-tag type="success">正常</el-tag></span>
+        </template>
+      </el-table-column>
       <el-table-column label="性别" prop="gender" align="center" width="80">
         <template slot-scope="{row}">
           <span v-if="row.gender === 1 ">男</span>
@@ -57,7 +66,7 @@
           <span v-else>未知</span>
         </template>
       </el-table-column>
-      <el-table-column label="账号状态" prop="status" align="center" width="160">
+      <el-table-column label="账号状态" prop="status" align="center" width="80">
         <template slot-scope="{row}">
           <span v-if="row.status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.status === 0 "><el-tag type="warning">待激活</el-tag></span>
@@ -65,11 +74,6 @@
         </template>
       </el-table-column>
       <el-table-column label="活跃时间" prop="activated_time" sortable="custom" align="center" width="160" />
-      <el-table-column label="IP地址" prop="ip" align="center" width="160" />
-      <el-table-column label="注册时间" prop="created_time" sortable="custom" align="center" width="160" />
-      <el-table-column label="注册渠道" prop="created_source" align="center" width="120" />
-      <el-table-column label="自我介绍" prop="introduction" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="备注" prop="remark" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="操作" prop="id" align="center" width="210" fixed="right">
         <template slot-scope="{row}">
           <router-link to="/profile/index">
@@ -80,7 +84,7 @@
             @click="handleUpdate(row)"
           >编辑</el-button>
           <el-button
-            v-if="row.status === 1"
+            v-if="row.role_status === 1"
             size="mini"
             type="danger"
             @click="handleUpdateStatus(row)"
@@ -109,13 +113,31 @@
       <el-form
         ref="dataForm"
         :rules="rules"
-        :model="user"
+        :model="administrator"
         label-position="left"
         label-width="70px"
       >
+        <el-form-item label="用户" prop="user_id">
+          <el-select
+            v-model="administrator.user_id"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入玩家名称"
+            :remote-method="remotePlayers"
+            :loading="loading"
+          >
+            <el-option
+              v-for="item in playerOptions"
+              :key="item.key"
+              :label="item.label"
+              :value="item.key"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-select
-            v-model="user.status"
+            v-model="administrator.status"
             class="filter-item"
             placeholder="Please select"
           >
@@ -127,32 +149,24 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="用户名" prop="user_name">
-          <el-input v-model="user.user_name" />
-        </el-form-item>
-        <el-form-item label="昵称" prop="nick_name">
-          <el-input v-model="user.nick_name" />
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-select v-model="user.gender" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in genderOptions" :key="item.key" :label="item.label" :value="item.key" />
+        <el-form-item label="角色" prop="roles">
+          <el-select
+            v-model="administrator.roles"
+            multiple
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入关键词"
+            :remote-method="remoteRoles"
+            :loading="loading"
+          >
+            <el-option
+              v-for="item in rolesOptions"
+              :key="item.key"
+              :label="item.label"
+              :value="item.key"
+            />
           </el-select>
-        </el-form-item>
-        <el-form-item label="自我介绍">
-          <el-input
-            v-model="user.introduction"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="用户自我介绍"
-          />
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input
-            v-model="user.remark"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="用户备注"
-          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -164,21 +178,14 @@
         </el-button>
       </div>
     </el-dialog>
-
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { page, update } from '@/api/user/administrator'
+import { page, update, create } from '@/api/user/administrator'
+import { page as getPlayerOptions } from '@/api/user/player'
+import { page as getRoleOptions } from '@/api/role'
+
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -206,33 +213,29 @@ export default {
         type: undefined,
         sort: '+id'
       },
-      statusOptions: [{ label: '禁用', key: -1 }, { label: '待激活', key: 0 }, { label: '正常', key: 1 }],
+      statusOptions: [{ label: '禁用', key: -1 }, { label: '正常', key: 1 }],
       genderOptions: [{ label: '男', key: 1 }, { label: '女', key: 2 }],
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
       showReviewer: false,
-      user: {
+      administrator: {
         id: undefined,
-        status: 0,
-        user_name: undefined,
-        nick_name: undefined,
-        gender: undefined,
-        introduction: undefined,
-        remark: undefined
+        user_id: undefined,
+        status: undefined,
+        roles: []
       },
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
         update: 'Edit'
       },
-      dialogPvVisible: false,
-      pvData: [],
       rules: {
         status: [{ required: true, message: 'status is required', trigger: 'change' }],
-        gender: [{ required: true, message: 'gender is required', trigger: 'change' }],
-        user_name: [{ required: true, message: 'user name is required', trigger: 'blur' }],
-        nick_name: [{ required: true, message: 'nick name is required', trigger: 'blur' }]
+        roles: [{ required: true, message: 'nick name is required', trigger: 'change' }],
+        user_id: [{ required: true, message: 'nick name is required', trigger: 'change' }]
       },
-      downloadLoading: false
+      loading: false,
+      rolesOptions: [],
+      playerOptions: []
     }
   },
   created() {
@@ -245,6 +248,32 @@ export default {
         this.list = response.data.items
         this.total = response.data.total
         this.listLoading = false
+      })
+    },
+    remotePlayers(query) {
+      console.log(query)
+      this.loading = true
+      getPlayerOptions({
+        page: 1,
+        limit: 100,
+        user_name: query
+      }).then(response => {
+        this.playerOptions = response.data.items.map(item => {
+          return { key: item['user_id'], label: item['id'] + ':' + item['user_name'] }
+        })
+        console.log(this.playerOptions)
+        this.loading = false
+      })
+    },
+    remoteRoles(query) {
+      this.loading = true
+      getRoleOptions({
+        page: 1,
+        limit: 100,
+        name: query
+      }).then(response => {
+        this.rolesOptions = response.data.items.map(item => { return { key: item['name'], label: item['name'] } })
+        this.loading = false
       })
     },
     handleFilter() {
@@ -265,18 +294,18 @@ export default {
       }
       this.handleFilter()
     },
-    resetUser() {
-      this.user = {
+    resetAdministrator() {
+      this.administrator = {
         id: undefined,
-        status: 0,
-        user_name: undefined,
-        nick_name: undefined,
-        gender: undefined,
-        introduction: undefined,
-        remark: undefined
+        user_id: undefined,
+        status: undefined,
+        roles: undefined
       }
+      this.playerOptions = []
+      this.rolesOptions = []
     },
     handleCreate() {
+      this.resetAdministrator()
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -284,22 +313,25 @@ export default {
       })
     },
     handleUpdateStatus(row) {
-      this.resetUser()
-      this.$alert(row['status'] === 1 ? '确定禁用账号?' : '确定启用账号?', '提示', {
+      this.resetAdministrator()
+      this.$alert(row['status'] === 1 ? '确定禁用管理平台账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.user.id = row.id
-          this.user.status = row['status'] === 1 ? -1 : 1
-          update(this.user).then(value => {
+          this.administrator.user_id = row.user_id
+          this.administrator.status = row['status'] === 1 ? -1 : 1
+          update(this.administrator).then(value => {
             this.getList()
           })
         }
       })
     },
     handleUpdate(row) {
-      this.resetUser()
-      this.user = Object.assign({}, row) // copy obj
-      this.user.status = 1
+      this.resetAdministrator()
+      this.administrator.roles = JSON.parse(row.roles)
+      this.administrator.user_id = row.user_id
+      this.administrator.status = row.role_status
+      this.rolesOptions = JSON.parse(row.roles).map(item => { return { key: item, label: item } })
+      this.playerOptions.push({ key: row.user_id, label: row.id + ':' + row.user_name })
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -309,12 +341,31 @@ export default {
     updateData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          update(this.user).then(value => {
-            this.resetUser()
+          this.administrator.roles = JSON.stringify(this.administrator.roles)
+          update(this.administrator).then(value => {
+            this.resetAdministrator()
             this.dialogFormVisible = false
             this.$notify({
               title: 'Success',
               message: 'Update Successfully',
+              type: 'success',
+              duration: 2000
+            })
+            this.getList()
+          })
+        }
+      })
+    },
+    createData() {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          this.administrator.roles = JSON.stringify(this.administrator.roles)
+          create(this.administrator).then(value => {
+            this.resetAdministrator()
+            this.dialogFormVisible = false
+            this.$notify({
+              title: 'Success',
+              message: 'Create Successfully',
               type: 'success',
               duration: 2000
             })

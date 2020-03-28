@@ -28,6 +28,7 @@ CREATE TABLE user_profile
     remark         text,                               -- 备注
     created_source varchar(64),                        -- 注册来源
     created_time   datetime,                           -- 注册时间
+    modified_time  datetime,                           -- 更新时间
     login_time     datetime,                           -- 登录时间
     activated_time datetime,                           -- 激活时间
     UNIQUE (user_id)
@@ -63,13 +64,14 @@ CREATE TABLE user_activity
 -- 邮箱登录
 CREATE TABLE user_local_auth
 (
-    user_id      varchar(64) PRIMARY KEY, -- 用户ID
-    mobile       varchar(64),             -- 登录用手机
-    email        varchar(128),            -- 登录用邮箱
-    password     varchar(64),             -- 密码
-    salt         varchar(64),             -- 盐
-    enable       integer,                 -- 是否启用
-    created_time datetime                 -- 启用时间
+    user_id       varchar(64) PRIMARY KEY, -- 用户ID
+    mobile        varchar(64),             -- 登录用手机
+    email         varchar(128),            -- 登录用邮箱
+    password      varchar(64),             -- 密码
+    salt          varchar(64),             -- 盐
+    enable        integer,                 -- 是否启用
+    modified_time datetime,                -- 更新时间
+    created_time  datetime                 -- 启用时间
 );
 
 -- 微信登录
@@ -171,20 +173,23 @@ CREATE TABLE distributor_activity
 -- 角色表
 CREATE TABLE role
 (
-    id           integer PRIMARY KEY AUTO_INCREMENT,
-    name         varchar(64), -- 角色名称 (administrator / distributor / analyser / player ) 默认都是player
-    permissions  text,        -- 角色权限（array）
-    description  text,        -- 角色描述
-    created_time datetime,    -- 创建时间
+    id            integer PRIMARY KEY AUTO_INCREMENT,
+    name          varchar(64), -- 角色名称 (administrator / distributor / analyser / player ) 默认都是player
+    permissions   text,        -- 角色权限（array）
+    description   text,        -- 角色描述
+    modified_time datetime,    -- 更新时间
+    created_time  datetime,    -- 创建时间
     UNIQUE (name)
 );
 
 -- 用户角色表（分配了角色的用户具有后台管理系统的登录权限）
 CREATE TABLE user_role
 (
-    id           integer PRIMARY KEY AUTO_INCREMENT,
-    user_id      varchar(64), -- 用户ID
-    roles        text,        -- 角色数组（array）
-    created_time datetime,    -- 创建时间
+    id            integer PRIMARY KEY AUTO_INCREMENT,
+    user_id       varchar(64), -- 用户ID
+    roles         text,        -- 角色数组（array）
+    status        integer,     -- 状态(-1禁用,1正常)
+    modified_time datetime,    -- 更新时间
+    created_time  datetime,    -- 创建时间
     INDEX IDX_1 (user_id)
 );

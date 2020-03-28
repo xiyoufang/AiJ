@@ -57,6 +57,9 @@ public class AiJRealm extends AuthorizingRealm {
         AiJAuthenticationToken aiJToken = (AiJAuthenticationToken) token;
         UserDO userDO = (UserDO) aiJToken.getPrincipal();
         List<Record> records = UserService.me().findRolesByUser(userDO.getRecord());
+        if (records == null) {
+            throw new AuthenticationException("账号禁止登录管理平台");
+        }
         Set<String> roleNames = new HashSet<>();
         records.forEach(record -> roleNames.add(record.getStr("name")));
         Set<String> permissions = new HashSet<>();

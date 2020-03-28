@@ -31,7 +31,7 @@ public class PlayerController extends BaseController {
                      @Para(value = "user_name") String userName,
                      Integer status,
                      String sort) {
-        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("users.get_player_page",
+        SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("uc.get_player_page",
                 Kv.by("user_name", userName).set("status", status));
         Page<Record> recordPage = AiJPlatformDb.uc().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
