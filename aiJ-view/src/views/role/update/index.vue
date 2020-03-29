@@ -7,10 +7,10 @@
       <el-col :span="18" :xs="24">
         <el-card>
           <el-tabs v-model="activeTab">
-            <el-tab-pane label="Menus" name="menus">
+            <el-tab-pane label="菜单" name="menus">
               <menus :role="role" />
             </el-tab-pane>
-            <el-tab-pane label="Permissions" name="permissions">
+            <el-tab-pane label="权限" name="permissions">
               <permissions :role="role" />
             </el-tab-pane>
           </el-tabs>

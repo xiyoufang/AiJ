@@ -1,7 +1,7 @@
 <template>
-  <el-card style="margin-bottom:20px;">
+  <el-card>
     <div slot="header" class="clearfix">
-      <span>基本信息</span>
+      <span>角色信息</span>
     </div>
     <div>
       <el-form>

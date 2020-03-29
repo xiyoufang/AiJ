@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import userRouter from './modules/user'
+import roleRouter from './modules/role'
 import gameRouter from './modules/game'
 import dataRouter from './modules/data'
 
@@ -97,36 +98,9 @@ export const constantRoutes = [
     ]
   },
   userRouter,
+  roleRouter,
   gameRouter,
   dataRouter,
-  {
-    path: '/role',
-    component: Layout,
-    redirect: '/role/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/role'),
-        name: 'Role',
-        meta: { title: '角色权限', icon: 'lock', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/role/update',
-    component: Layout,
-    redirect: '/role/update/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/role/update'),
-        name: 'UpdateRole',
-        hidden: true,
-        meta: { title: '角色权限管理', noCache: true }
-      }
-    ]
-  },
   {
     path: 'external-link',
     component: Layout,

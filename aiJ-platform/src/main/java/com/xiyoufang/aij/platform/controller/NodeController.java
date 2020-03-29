@@ -6,6 +6,7 @@ import com.xiyoufang.aij.core.AppConfig;
 import com.xiyoufang.aij.core.CoreConfig;
 import com.xiyoufang.aij.core.ServiceDetail;
 import com.xiyoufang.jfinal.zk.ZkKit;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class NodeController extends BaseController {
 
     @RequiresRoles("administrator")
+    @RequiresPermissions("NodeController_Page")
     public void page(int limit, int page, String sort) {
         List<ServiceDetail> details = ZkKit.use().discovery(ServiceDetail.class, AppConfig.use().getStr(CoreConfig.REGISTER_PATH));
         int totalRow = details.size();
