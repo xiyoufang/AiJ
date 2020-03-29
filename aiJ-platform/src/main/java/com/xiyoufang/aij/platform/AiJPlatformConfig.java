@@ -19,6 +19,7 @@ import com.xiyoufang.jfinal.handler.AllowCrossHandler;
 import com.xiyoufang.jfinal.handler.TrimParameterHandler;
 import com.xiyoufang.jfinal.handler.UrlFilterHandler;
 import com.xiyoufang.jfinal.shiro.ShiroInterceptor;
+import com.xiyoufang.jfinal.shiro.ShiroManager;
 import com.xiyoufang.jfinal.zk.ZkPlugin;
 
 /**
@@ -28,7 +29,10 @@ import com.xiyoufang.jfinal.zk.ZkPlugin;
  */
 public class AiJPlatformConfig extends JFinalConfig {
 
-    AiJPlatformStarter aiJPlatformStarter;
+    /**
+     * Web Socket Server
+     */
+    private AiJPlatformStarter aiJPlatformStarter;
 
     /**
      * Config constant
@@ -76,16 +80,13 @@ public class AiJPlatformConfig extends JFinalConfig {
      */
     @Override
     public void configRoute(Routes me) {
-        // 授权
         me.add("/authorization", AuthorizationController.class);
         me.add("/role", RoleController.class);
         me.add("/service", ServiceController.class);
         me.add("/node", NodeController.class);
         me.add("/avatar", AvatarController.class);  //头像服务
-
         me.add("/admin", AdminController.class);
         me.add("/views", ViewsController.class);
-
         me.add(new Routes() {   // 用户相关
             @Override
             public void config() {
@@ -94,6 +95,7 @@ public class AiJPlatformConfig extends JFinalConfig {
                 me.add("/user/distributor", DistributorController.class);
             }
         });
+        ShiroManager.me().init(me.getRouteItemList());
     }
 
     /**

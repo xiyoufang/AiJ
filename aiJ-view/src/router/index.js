@@ -100,6 +100,34 @@ export const constantRoutes = [
   gameRouter,
   dataRouter,
   {
+    path: '/role',
+    component: Layout,
+    redirect: '/role/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/role'),
+        name: 'Role',
+        meta: { title: '角色权限', icon: 'lock', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/role/update',
+    component: Layout,
+    redirect: '/role/update/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/role/update'),
+        name: 'UpdateRole',
+        hidden: true,
+        meta: { title: '角色权限管理', noCache: true }
+      }
+    ]
+  },
+  {
     path: 'external-link',
     component: Layout,
     children: [

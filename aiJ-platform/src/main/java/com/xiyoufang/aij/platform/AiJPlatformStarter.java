@@ -2,6 +2,7 @@ package com.xiyoufang.aij.platform;
 
 import com.jfinal.server.undertow.UndertowServer;
 import com.xiyoufang.aij.core.*;
+import com.xiyoufang.aij.platform.config.PlatformConfig;
 import org.tio.server.ServerGroupContext;
 
 /**
@@ -77,10 +78,11 @@ public class AiJPlatformStarter extends AiJStarter {
      */
     @Override
     protected CoreConfig config(CoreConfig config) {
-        config.setServiceType(ServiceType.PLATFORM);
-        config.setDevMode(true);
-        config.setWsPort(8083);
-        return config;
+        PlatformConfig platformConfig = new PlatformConfig(config);
+        platformConfig.setServiceType(ServiceType.PLATFORM);
+        platformConfig.setDevMode(true);
+        platformConfig.setWsPort(8083);
+        return platformConfig;
     }
 
     /**

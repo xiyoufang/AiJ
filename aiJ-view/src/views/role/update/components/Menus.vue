@@ -4,11 +4,10 @@
       <el-tree
         ref="tree"
         :check-strictly="checkStrictly"
-        :data="menusData"
+        :data="menus"
         :props="defaultProps"
         show-checkbox
         node-key="name"
-        class="permission-tree"
       />
     </el-form-item>
   </el-form>
@@ -23,10 +22,11 @@ export default {
       type: Object,
       default: () => {
         return {
-          name: '',
-          permissions: [],
-          menus: [],
-          description: ''
+          id: undefined,
+          name: undefined,
+          permissions: undefined,
+          menus: undefined,
+          description: undefined
         }
       }
     }
@@ -39,11 +39,6 @@ export default {
         children: 'children',
         label: 'title'
       }
-    }
-  },
-  computed: {
-    menusData() {
-      return this.menus
     }
   },
   created() {

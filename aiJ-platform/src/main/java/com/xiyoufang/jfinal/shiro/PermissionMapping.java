@@ -5,7 +5,7 @@ package com.xiyoufang.jfinal.shiro;
  *
  * @author 席有芳
  */
-public class PermissionKv {
+public class PermissionMapping {
     /**
      * 权限Key
      */
@@ -21,7 +21,7 @@ public class PermissionKv {
      * @param v
      * 权限value
      */
-    PermissionKv(String k, String v) {
+    PermissionMapping(String k, String v) {
         this.k = k;
         this.v = v;
     }

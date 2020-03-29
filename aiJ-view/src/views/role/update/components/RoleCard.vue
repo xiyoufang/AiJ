@@ -6,7 +6,7 @@
     <div>
       <el-form>
         <el-form-item label="名称">
-          <el-input v-model.trim="role.name" />
+          <el-input v-model.trim="role.name" :disabled="role.protected === 'Y'" />
         </el-form-item>
         <el-form-item label="描述">
           <el-input

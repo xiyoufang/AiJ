@@ -29,19 +29,6 @@ const userRouter = {
       component: () => import('@/views/user/distributor'),
       name: 'Distributor',
       meta: { title: '游戏代理' }
-    },
-    {
-      path: 'role',
-      component: () => import('@/views/user/role'),
-      name: 'Role',
-      meta: { title: '角色权限' }
-    },
-    {
-      path: 'role/update',
-      component: () => import('@/views/user/role/update'),
-      name: 'UpdateRole',
-      hidden: true,
-      meta: { title: '角色权限管理', noCache: true }
     }
   ]
 }
