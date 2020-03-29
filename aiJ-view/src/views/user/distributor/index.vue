@@ -4,7 +4,7 @@
       <el-input
         v-model="listQuery.nick_name"
         placeholder="昵称"
-        style="width: 200px;"
+        style="width: 160px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
@@ -12,11 +12,30 @@
         v-model="listQuery.status"
         placeholder="状态"
         clearable
-        style="width: 90px"
+        style="width: 80px"
         class="filter-item"
         @change="handleFilter"
       >
         <el-option v-for="item in statusOptions" :key="item.key" :label="item.label" :value="item.key" />
+      </el-select>
+      <el-select
+        v-model="listQuery.parent_user_id"
+        filterable
+        remote
+        clearable
+        reserve-keyword
+        placeholder="上级"
+        :remote-method="remotePlayers"
+        :loading="loading"
+        style="width: 160px"
+        class="filter-item"
+      >
+        <el-option
+          v-for="item in playerOptions"
+          :key="item.key"
+          :label="item.label"
+          :value="item.key"
+        />
       </el-select>
       <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
@@ -61,8 +80,8 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="上级" prop="parent_name" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="代理状态" prop="distributor_status" align="center" width="80">
+      <el-table-column label="上级" prop="parent_nick_name" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="代理权限" prop="distributor_status" align="center" width="80">
         <template slot-scope="{row}">
           <span v-if="row.distributor_status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.distributor_status === 1 "><el-tag type="success">正常</el-tag></span>
@@ -165,10 +184,11 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="上级" prop="parent_id">
+        <el-form-item label="上级" prop="parent_user_id">
           <el-select
-            v-model="distributor.parent_id"
+            v-model="distributor.parent_user_id"
             filterable
+            clearable
             remote
             reserve-keyword
             placeholder="请输入玩家昵称"
@@ -182,6 +202,14 @@
               :value="item.key"
             />
           </el-select>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input
+            v-model="distributor.remark"
+            :autosize="{ minRows: 2, maxRows: 4}"
+            type="textarea"
+            placeholder="备注"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -224,7 +252,7 @@ export default {
         limit: 20,
         nick_name: undefined,
         status: undefined,
-        type: undefined,
+        parent_user_id: undefined,
         sort: '+id'
       },
       statusOptions: [{ label: '禁用', key: -1 }, { label: '正常', key: 1 }],
@@ -234,7 +262,7 @@ export default {
         id: undefined,
         user_id: undefined,
         status: undefined,
-        parent_id: undefined,
+        parent_user_id: undefined,
         level: undefined,
         remark: undefined
       },
@@ -265,7 +293,6 @@ export default {
       })
     },
     remotePlayers(query) {
-      console.log(query)
       this.loading = true
       getPlayerOptions({
         page: 1,
@@ -302,7 +329,7 @@ export default {
         id: undefined,
         user_id: undefined,
         status: undefined,
-        parent_id: undefined,
+        parent_user_id: undefined,
         level: undefined,
         remark: undefined
       }
@@ -318,26 +345,29 @@ export default {
     },
     handleUpdateStatus(row) {
       this.resetDistributor()
-      this.$alert(row.distributor_status === 1 ? '确定禁用管理平台账号?' : '确定启用账号?', '提示', {
+      this.$alert(row.distributor_status === 1 ? '确定禁用代理账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.distributor.user_id = row.user_id
-          this.distributor.status = row.distributor_status === 1 ? -1 : 1
-          update(this.distributor).then(value => {
-            this.getList()
-          })
+          if (action === 'confirm') {
+            this.distributor.user_id = row.user_id
+            this.distributor.status = row.distributor_status === 1 ? -1 : 1
+            update(this.distributor).then(value => {
+              this.getList()
+            })
+          }
         }
       })
     },
     handleUpdate(row) {
       this.resetDistributor()
       this.distributor.user_id = row.user_id
-      this.distributor.parent_id = row.parent_id
+      this.distributor.parent_user_id = row.parent_user_id
       this.distributor.status = row.distributor_status
-      this.distributor.level =row.level
+      this.distributor.level = row.level
+      this.distributor.remark = row.remark
       this.playerOptions.push({ key: row.user_id, label: row.id + ':' + row.nick_name })
       if (row.parent_id !== undefined) {
-        this.playerOptions.push({ key: row.parent_id, label: row.parent_id + ':' + row.parent_name })
+        this.playerOptions.push({ key: row.parent_user_id, label: row.parent_id + ':' + row.parent_nick_name })
       }
       this.dialogStatus = 'update'
       this.dialogFormVisible = true

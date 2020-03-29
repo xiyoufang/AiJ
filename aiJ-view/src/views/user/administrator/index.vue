@@ -52,14 +52,14 @@
       <el-table-column label="用户ID" prop="user_id" align="center" width="100" show-overflow-tooltip />
       <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="角色" prop="roles" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="角色状态" prop="status" align="center" width="80">
+      <el-table-column label="平台权限" prop="status" align="center" width="120">
         <template slot-scope="{row}">
           <span v-if="row.role_status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.role_status === 1 "><el-tag type="success">正常</el-tag></span>
         </template>
       </el-table-column>
-      <el-table-column label="账号状态" prop="status" align="center" width="80">
+      <el-table-column label="平台角色" prop="roles" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="账号状态" prop="status" align="center" width="120">
         <template slot-scope="{row}">
           <span v-if="row.status === -1 "><el-tag type="danger">禁用</el-tag></span>
           <span v-if="row.status === 0 "><el-tag type="warning">待激活</el-tag></span>
@@ -242,7 +242,6 @@ export default {
       })
     },
     remotePlayers(query) {
-      console.log(query)
       this.loading = true
       getPlayerOptions({
         page: 1,
@@ -308,11 +307,13 @@ export default {
       this.$alert(row.role_status === 1 ? '确定禁用管理平台账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.administrator.user_id = row.user_id
-          this.administrator.status = row.role_status === 1 ? -1 : 1
-          update(this.administrator).then(value => {
-            this.getList()
-          })
+          if (action === 'confirm') {
+            this.administrator.user_id = row.user_id
+            this.administrator.status = row.role_status === 1 ? -1 : 1
+            update(this.administrator).then(value => {
+              this.getList()
+            })
+          }
         }
       })
     },

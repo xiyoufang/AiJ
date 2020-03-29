@@ -266,11 +266,13 @@ export default {
       this.$alert(row['status'] === 1 ? '确定禁用玩家账号?' : '确定启用账号?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.user.id = row.id
-          this.user.status = row['status'] === 1 ? -1 : 1
-          update(this.user).then(value => {
-            this.getList()
-          })
+          if (action === 'confirm') {
+            this.user.id = row.id
+            this.user.status = row['status'] === 1 ? -1 : 1
+            update(this.user).then(value => {
+              this.getList()
+            })
+          }
         }
       })
     },

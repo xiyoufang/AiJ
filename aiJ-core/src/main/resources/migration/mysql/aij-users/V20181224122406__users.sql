@@ -149,27 +149,27 @@ CREATE TABLE circle_member_change
 -- 代理人
 CREATE TABLE distributor
 (
-    id            integer PRIMARY KEY AUTO_INCREMENT,
-    user_id       varchar(64), -- 用户ID
-    parent_id     varchar(64), -- 上级用户ID
-    level         integer,     -- 级别
-    status        integer,     -- 状态(1 ACTIVE\ -1 INACTIVE)
-    remark        text,        -- 备注
-    modified_time datetime,    -- 更新时间
-    created_time  datetime,    -- 创建时间
+    id             integer PRIMARY KEY AUTO_INCREMENT,
+    user_id        varchar(64), -- 用户ID
+    parent_user_id varchar(64), -- 上级用户ID
+    level          integer,     -- 级别
+    status         integer,     -- 状态(1 ACTIVE\ -1 INACTIVE)
+    remark         text,        -- 备注
+    modified_time  datetime,    -- 更新时间
+    created_time   datetime,    -- 创建时间
     UNIQUE (user_id)
 );
 
 -- 代理人活动记录
 CREATE TABLE distributor_activity
 (
-    id             integer PRIMARY KEY AUTO_INCREMENT,
-    distributor_id varchar(64), -- 代理ID
-    code           varchar(64), -- activity Code
-    data           text,        -- activity数据
-    ip             varchar(64), -- IP地址
-    device_id      varchar(64), -- 设备ID
-    created_time   datetime     -- 添加时间
+    id                  integer PRIMARY KEY AUTO_INCREMENT,
+    distributor_user_id varchar(64), -- 代理ID
+    code                varchar(64), -- activity Code
+    data                text,        -- activity数据
+    ip                  varchar(64), -- IP地址
+    device_id           varchar(64), -- 设备ID
+    created_time        datetime     -- 添加时间
 );
 
 -- 角色表

@@ -2,6 +2,9 @@ package com.xiyoufang.aij.platform.service;
 
 import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.config.AiJPlatformDb;
+
+import java.util.Date;
 
 /**
  * Created by 席有芳 on 2020-03-28.
@@ -22,7 +25,9 @@ public class DistributorService {
      * @return boolean
      */
     public boolean save(Record record) {
-        return false;
+        record.set("modified_time", new Date());
+        record.set("created_time", new Date());
+        return AiJPlatformDb.uc().save("distributor", "id", record);
     }
 
     /**
@@ -32,6 +37,7 @@ public class DistributorService {
      * @return boolean
      */
     public boolean update(Record record) {
-        return false;
+        record.set("modified_time", new Date());
+        return AiJPlatformDb.uc().updateByUnique("distributor", "user_id", record);
     }
 }
