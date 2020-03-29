@@ -37,12 +37,11 @@
       <el-table-column label="创建日期" prop="created_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="240" fixed="right">
         <template slot-scope="{row}">
-          <router-link to="/profile/index">
+          <router-link :to="{name: 'RoleDetail' , params: row}">
             <el-button
               size="mini"
             >详情</el-button>
           </router-link>
-
           <el-button
             v-if="row.status === 1"
             size="mini"
@@ -68,66 +67,6 @@
       :limit.sync="listQuery.limit"
       @pagination="getList"
     />
-
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="dataForm"
-        :rules="rules"
-        :model="user"
-        label-position="left"
-        label-width="70px"
-      >
-        <el-form-item label="状态" prop="status">
-          <el-select
-            v-model="user.status"
-            class="filter-item"
-            placeholder="Please select"
-          >
-            <el-option
-              v-for="item in statusOptions"
-              :key="item.key"
-              :label="item.label"
-              :value="item.key"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="用户名" prop="user_name">
-          <el-input v-model="user.user_name" />
-        </el-form-item>
-        <el-form-item label="昵称" prop="nick_name">
-          <el-input v-model="user.nick_name" />
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-select v-model="user.gender" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in genderOptions" :key="item.key" :label="item.label" :value="item.key" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="自我介绍">
-          <el-input
-            v-model="user.introduction"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="用户自我介绍"
-          />
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input
-            v-model="user.remark"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="用户备注"
-          />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          Cancel
-        </el-button>
-        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-          Confirm
-        </el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -160,29 +99,7 @@ export default {
         type: undefined,
         sort: '+id'
       },
-      statusOptions: [{ label: '禁用', key: -1 }, { label: '待激活', key: 0 }, { label: '正常', key: 1 }],
-      genderOptions: [{ label: '男', key: 1 }, { label: '女', key: 2 }],
-      sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-      user: {
-        id: undefined,
-        status: undefined,
-        user_name: undefined,
-        nick_name: undefined,
-        gender: undefined,
-        introduction: undefined,
-        remark: undefined
-      },
-      dialogFormVisible: false,
-      dialogStatus: '',
-      textMap: {
-        update: 'Edit'
-      },
-      rules: {
-        status: [{ required: true, message: 'status is required', trigger: 'change' }],
-        gender: [{ required: true, message: 'gender is required', trigger: 'change' }],
-        user_name: [{ required: true, message: 'user name is required', trigger: 'blur' }],
-        nick_name: [{ required: true, message: 'nick name is required', trigger: 'blur' }]
-      }
+      statusOptions: [{ label: '禁用', key: -1 }, { label: '正常', key: 1 }]
     }
   },
   created() {
@@ -215,19 +132,7 @@ export default {
       }
       this.handleFilter()
     },
-    resetUser() {
-      this.user = {
-        id: undefined,
-        status: undefined,
-        user_name: undefined,
-        nick_name: undefined,
-        gender: undefined,
-        introduction: undefined,
-        remark: undefined
-      }
-    },
     handleCreate() {
-
     },
     handleUpdateStatus(row) {
       this.resetUser()
@@ -237,32 +142,6 @@ export default {
           this.user.id = row.id
           this.user.status = row['status'] === 1 ? -1 : 1
           // update(this.user).then(value => {
-          //   this.getList()
-          // })
-        }
-      })
-    },
-    handleUpdate(row) {
-      this.resetUser()
-      this.user = Object.assign({}, row) // copy obj
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    updateData() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          // update(this.user).then(value => {
-          //   this.resetUser()
-          //   this.dialogFormVisible = false
-          //   this.$notify({
-          //     title: 'Success',
-          //     message: 'Update Successfully',
-          //     type: 'success',
-          //     duration: 2000
-          //   })
           //   this.getList()
           // })
         }

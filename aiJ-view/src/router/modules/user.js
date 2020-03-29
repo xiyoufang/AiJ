@@ -6,7 +6,7 @@ const userRouter = {
   path: '/user',
   component: Layout,
   redirect: 'noRedirect',
-  name: 'userRouter',
+  name: 'UserRouter',
   meta: {
     title: '用户管理',
     icon: 'peoples'
@@ -15,26 +15,33 @@ const userRouter = {
     {
       path: 'player',
       component: () => import('@/views/user/player'),
-      name: 'player',
-      meta: { title: '玩家管理' }
+      name: 'Player',
+      meta: { title: '游戏玩家' }
     },
     {
       path: 'administrator',
       component: () => import('@/views/user/administrator'),
-      name: 'administrator',
+      name: 'Administrator',
       meta: { title: '平台用户' }
     },
     {
       path: 'distributor',
       component: () => import('@/views/user/distributor'),
-      name: 'distributor',
-      meta: { title: '代理管理' }
+      name: 'Distributor',
+      meta: { title: '游戏代理' }
     },
     {
       path: 'role',
       component: () => import('@/views/user/role'),
-      name: 'role',
+      name: 'Role',
       meta: { title: '角色权限' }
+    },
+    {
+      path: 'role/detail',
+      component: () => import('@/views/user/role/detail'),
+      name: 'RoleDetail',
+      hidden: true,
+      meta: { title: '角色权限详情', noCache: true }
     }
   ]
 }

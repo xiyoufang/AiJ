@@ -6,7 +6,7 @@ const gameRouter = {
   path: '/game',
   component: Layout,
   redirect: 'noRedirect',
-  name: 'gameRouter',
+  name: 'GameRouter',
   meta: {
     title: '游戏管理',
     icon: 'component'
@@ -15,13 +15,13 @@ const gameRouter = {
     {
       path: 'service',
       component: () => import('@/views/game/service'),
-      name: 'service',
+      name: 'Service',
       meta: { title: '服务类型' }
     },
     {
       path: 'node',
       component: () => import('@/views/game/node'),
-      name: 'node',
+      name: 'Node',
       meta: { title: '节点信息' }
     }
   ]
