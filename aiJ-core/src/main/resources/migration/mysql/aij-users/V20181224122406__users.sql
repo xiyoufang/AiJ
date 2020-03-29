@@ -178,7 +178,9 @@ CREATE TABLE role
     id            integer PRIMARY KEY AUTO_INCREMENT,
     name          varchar(64), -- 角色名称 (administrator / distributor / analyser / player ) 默认都是player
     permissions   text,        -- 角色权限（array）
+    menus         text,        -- 菜单（array）
     description   text,        -- 角色描述
+    protected     char(1),     -- 系统保护 (Y\N)
     modified_time datetime,    -- 更新时间
     created_time  datetime,    -- 创建时间
     UNIQUE (name)

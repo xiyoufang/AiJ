@@ -27,13 +27,13 @@ const userRouter = {
     {
       path: 'distributor',
       component: () => import('@/views/user/distributor'),
-      name: '',
+      name: 'distributor',
       meta: { title: '代理管理' }
     },
     {
       path: 'role',
       component: () => import('@/views/user/role'),
-      name: '',
+      name: 'role',
       meta: { title: '角色权限' }
     }
   ]

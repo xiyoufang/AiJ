@@ -1,28 +1,21 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input
-        v-model="listQuery.user_name"
-        placeholder="用户名"
-        style="width: 200px;"
-        class="filter-item"
-        @keyup.enter.native="handleFilter"
-      />
       <el-select
         v-model="listQuery.status"
         placeholder="状态"
         clearable
-        style="width: 90px"
+        style="width: 180px"
         class="filter-item"
         @change="handleFilter"
       >
         <el-option v-for="item in statusOptions" :key="item.key" :label="item.label" :value="item.key" />
       </el-select>
-      <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
-      </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+        Add
       </el-button>
     </div>
 
@@ -36,48 +29,20 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column label="头像" align="center" width="80" fixed="left">
-        <template slot-scope="{row}">
-          <img :src="baseURL+'/avatar?url=' + row.avatar" alt="" class="user-avatar">
-        </template>
-      </el-table-column>
-      <el-table-column label="显示ID" prop="id" align="center" width="100" fixed="left" show-overflow-tooltip>
-        <template slot-scope="{row}">
-          <span>{{ row.id | idFilter }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="用户ID" prop="user_id" align="center" width="100" show-overflow-tooltip />
-      <el-table-column label="用户名称" prop="user_name" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="性别" prop="gender" align="center" width="80">
-        <template slot-scope="{row}">
-          <span v-if="row.gender === 1 ">男</span>
-          <span v-else-if="row.gender === 2 ">女</span>
-          <span v-else>未知</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="账号状态" prop="status" align="center" width="160">
-        <template slot-scope="{row}">
-          <span v-if="row.status === -1 "><el-tag type="danger">禁用</el-tag></span>
-          <span v-if="row.status === 0 "><el-tag type="warning">待激活</el-tag></span>
-          <span v-if="row.status === 1 "><el-tag type="success">正常</el-tag></span>
-        </template>
-      </el-table-column>
-      <el-table-column label="活跃时间" prop="activated_time" sortable="custom" align="center" width="160" />
-      <el-table-column label="IP地址" prop="ip" align="center" width="160" />
-      <el-table-column label="注册时间" prop="created_time" sortable="custom" align="center" width="160" />
-      <el-table-column label="注册渠道" prop="created_source" align="center" width="120" />
-      <el-table-column label="自我介绍" prop="introduction" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="备注" prop="remark" align="center" width="160" show-overflow-tooltip />
-      <el-table-column label="操作" prop="id" align="center" width="210" fixed="right">
+      <el-table-column label="ID" prop="id" align="center" width="100" show-overflow-tooltip />
+      <el-table-column label="角色" prop="name" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="描述" prop="description" align="center" width="240" show-overflow-tooltip />
+      <el-table-column label="数据保护" prop="protected" align="center" width="160" />
+      <el-table-column label="更新日期" prop="modified_time" align="center" width="160" />
+      <el-table-column label="创建日期" prop="created_time" align="center" width="160" />
+      <el-table-column label="操作" prop="id" align="center" width="240" fixed="right">
         <template slot-scope="{row}">
           <router-link to="/profile/index">
-            <el-button size="mini">资料</el-button>
+            <el-button
+              size="mini"
+            >详情</el-button>
           </router-link>
-          <el-button
-            size="mini"
-            @click="handleUpdate(row)"
-          >编辑</el-button>
+
           <el-button
             v-if="row.status === 1"
             size="mini"
@@ -167,12 +132,12 @@
 </template>
 
 <script>
-import { page, update } from '@/api/user/player'
+import { page } from '@/api/role'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
-  name: 'UserPlayer',
+  name: 'UserRole',
   components: { Pagination },
   directives: { waves },
   filters: {
@@ -261,6 +226,9 @@ export default {
         remark: undefined
       }
     },
+    handleCreate() {
+
+    },
     handleUpdateStatus(row) {
       this.resetUser()
       this.$alert(row['status'] === 1 ? '确定禁用玩家账号?' : '确定启用账号?', '提示', {
@@ -268,9 +236,9 @@ export default {
         callback: action => {
           this.user.id = row.id
           this.user.status = row['status'] === 1 ? -1 : 1
-          update(this.user).then(value => {
-            this.getList()
-          })
+          // update(this.user).then(value => {
+          //   this.getList()
+          // })
         }
       })
     },
@@ -286,17 +254,17 @@ export default {
     updateData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          update(this.user).then(value => {
-            this.resetUser()
-            this.dialogFormVisible = false
-            this.$notify({
-              title: 'Success',
-              message: 'Update Successfully',
-              type: 'success',
-              duration: 2000
-            })
-            this.getList()
-          })
+          // update(this.user).then(value => {
+          //   this.resetUser()
+          //   this.dialogFormVisible = false
+          //   this.$notify({
+          //     title: 'Success',
+          //     message: 'Update Successfully',
+          //     type: 'success',
+          //     duration: 2000
+          //   })
+          //   this.getList()
+          // })
         }
       })
     },

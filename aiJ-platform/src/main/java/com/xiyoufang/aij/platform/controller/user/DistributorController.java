@@ -10,7 +10,6 @@ import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.aij.platform.controller.BaseController;
 import com.xiyoufang.aij.platform.service.DistributorService;
-import com.xiyoufang.aij.platform.service.RoleService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -30,10 +29,11 @@ public class DistributorController extends BaseController {
     @RequiresRoles({"administrator"})
     public void page(int limit, int page,
                      @Para(value = "nick_name") String nickName,
+                     @Para(value = "parent_user_id") String parentUserId,
                      Integer status,
                      String sort) {
         SqlPara sqlPara = AiJPlatformDb.uc().getSqlPara("uc.get_distributor_page",
-                Kv.by("nick_name", nickName).set("status", status));
+                Kv.by("nick_name", nickName).set("status", status).set("parent_user_id", parentUserId));
         Page<Record> recordPage = AiJPlatformDb.uc().paginate(page, limit, sqlPara);
         renderOk(Kv.by("data", Kv.create().set("total", recordPage.getTotalRow()).set("items", recordPage.getList().stream().map(Record::getColumns).toArray())));
     }
