@@ -14,9 +14,11 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        Add
-      </el-button>
+      <router-link :to="{name: 'UpdateRole'}">
+        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit">
+          Add
+        </el-button>
+      </router-link>
     </div>
 
     <el-table
@@ -37,10 +39,10 @@
       <el-table-column label="创建日期" prop="created_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="240" fixed="right">
         <template slot-scope="{row}">
-          <router-link :to="{name: 'RoleDetail' , params: row}">
+          <router-link :to="{name: 'UpdateRole' , params: row}">
             <el-button
               size="mini"
-            >详情</el-button>
+            >修改</el-button>
           </router-link>
           <el-button
             v-if="row.status === 1"
@@ -109,7 +111,11 @@ export default {
     getList() {
       this.listLoading = true
       page(this.listQuery).then(response => {
-        this.list = response.data.items
+        this.list = response.data.items.map(item => {
+          item.menus = item.menus === undefined ? [] : JSON.parse(item.menus)
+          item.permissions = item.permissions === undefined ? [] : JSON.parse(item.permissions)
+          return item
+        })
         this.total = response.data.total
         this.listLoading = false
       })

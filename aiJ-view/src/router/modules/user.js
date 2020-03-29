@@ -37,11 +37,11 @@ const userRouter = {
       meta: { title: '角色权限' }
     },
     {
-      path: 'role/detail',
-      component: () => import('@/views/user/role/detail'),
-      name: 'RoleDetail',
+      path: 'role/update',
+      component: () => import('@/views/user/role/update'),
+      name: 'UpdateRole',
       hidden: true,
-      meta: { title: '角色权限详情', noCache: true }
+      meta: { title: '角色权限管理', noCache: true }
     }
   ]
 }
