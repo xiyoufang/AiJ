@@ -79,7 +79,7 @@ export default {
       page(this.listQuery).then(response => {
         this.list = response.data.items
         this.total = response.data.total
-        // Just to simulate the time of the request
+      }).finally(() => {
         setTimeout(() => {
           this.listLoading = false
         }, 0.5 * 1000)

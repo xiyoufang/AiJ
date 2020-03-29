@@ -11,13 +11,13 @@ const roleRouter = {
       path: 'index',
       component: () => import('@/views/role'),
       name: 'Role',
-      meta: { title: '角色权限', icon: 'lock', noCache: true }
+      meta: { title: '平台角色', icon: 'lock', noCache: true }
     }, {
       path: 'update',
       component: () => import('@/views/role/update'),
       name: 'UpdateRole',
       hidden: true,
-      meta: { title: '角色权限管理', noCache: true }
+      meta: { title: '角色管理', noCache: true }
     }
   ]
 }

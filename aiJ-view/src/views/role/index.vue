@@ -117,7 +117,10 @@ export default {
           return item
         })
         this.total = response.data.total
-        this.listLoading = false
+      }).finally(() => {
+        setTimeout(() => {
+          this.listLoading = false
+        }, 0.5 * 1000)
       })
     },
     handleFilter() {
