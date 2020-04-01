@@ -13,7 +13,6 @@ import com.xiyoufang.aij.platform.service.UserRoleService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import java.util.HashMap;
 
@@ -27,7 +26,6 @@ public class AdministratorController extends BaseController {
     /**
      * 获取用户列表
      */
-    @RequiresRoles({"administrator"})
     @RequiresPermissions("AdministratorController_Page")
     public void page(int limit, int page,
                      @Para(value = "nick_name") String nickName,
@@ -43,7 +41,6 @@ public class AdministratorController extends BaseController {
     /**
      * 更新平台状态
      */
-    @RequiresRoles({"administrator"})
     @RequiresPermissions("AdministratorController_Update")
     @Before(BodyInject.class)
     public void update(@Body HashMap<String, Object> userRoleDTO) {
@@ -60,7 +57,6 @@ public class AdministratorController extends BaseController {
      *
      * @param userRoleDTO userRoleDTO
      */
-    @RequiresRoles({"administrator"})
     @RequiresPermissions("AdministratorController_Create")
     @Before(BodyInject.class)
     public void create(@Body HashMap<String, Object> userRoleDTO) {
