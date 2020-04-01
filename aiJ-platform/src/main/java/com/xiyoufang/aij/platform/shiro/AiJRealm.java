@@ -1,18 +1,19 @@
 package com.xiyoufang.aij.platform.shiro;
 
-import com.jfinal.kit.JsonKit;
+import com.alibaba.fastjson.JSONArray;
+import com.jfinal.json.FastJsonFactory;
+import com.jfinal.plugin.activerecord.Record;
+import com.xiyoufang.aij.platform.domain.UserDO;
+import com.xiyoufang.aij.user.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,50 @@ import java.util.Set;
 public class AiJRealm extends AuthorizingRealm {
 
     /**
+     * 数据源
+     */
+    private String dataSource;
+
+    /**
+     * Convenience implementation that returns
+     * <tt>getAuthenticationTokenClass().isAssignableFrom( token.getClass() );</tt>.  Can be overridden
+     * by subclasses for more complex token checking.
+     * <p>Most configurations will only need to set a different class via
+     * {@link #setAuthenticationTokenClass}, as opposed to overriding this method.
+     *
+     * @param token the token being submitted for authentication.
+     * @return true if this authentication realm can process the submitted token instance of the class, false otherwise.
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof AiJAuthenticationToken;
+    }
+
+    /**
+     * 授权，外部进行权限校验
+     *
+     * @param token token
+     * @return AuthenticationInfo
+     * @throws AuthenticationException AuthenticationException
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        AiJAuthenticationToken aiJToken = (AiJAuthenticationToken) token;
+        UserDO userDO = (UserDO) aiJToken.getPrincipal();
+        List<Record> records = UserService.me().findRolesByUser(userDO.getRecord());
+        if (records == null) {
+            throw new AuthenticationException("账号禁止登录管理平台");
+        }
+        Set<String> roleNames = new HashSet<>();
+        records.forEach(record -> roleNames.add(record.getStr("name")));
+        Set<String> permissions = new HashSet<>();
+        records.forEach(record -> permissions.addAll(FastJsonFactory.me().getJson().parse(record.getStr("permissions"), JSONArray.class).toJavaList(String.class)));
+        userDO.setRoles(roleNames);             // 注入权限与用户
+        userDO.setPermissions(permissions);
+        return new SimpleAuthenticationInfo(userDO, userDO, getName());
+    }
+
+    /**
      * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
      * an instance from this method, you might want to consider using an instance of
      * {@link SimpleAuthorizationInfo SimpleAuthorizationInfo}, as it is suitable in most cases.
@@ -35,27 +80,17 @@ public class AiJRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+        UserDO userDO = (UserDO) principals.getPrimaryPrincipal();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(userDO.getRoles());
+        info.setStringPermissions(userDO.getPermissions());
+        return info;
     }
 
-    /**
-     * Retrieves authentication data from an implementation-specific datasource (RDBMS, LDAP, etc) for the given
-     * authentication token.
-     * <p/>
-     * For most datasources, this means just 'pulling' authentication data for an associated subject/user and nothing
-     * more and letting Shiro do the rest.  But in some systems, this method could actually perform EIS specific
-     * log-in logic in addition to just retrieving data - it is up to the Realm implementation.
-     * <p/>
-     * A {@code null} return value means that no account could be associated with the specified token.
-     *
-     * @param token the authentication token containing the user's principal and credentials.
-     * @return an {@link AuthenticationInfo} object containing account data resulting from the
-     * authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
-     * @throws AuthenticationException if there is an error acquiring data or performing
-     *                                 realm-specific authentication logic for the specified <tt>token</tt>
-     */
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        return null;
+    public String getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
     }
 }

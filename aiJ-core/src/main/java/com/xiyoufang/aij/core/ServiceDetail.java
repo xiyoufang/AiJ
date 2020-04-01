@@ -21,6 +21,14 @@ public class ServiceDetail {
      */
     private int serviceCode;
     /**
+     * 服务名称
+     */
+    private String serviceName;
+    /**
+     * 服务描述
+     */
+    private String serviceDescription;
+    /**
      * 服务地址
      */
     private String address;
@@ -29,9 +37,17 @@ public class ServiceDetail {
      */
     private int port;
     /**
-     * 服务名称
+     * 节点名称
      */
-    private String name;
+    private String nodeName;
+    /**
+     * 节点描述
+     */
+    private String nodeDescription;
+    /**
+     * 节点Token，用于与其它服务器鉴权
+     */
+    private String nodeToken;
     /**
      * 启用状态
      */
@@ -65,6 +81,22 @@ public class ServiceDetail {
         this.serviceCode = serviceCode;
     }
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -81,12 +113,28 @@ public class ServiceDetail {
         this.port = port;
     }
 
-    public String getName() {
-        return name;
+    public String getNodeName() {
+        return nodeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
+    }
+
+    public String getNodeDescription() {
+        return nodeDescription;
+    }
+
+    public void setNodeDescription(String nodeDescription) {
+        this.nodeDescription = nodeDescription;
+    }
+
+    public String getNodeToken() {
+        return nodeToken;
+    }
+
+    public void setNodeToken(String nodeToken) {
+        this.nodeToken = nodeToken;
     }
 
     public boolean isEnable() {

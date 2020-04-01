@@ -5,7 +5,6 @@ import com.jfinal.weixin.sdk.api.ApiResult;
 import com.jfinal.weixin.sdk.api.SnsAccessToken;
 import com.jfinal.weixin.sdk.api.SnsAccessTokenApi;
 import com.jfinal.weixin.sdk.api.SnsApi;
-import com.xiyoufang.aij.core.AiJCoreDb;
 import com.xiyoufang.aij.core.AppConfig;
 import com.xiyoufang.aij.core.CoreConfig;
 import com.xiyoufang.aij.core.ResponseFactory;
@@ -22,7 +21,7 @@ import org.tio.websocket.common.WsResponse;
  *
  * @author 席有芳
  */
-public class WeiXinLoginEventHandler extends LoginEventHandler<WeiXinLoginEvent> {
+public abstract class WeiXinLoginEventHandler extends LoginEventHandler<WeiXinLoginEvent> {
 
     public WeiXinLoginEventHandler() {
         super(WeiXinLoginEvent.class);
@@ -38,17 +37,6 @@ public class WeiXinLoginEventHandler extends LoginEventHandler<WeiXinLoginEvent>
     @Override
     protected boolean authenticate(String key, Record record) {
         return true;
-    }
-
-    /**
-     * 登录成功操作
-     *
-     * @param channelContext channelContext
-     * @param user           user
-     */
-    @Override
-    protected void success(ChannelContext channelContext, User user) {
-
     }
 
     /**
@@ -68,7 +56,7 @@ public class WeiXinLoginEventHandler extends LoginEventHandler<WeiXinLoginEvent>
             String avatar = userInfo.getStr("headimgurl");
             int sex = userInfo.getInt("sex");
             String nickName = userInfo.getStr("nickname");
-            Record record = AiJCoreDb.uc().findFirst(AiJCoreDb.uc().getSqlPara("core.user_auth_by_wx", unionId));
+            Record record = UserService.me().findUserByWeiXin(unionId);
             authenticate(channelContext, null, record == null ? UserService.me().registerWeiXinUser(unionId, openId, avatar, sex, nickName) : record);
         } else {
             Tio.send(channelContext, WsResponse.fromText(ResponseFactory.error(CommonResponse.class, "微信授权失败!").toJson(), AppConfig.use().getCharset()));

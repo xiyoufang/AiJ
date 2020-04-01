@@ -18,7 +18,6 @@ public class PlazaWeiXinLoginEventHandler extends WeiXinLoginEventHandler {
      * @param user           user
      */
     @Override
-
     protected void success(ChannelContext channelContext, User user) {
         UserManager.getInstance().success(channelContext, user);
     }

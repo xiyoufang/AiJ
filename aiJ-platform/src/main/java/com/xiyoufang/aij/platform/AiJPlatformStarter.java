@@ -2,6 +2,7 @@ package com.xiyoufang.aij.platform;
 
 import com.jfinal.server.undertow.UndertowServer;
 import com.xiyoufang.aij.core.*;
+import com.xiyoufang.aij.platform.config.PlatformConfig;
 import org.tio.server.ServerGroupContext;
 
 /**
@@ -21,12 +22,12 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
      * @return service name
      */
     @Override
-    protected String configServiceName() {
+    protected String configNodeName() {
         return "运营平台";
     }
 
@@ -36,7 +37,7 @@ public class AiJPlatformStarter extends AiJStarter {
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "运营管理平台";
     }
 
@@ -77,10 +78,11 @@ public class AiJPlatformStarter extends AiJStarter {
      */
     @Override
     protected CoreConfig config(CoreConfig config) {
-        config.setServiceType(ServiceType.PLATFORM);
-        config.setDevMode(true);
-        config.setWsPort(8083);
-        return config;
+        PlatformConfig platformConfig = new PlatformConfig(config);
+        platformConfig.setServiceType(ServiceType.PLATFORM);
+        platformConfig.setDevMode(true);
+        platformConfig.setWsPort(8083);
+        return platformConfig;
     }
 
     /**
@@ -103,6 +105,17 @@ public class AiJPlatformStarter extends AiJStarter {
     protected AiJDs configUserCenterDs() {
         return createAiJDs(prop.get("db.users.url"), prop.get("db.users.username"),
                 prop.get("db.users.password"), prop.get("db.users.dialect"), prop.get("db.users.type"));
+    }
+
+    /**
+     * 配置核心数据源
+     *
+     * @param coreDs coreDs
+     * @return coreDs
+     */
+    @Override
+    protected CoreDs configDs(CoreDs coreDs) {
+        return coreDs;
     }
 
     /**
@@ -131,7 +144,11 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     public static void main(String[] args) {
-        UndertowServer.create(AiJPlatformConfig.class).start();
+        UndertowServer.create(AiJPlatformConfig.class).configWeb(builder -> {
+            builder.addListener("org.apache.shiro.web.env.EnvironmentLoaderListener");
+            builder.addFilter("shiro", "org.apache.shiro.web.servlet.ShiroFilter");
+            builder.addFilterUrlMapping("shiro", "/*");
+        }).start();
     }
 
 }

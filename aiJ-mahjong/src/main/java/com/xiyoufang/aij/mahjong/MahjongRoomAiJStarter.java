@@ -57,12 +57,12 @@ public class MahjongRoomAiJStarter extends RoomAiJStarter {
     }
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
      * @return service name
      */
     @Override
-    protected String configServiceName() {
+    protected String configNodeName() {
         return "南丰麻将";
     }
 
@@ -72,7 +72,7 @@ public class MahjongRoomAiJStarter extends RoomAiJStarter {
      * @return description
      */
     @Override
-    protected String configServiceDescription() {
+    protected String configNodeDescription() {
         return "南丰麻将服务器";
     }
 

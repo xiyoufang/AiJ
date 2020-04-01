@@ -12,10 +12,6 @@ public class ServiceInfo {
      */
     private int id;
     /**
-     * token
-     */
-    private String token;
-    /**
      * 服务Code
      */
     private int code;
@@ -38,14 +34,6 @@ public class ServiceInfo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getName() {

@@ -1,13 +1,16 @@
 package com.xiyoufang.aij.core;
 
 import com.jfinal.kit.Prop;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.activerecord.IDbProFactory;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.template.Engine;
+import com.jfinal.template.source.ClassPathSource;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import com.jfinal.template.source.ISource;
 import com.xiyoufang.aij.cache.CacheProFactory;
 import com.xiyoufang.aij.cache.SimpleCachePro;
 import com.xiyoufang.aij.handler.HeadEventHandler;
@@ -24,7 +27,7 @@ import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.RetryOneTime;
 import org.fest.reflect.core.Reflection;
 import org.flywaydb.core.Flyway;
-import org.joda.time.DateTime;
+import org.flywaydb.core.api.FlywayException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.server.ServerGroupContext;
@@ -36,6 +39,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -61,18 +65,18 @@ public abstract class AiJStarter {
 
 
     /**
-     * 配置服务名称
+     * 配置节点名称
      *
-     * @return service name
+     * @return node name
      */
-    protected abstract String configServiceName();
+    protected abstract String configNodeName();
 
     /**
-     * 服务描述
+     * 节点描述
      *
      * @return description
      */
-    protected abstract String configServiceDescription();
+    protected abstract String configNodeDescription();
 
     /**
      * 配置指令路由
@@ -228,7 +232,9 @@ public abstract class AiJStarter {
         //获取服务ID
         ServiceInfo serviceInfo = registryService();
         config.setServiceId(serviceInfo.getId());
-        config.setServiceToken(serviceInfo.getToken());
+        config.setServiceName(serviceInfo.getName());
+        config.setServiceDescription(serviceInfo.getDescription());
+        config.setNodeToken(UUID.randomUUID().toString());
         //初始化Id生成器
         Id.init();
         //初始化路由
@@ -267,28 +273,16 @@ public abstract class AiJStarter {
      */
     private ServiceInfo registryService() {
         ServiceInfo serviceInfo = new ServiceInfo();
-        Record record = AiJCoreDb.platform().findFirst("select * from service s WHERE s.type = ? and s.code = ?",
-                AppConfig.use().getStr(CoreConfig.SERVICE_TYPE), AppConfig.use().getInt(CoreConfig.SERVICE_CODE));
+        int serviceCode = AppConfig.use().getInt(CoreConfig.SERVICE_CODE);
+        String serviceType = AppConfig.use().getStr(CoreConfig.SERVICE_TYPE);
+        Record record = AiJCoreDb.platform().findByUnique("service", "type, code", serviceType, serviceCode);
         if (record == null) {
-            record = new Record().set("type", AppConfig.use().getStr(CoreConfig.SERVICE_TYPE))
-                    .set("code", AppConfig.use().getInt(CoreConfig.SERVICE_CODE))
-                    .set("name", AppConfig.use().getStr(CoreConfig.SERVICE_NAME))
-                    .set("description", AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION))
-                    .set("token", UUID.randomUUID().toString())
-                    .set("created_time", new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
-            AiJCoreDb.platform().save("service", record);
-        } else {
-            AiJCoreDb.platform().update("service",
-                    new Record().set("id", record.get("id"))
-                            .set("type", AppConfig.use().getStr(CoreConfig.SERVICE_TYPE))
-                            .set("code", AppConfig.use().getInt(CoreConfig.SERVICE_CODE))
-                            .set("name", AppConfig.use().getStr(CoreConfig.SERVICE_NAME))
-                            .set("description", AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION))
-                            .set("modified_time", new DateTime().toString("yyyy-MM-dd HH:mm:ss")));
+            String message = MessageFormat.format("CODE为:{0}的{1}服务，没有在数据库中添加，请校验service表是否存在对应的服务信息", serviceCode, serviceType);
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
         serviceInfo.setId(record.getInt("id"));
         serviceInfo.setDescription(record.getStr("description"));
-        serviceInfo.setToken(record.getStr("token"));
         serviceInfo.setName(record.getStr("name"));
         serviceInfo.setCode(record.getInt("code"));
         serviceInfo.setType(ServiceType.valueOf(record.getStr("type")));
@@ -336,8 +330,12 @@ public abstract class AiJStarter {
                             payload.setAddress(AppConfig.use().getStr(CoreConfig.WS_PROXY_ADDRESS));
                             payload.setPort(AppConfig.use().getInt(CoreConfig.WS_PROXY_PORT));
                             payload.setServiceType(ServiceType.valueOf(AppConfig.use().getStr(CoreConfig.SERVICE_TYPE)));
-                            payload.setName(AppConfig.use().getStr(CoreConfig.SERVICE_NAME));
                             payload.setServiceCode(AppConfig.use().getInt(CoreConfig.SERVICE_CODE));
+                            payload.setServiceName(AppConfig.use().getStr(CoreConfig.SERVICE_NAME));
+                            payload.setServiceDescription(AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION));
+                            payload.setNodeName(AppConfig.use().getStr(CoreConfig.NODE_NAME));
+                            payload.setNodeDescription(AppConfig.use().getStr(CoreConfig.NODE_DESCRIPTION));
+                            payload.setNodeToken(AppConfig.use().getStr(CoreConfig.NODE_TOKEN));
                             payload.setRegistered(new Date());
                             registryCenter.registerService(payload, ServiceDetail.class);
                         } catch (Exception e) {
@@ -399,19 +397,26 @@ public abstract class AiJStarter {
                 ActiveRecordPlugin arp = new ActiveRecordPlugin(entry.getKey(), aiJDs.getDataSource());
                 SqlReporter.setLog(devMode);
                 arp.setDevMode(devMode);
-                arp.setDbProFactory(new IDbProFactory() {
-                    @Override
-                    public AiJDbPro getDbPro(String configName) {
-                        return new AiJDbPro(configName);
-                    }
-                });
+                arp.setDbProFactory(AiJDbPro::new);
                 arp.setShowSql(devMode);
                 arp.setDialect(aiJDs.getDialect());
                 if (arp.getConfig().getDialect() instanceof Sqlite3Dialect) {
                     arp.setTransactionLevel(Connection.TRANSACTION_SERIALIZABLE);   //SQLITE事物隔离级别
                 }
                 arp.setBaseSqlTemplatePath(aiJDs.getSqlPath());
-                arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
+                Engine engine = arp.getEngine();
+                engine.addSharedObject("StrKit", new StrKit());
+                engine.setSourceFactory(new ClassPathSourceFactory() {
+                    @Override
+                    public ISource getSource(String baseTemplatePath, String fileName, String encoding) {
+                        return new ClassPathSource(baseTemplatePath, fileName, encoding) {
+                            @Override
+                            public boolean isModified() {
+                                return devMode; //开发模式热更新
+                            }
+                        };
+                    }
+                });
                 if (ClassResource.exist(ClassResource.buildFinalFileName(aiJDs.getSqlPath(), "core.sql"))) {
                     arp.addSqlTemplate("core.sql"); //约定的东西
                 }
@@ -426,7 +431,15 @@ public abstract class AiJStarter {
                         .table(aiJDs.getTable())
                         .locations(aiJDs.getLocation())
                         .baselineOnMigrate(true).load();
-                flyway.migrate();
+                try {
+                    flyway.migrate();
+                } catch (FlywayException e) {
+                    if (devMode) {
+                        LOGGER.warn("开发过程中初始化SQL执行错误不处理，手动维护", e);
+                    } else {
+                        throw e;
+                    }
+                }
             }
         }
     }
@@ -442,8 +455,8 @@ public abstract class AiJStarter {
         config.setWsProxyPort(config.getInt(CoreConfig.WS_PORT));
         config.setWsProxyAddress(config.getStr(CoreConfig.WS_ADDRESS));
         config.setServiceCode(configServiceCode());
-        config.setServiceName(configServiceName());
-        config.setServiceDescription(configServiceDescription());
+        config.setNodeName(configNodeName());
+        config.setNodeDescription(configNodeDescription());
         config.setDefaultCacheName("aij_simple_cache");
         config.setRegisterPath("/aij/service");
         config.setDsUserCenter("aij-users");

@@ -3,8 +3,8 @@ package com.xiyoufang.jfinal.shiro;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
 import com.xiyoufang.jfinal.shiro.annotation.Permission;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,15 @@ public class ShiroManager {
     /**
      * 权限Kv
      */
-    private List<PermissionKv> permissionKvs = new ArrayList<PermissionKv>();
+    private List<PermissionMapping> permissionMappings = new ArrayList<>();
+
+    /**
+     * 权限列表
+     */
+    private List<String> permissions = new ArrayList<>();
 
     private ShiroManager() {
+
     }
 
     public static ShiroManager me() {
@@ -34,8 +40,17 @@ public class ShiroManager {
         initPermission(routes);
     }
 
-    public List<PermissionKv> getPermissionKvs() {
-        return permissionKvs;
+    public List<PermissionMapping> getPermissionMappings() {
+        return permissionMappings;
+    }
+
+    /**
+     * 获取所有的权限信息
+     *
+     * @return permissions
+     */
+    public List<String> getPermissions() {
+        return permissions;
     }
 
     /**
@@ -46,13 +61,37 @@ public class ShiroManager {
     private void initPermission(List<Routes.Route> routes) {
         for (Routes.Route route : routes) {
             Class<? extends Controller> controllerClass = route.getControllerClass();
-            String controllerKey = route.getControllerKey();
-            Annotation[] controllerAnnotations = controllerClass.getAnnotations();
+            parsingRequiresPermissionsAnnotation(controllerClass.getAnnotation(RequiresPermissions.class));
             Method[] methods = controllerClass.getMethods();
             for (Method method : methods) {
-                Permission annotation = method.getAnnotation(Permission.class);
-                if (annotation != null) {
-                    permissionKvs.add(new PermissionKv(annotation.key(), annotation.name()));
+                parsingPermissionAnnotation(method.getAnnotation(Permission.class));
+                parsingRequiresPermissionsAnnotation(method.getAnnotation(RequiresPermissions.class));
+            }
+
+        }
+    }
+
+    /**
+     * 解析 permission 注解
+     *
+     * @param permission permission
+     */
+    private void parsingPermissionAnnotation(Permission permission) {
+        if (permission != null) {
+            permissionMappings.add(new PermissionMapping(permission.key(), permission.name()));
+        }
+    }
+
+    /**
+     * 解析 requiresPermissions 注解
+     *
+     * @param requiresPermissions requiresPermissions
+     */
+    private void parsingRequiresPermissionsAnnotation(RequiresPermissions requiresPermissions) {
+        if (requiresPermissions != null) {
+            for (String permission : requiresPermissions.value()) {
+                if (!this.permissions.contains(permission)) {
+                    this.permissions.add(permission);
                 }
             }
         }

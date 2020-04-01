@@ -1,47 +1,51 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
-import VueRouter from 'vue-router'
+
+import Cookies from 'js-cookie'
+
+import 'normalize.css/normalize.css' // a modern alternative to CSS resets
+
 import Element from 'element-ui'
+import './styles/element-variables.scss'
+
+import '@/styles/index.scss' // global css
+
 import App from './App'
-import Foo from './Foo'
-import Bar from './Bar'
+import store from './store'
+import router from './router'
 
-Vue.use(VueRouter)
-Vue.use(Element)
-Vue.use(Vuex)
+import './icons' // icon
+import './permission' // permission control
+import './utils/error-log' // error log
 
-const router = new VueRouter({
-    routes: [
-        {path: '/foo', component: Foo},
-        {path: '/bar', component: Bar}
-    ]
+import * as filters from './filters' // global filters
 
-})
-
-const publicState = {
-    name: 'Vue'
+/**
+ * If you don't want to use mock-server
+ * you want to use MockJs for mock api
+ * you can execute: mockXHR()
+ *
+ * Currently MockJs will be used in the production environment,
+ * please remove it before going online ! ! !
+ */
+if (process.env.NODE_ENV === 'production') {
+  const { mockXHR } = require('../mock')
+  mockXHR()
 }
 
-const store = new Vuex.Store({
-    state: {
-        title: '游戏后台管理系统',
-        author: 'xiyoufang@yeah.net'
-    },
-    getters: {
-        getTitle: function (state) {
-            return state.title;
-        }
-    }
-
+Vue.use(Element, {
+  size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
+// register global utility filters
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+
+Vue.config.productionTip = false
+
 new Vue({
-    router: router,
-    store,
-    data: function () {
-        return {publicState: publicState}
-    },
-    render: function (h) {
-        return h(App)
-    }
-}).$mount('#app')
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+})
