@@ -48,6 +48,7 @@
             v-if="row.status === 1"
             size="mini"
             type="danger"
+            :disabled="row.protected === 'Y'"
             @click="handleUpdateStatus(row)"
           >禁用
           </el-button>
@@ -55,6 +56,7 @@
             v-else
             size="mini"
             type="success"
+            :disabled="row.protected === 'Y'"
             @click="handleUpdateStatus(row)"
           >启用
           </el-button>
@@ -73,7 +75,7 @@
 </template>
 
 <script>
-import { page } from '@/api/role'
+import { page, updateRole } from '@/api/role'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -100,6 +102,10 @@ export default {
         status: undefined,
         type: undefined,
         sort: '+id'
+      },
+      role: {
+        id: undefined,
+        status: undefined
       },
       statusOptions: [{ label: '禁用', key: -1 }, { label: '正常', key: 1 }]
     }
@@ -141,18 +147,26 @@ export default {
       }
       this.handleFilter()
     },
+    resetRole() {
+      this.role = {
+        id: undefined,
+        status: undefined
+      }
+    },
     handleCreate() {
     },
     handleUpdateStatus(row) {
-      this.resetUser()
-      this.$alert(row['status'] === 1 ? '确定禁用玩家账号?' : '确定启用账号?', '提示', {
+      this.resetRole()
+      this.$alert(row['status'] === 1 ? '确定禁用角色?' : '确定启用角色?', '提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.user.id = row.id
-          this.user.status = row['status'] === 1 ? -1 : 1
-          // update(this.user).then(value => {
-          //   this.getList()
-          // })
+          if (action === 'confirm') {
+            this.role.id = row.id
+            this.role.status = row['status'] === 1 ? -1 : 1
+            updateRole(this.role).then(value => {
+              this.getList()
+            })
+          }
         }
       })
     },

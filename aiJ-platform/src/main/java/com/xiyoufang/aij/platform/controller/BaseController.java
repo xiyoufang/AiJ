@@ -23,7 +23,6 @@ public class BaseController extends Controller {
      */
     protected <T> T body(Class<T> clazz) {
         return JsonKit.parse(getRawData(), clazz);
-
     }
 
     /**

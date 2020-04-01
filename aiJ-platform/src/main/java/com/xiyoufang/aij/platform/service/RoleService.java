@@ -7,38 +7,41 @@ import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import java.util.Date;
 
 /**
- * Created by 席有芳 on 2020-03-28.
+ * Created by 席有芳 on 2020-04-01.
+ * 角色Service
  *
  * @author 席有芳
  */
 public class RoleService {
 
-
     /**
-     * 单例，实例
+     *
      */
     public final static RoleService me = Duang.duang(RoleService.class);
 
     /**
-     * 更新
+     * 更新角色资料
      *
      * @param record record
-     * @return boolean
+     * @return boolean result
      */
     public boolean update(Record record) {
         record.set("modified_time", new Date());
-        return AiJPlatformDb.uc().updateByUnique("user_role", "user_id", record);
+        return AiJPlatformDb.uc().updateByUnique("role", "id", record);
     }
 
     /**
-     * 保存
+     * 创建新的角色
      *
      * @param record record
-     * @return boolean
+     * @return boolean result
      */
     public boolean save(Record record) {
-        record.set("modified_time", new Date());
-        record.set("created_time", new Date());
-        return AiJPlatformDb.uc().save("user_role", "id", record);
+        Date now = new Date();
+        record.set("created_time", now);
+        record.set("modified_time", now);
+        record.set("protected", "Y");
+        record.set("status", 1);
+        return AiJPlatformDb.uc().save("role", "id", record);
     }
 }

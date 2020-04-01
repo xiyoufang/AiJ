@@ -58,7 +58,7 @@
           <span v-if="row.role_status === 1 "><el-tag type="success">正常</el-tag></span>
         </template>
       </el-table-column>
-      <el-table-column label="平台角色" prop="roles" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="平台角色" prop="roles" align="center" width="240" show-overflow-tooltip />
       <el-table-column label="账号状态" prop="status" align="center" width="120">
         <template slot-scope="{row}">
           <span v-if="row.status === -1 "><el-tag type="danger">禁用</el-tag></span>

@@ -1,10 +1,14 @@
 package com.xiyoufang.aij.core;
 
+import com.jfinal.plugin.activerecord.Config;
 import com.jfinal.plugin.activerecord.DbPro;
 import com.jfinal.plugin.activerecord.Record;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 席有芳 on 2019-02-21.
@@ -18,6 +22,34 @@ public class AiJDbPro extends DbPro {
 
     public AiJDbPro(String configName) {
         super(configName);
+    }
+
+    @Override
+    public boolean update(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
+        recordValueOptimization(record);
+        return super.update(config, conn, tableName, primaryKey, record);
+    }
+
+    @Override
+    protected boolean save(Config config, Connection conn, String tableName, String primaryKey, Record record) throws SQLException {
+        recordValueOptimization(record);
+        return super.save(config, conn, tableName, primaryKey, record);
+    }
+
+    /**
+     * 记录值预先处理
+     *
+     * @param record record
+     */
+    private void recordValueOptimization(Record record) {
+        Map<String, Object> columns = record.getColumns();
+        for (Map.Entry<String, Object> objectEntry : columns.entrySet()) {
+            String key = objectEntry.getKey();
+            Object value = objectEntry.getValue();
+            if (value != null && value.getClass().getName().toUpperCase().contains("JSON")) {
+                columns.put(key, value.toString());
+            }
+        }
     }
 
     /**

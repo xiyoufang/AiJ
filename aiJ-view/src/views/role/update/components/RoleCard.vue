@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { createRole, updateRole } from '@/api/role'
 export default {
   props: {
     role: {
@@ -43,10 +44,41 @@ export default {
   },
   methods: {
     handleCreate() {
-      console.log('handle create')
+      this.$alert('确定创建角色?', '提示', {
+        confirmButtonText: '确定',
+        callback: action => {
+          if (action === 'confirm') {
+            createRole(this.role).then(value => {
+              console.log(value)
+              this.role.id = value.data.id // 更新ID
+              this.$notify({
+                title: 'Success',
+                message: 'Create Successfully',
+                type: 'success',
+                duration: 2000
+              })
+            })
+          }
+        }
+      })
     },
     handleUpdate() {
-      console.log('handle update')
+      this.$alert('确定更新角色?', '提示', {
+        confirmButtonText: '确定',
+        callback: action => {
+          if (action === 'confirm') {
+            updateRole(this.role).then(value => {
+              console.log(value)
+              this.$notify({
+                title: 'Success',
+                message: 'Update Successfully',
+                type: 'success',
+                duration: 2000
+              })
+            })
+          }
+        }
+      })
     }
   }
 }

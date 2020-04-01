@@ -33,9 +33,9 @@ public class AuthorizationController extends BaseController {
         if (UserService.me().authenticate(loginFormDTO.getPassword(), record)) {
             SecurityUtils.getSubject().login(new AiJAuthenticationToken(new UserDO(record)));
             String token = (String) SecurityUtils.getSubject().getSession().getId();
-            renderOk(Kv.create().set("data", new TokenVO().setToken(token)));
+            renderOk(Kv.create().set(ResponseStatusCode.DATA_KEY, new TokenVO().setToken(token)));
         } else {
-            renderWithCode(ResponseStatusCode.LOGIN_FAILURE, Kv.create().set("message", "failure."));
+            renderWithCode(ResponseStatusCode.LOGIN_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "failure."));
         }
     }
 
@@ -61,7 +61,7 @@ public class AuthorizationController extends BaseController {
     @Before(HeaderInject.class)
     public void logout(@Header("X-Token") String token) {
         SecurityUtils.getSubject().logout();
-        renderOk(Kv.create().set("data", "success"));
+        renderOk(Kv.create().set(ResponseStatusCode.DATA_KEY, "success"));
     }
 
 }

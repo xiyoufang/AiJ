@@ -16,6 +16,7 @@
           :props="defaultProps"
           show-checkbox
           node-key="name"
+          @check-change="handleCheckChange"
         />
       </el-form-item>
     </el-form>
@@ -65,6 +66,9 @@ export default {
     },
     setCheckedKeys() {
       this.$refs.tree.setCheckedKeys(this.role.permissions)
+    },
+    handleCheckChange() {
+      this.role.permissions = this.$refs.tree.getCheckedKeys()
     }
   }
 }

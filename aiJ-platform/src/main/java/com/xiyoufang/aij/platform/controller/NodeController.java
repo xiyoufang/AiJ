@@ -5,6 +5,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.xiyoufang.aij.core.AppConfig;
 import com.xiyoufang.aij.core.CoreConfig;
 import com.xiyoufang.aij.core.ServiceDetail;
+import com.xiyoufang.aij.platform.config.ResponseStatusCode;
 import com.xiyoufang.jfinal.zk.ZkKit;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -25,7 +26,7 @@ public class NodeController extends BaseController {
         List<ServiceDetail> details = ZkKit.use().discovery(ServiceDetail.class, AppConfig.use().getStr(CoreConfig.REGISTER_PATH));
         int totalRow = details.size();
         Page<ServiceDetail> nodePage = new Page<>(details, page, limit, totalRow / limit + (totalRow % limit > 0 ? 1 : 0), totalRow);
-        renderOk(Kv.by("data", Kv.create().set("total", nodePage.getTotalRow()).set("items", nodePage.getList())));
+        renderOk(Kv.by(ResponseStatusCode.DATA_KEY, Kv.create().set("total", nodePage.getTotalRow()).set("items", nodePage.getList())));
     }
 
 }

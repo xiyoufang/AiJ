@@ -14,3 +14,27 @@ export function permissions() {
     method: 'get'
   })
 }
+
+/**
+ * 创建角色
+ * @param data
+ */
+export function createRole(data) {
+  return request({
+    url: '/role/create',
+    method: 'post',
+    data: data
+  })
+}
+
+/**
+ * 更新角色
+ * @param data
+ */
+export function updateRole(data) {
+  return request({
+    url: '/role/update',
+    method: 'post',
+    data: data
+  })
+}

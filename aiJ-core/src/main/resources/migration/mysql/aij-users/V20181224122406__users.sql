@@ -181,6 +181,7 @@ CREATE TABLE role
     menus         text,        -- 菜单（array）
     description   text,        -- 角色描述
     protected     char(1),     -- 系统保护 (Y\N)
+    status        integer,     -- 状态(-1禁用,1正常)
     modified_time datetime,    -- 更新时间
     created_time  datetime,    -- 创建时间
     UNIQUE (name)

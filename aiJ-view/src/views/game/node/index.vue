@@ -14,7 +14,6 @@
       fit
       highlight-current-row
       style="width: 100%;"
-      @sort-change="sortChange"
     >
       <el-table-column label="服务CODE" prop="serviceCode" align="center" width="120" />
       <el-table-column label="类型" prop="serviceType" align="center" width="160" />
@@ -30,7 +29,6 @@
       <el-table-column label="节点TOKEN" prop="nodeToken" align="center" width="240" show-overflow-tooltip />
       <el-table-column label="IP" prop="address" align="center" width="160" />
       <el-table-column label="端口" prop="port" align="center" width="120" />
-
       <el-table-column label="注册时间" prop="registered" align="center" width="160" />
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
