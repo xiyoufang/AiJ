@@ -13,6 +13,7 @@ import com.xiyoufang.aij.platform.validate.ServiceValidator;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
 /**
@@ -32,6 +33,7 @@ public class ServiceController extends BaseController {
      * @param sort  排序
      */
     @RequiresRoles("administrator")
+    @RequiresPermissions("ServiceController_Page")
     public void page(int limit, int page, String sort, String name) {
         SqlPara sqlPara = AiJPlatformDb.platform().getSqlPara("platform.get_service_page", Kv.by("name", name));
         Page<Record> recordPage = AiJPlatformDb.platform().paginate(page, limit, sqlPara);
@@ -44,6 +46,7 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresRoles("administrator")
+    @RequiresPermissions("ServiceController_Create")
     @Before({BodyInject.class, ServiceValidator.class})
     public void create(@Body ServiceDTO serviceDTO) {
         Record record = ServiceService.me.save(serviceDTO);
@@ -56,6 +59,7 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresRoles("administrator")
+    @RequiresPermissions("ServiceController_Update")
     @Before({BodyInject.class, ServiceValidator.class})
     public void update(@Body ServiceDTO serviceDTO) {
         Record record = ServiceService.me.update(serviceDTO);

@@ -12,6 +12,7 @@ import com.xiyoufang.aij.platform.controller.BaseController;
 import com.xiyoufang.aij.user.UserService;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class PlayerController extends BaseController {
      * 获取用户列表
      */
     @RequiresRoles({"administrator"})
+    @RequiresPermissions("PlayerController_Page")
     public void page(int limit, int page,
                      @Para(value = "nick_name") String nickName,
                      Integer status,
@@ -41,6 +43,7 @@ public class PlayerController extends BaseController {
      * 更新用户状态
      */
     @RequiresRoles({"administrator"})
+    @RequiresPermissions("PlayerController_Update")
     @Before(BodyInject.class)
     public void update(@Body HashMap<String, Object> userDTO) {
         Record record = new Record().setColumns(userDTO);
