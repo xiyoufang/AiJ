@@ -28,7 +28,10 @@ public class UserDO implements Serializable {
      * 权限
      */
     private Set<String> permissions;
-
+    /**
+     * 菜单
+     */
+    private Set<String> menus;
 
     public UserDO(Record record) {
         this.record = record;
@@ -60,4 +63,5 @@ public class UserDO implements Serializable {
     public String getIntroduction() {
         return this.record.getStr("introduction");
     }
+
 }

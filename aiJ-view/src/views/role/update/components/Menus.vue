@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import router from '@/router'
+import { constantRoutes } from '@/router'
 
 export default {
   props: {
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getMenus() {
-      this.menus = this.generateRoutes(router.options.routes)
+      this.menus = this.generateRoutes(constantRoutes)
     },
     generateRoutes(routes) {
       const res = []

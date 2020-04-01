@@ -40,5 +40,8 @@ public class LoginVO {
      * 权限
      */
     private Set<String> permissions;
-
+    /**
+     * 菜单
+     */
+    private Set<String> menus;
 }

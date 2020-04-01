@@ -60,7 +60,6 @@ export default {
   methods: {
     getPermissions() {
       permissions().then(response => {
-        console.log(response)
         this.permissions = response.data.map(item => { return { name: item, title: item } })
       })
     },

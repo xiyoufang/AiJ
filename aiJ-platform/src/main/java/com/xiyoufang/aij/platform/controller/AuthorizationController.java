@@ -51,6 +51,8 @@ public class AuthorizationController extends BaseController {
                 .setIntroduction(userDO.getIntroduction())
                 .setName(userDO.getUserName())
                 .setPermissions(userDO.getPermissions())
+                .setMenus(userDO.getMenus())
+
         ));
     }
 

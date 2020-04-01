@@ -64,8 +64,11 @@ public class AiJRealm extends AuthorizingRealm {
         records.forEach(record -> roleNames.add(record.getStr("name")));
         Set<String> permissions = new HashSet<>();
         records.forEach(record -> permissions.addAll(FastJsonFactory.me().getJson().parse(record.getStr("permissions"), JSONArray.class).toJavaList(String.class)));
-        userDO.setRoles(roleNames);             // 注入权限与用户
+        Set<String> menus = new HashSet<>();
+        records.forEach(record -> menus.addAll(FastJsonFactory.me().getJson().parse(record.getStr("menus"), JSONArray.class).toJavaList(String.class)));
+        userDO.setRoles(roleNames);
         userDO.setPermissions(permissions);
+        userDO.setMenus(menus);
         return new SimpleAuthenticationInfo(userDO, userDO, getName());
     }
 
