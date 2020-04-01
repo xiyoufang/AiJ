@@ -17,8 +17,8 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button v-if="role.id !== undefined" type="primary">Update</el-button>
-          <el-button v-else type="primary">Create</el-button>
+          <el-button v-if="role.id !== undefined" type="primary" @click="handleUpdate">Update</el-button>
+          <el-button v-else type="primary" @click="handleCreate">Create</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -41,9 +41,12 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      name: ''
+  methods: {
+    handleCreate() {
+      console.log('handle create')
+    },
+    handleUpdate() {
+      console.log('handle update')
     }
   }
 }

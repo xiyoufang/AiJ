@@ -1,16 +1,25 @@
 <template>
-  <el-form :model="role" label-position="left">
-    <el-form-item>
-      <el-tree
-        ref="tree"
-        :check-strictly="checkStrictly"
-        :data="permissions"
-        :props="defaultProps"
-        show-checkbox
-        node-key="name"
-      />
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-alert
+      title="提示"
+      type="info"
+      description="所有权限从后端@RequiresPermissions注解读取"
+      show-icon
+      style="margin-bottom: 10px"
+    />
+    <el-form :model="role" label-position="left">
+      <el-form-item>
+        <el-tree
+          ref="tree"
+          :check-strictly="checkStrictly"
+          :data="permissions"
+          :props="defaultProps"
+          show-checkbox
+          node-key="name"
+        />
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
