@@ -1,10 +1,14 @@
 {
-  "ver": "2.3.1",
+  "ver": "2.3.4",
   "uuid": "64b24bc1-8694-4cdb-8ee4-17efa25991ec",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 2048,
+  "height": 2048,
   "platformSettings": {},
   "subMetas": {
     "mahjong_atlas0_2": {

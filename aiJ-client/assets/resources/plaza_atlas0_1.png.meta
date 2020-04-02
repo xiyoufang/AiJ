@@ -1,10 +1,14 @@
 {
-  "ver": "2.3.1",
+  "ver": "2.3.4",
   "uuid": "7bdcac80-8f65-4cd8-912f-756941686260",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 2048,
+  "height": 2048,
   "platformSettings": {},
   "subMetas": {
     "plaza_atlas0_1": {
