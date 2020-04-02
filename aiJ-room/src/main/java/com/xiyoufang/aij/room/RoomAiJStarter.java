@@ -14,7 +14,7 @@ import com.xiyoufang.aij.timer.TimerSchedule;
 import org.fest.reflect.core.Reflection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 
 /**
  * Created by 席有芳 on 2018-12-19.
@@ -82,11 +82,11 @@ public abstract class RoomAiJStarter extends AiJStarter {
     protected abstract void configCustomRRouter(RRouter rRouter);
 
     /**
-     * 配置自定义 serverGroupContext
+     * 配置自定义 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
-    protected abstract void configCustomServerGroupContext(ServerGroupContext serverGroupContext);
+    protected abstract void configCustomServerTioConfig(ServerTioConfig serverTioConfig);
 
     /**
      * 房间启动回调
@@ -170,10 +170,10 @@ public abstract class RoomAiJStarter extends AiJStarter {
     /**
      * 配置 serverGroupContext
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
-    protected void configServerGroupContext(ServerGroupContext serverGroupContext) {
-        configCustomServerGroupContext(serverGroupContext);
+    protected void configServerTioConfig(ServerTioConfig serverTioConfig) {
+        configCustomServerTioConfig(serverTioConfig);
     }
 
     /**

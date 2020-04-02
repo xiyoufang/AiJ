@@ -30,7 +30,7 @@ import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.FlywayException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 import org.tio.server.TioServer;
 import org.tio.utils.hutool.StrUtil;
 import org.tio.websocket.server.WsServerStarter;
@@ -93,11 +93,11 @@ public abstract class AiJStarter {
     protected abstract void configRRouter(RRouter rRouter);
 
     /**
-     * 配置 serverGroupContext
+     * 配置 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
-    protected abstract void configServerGroupContext(ServerGroupContext serverGroupContext);
+    protected abstract void configServerTioConfig(ServerTioConfig serverTioConfig);
 
     /**
      * 初始化配置
@@ -220,9 +220,9 @@ public abstract class AiJStarter {
         config = config(config);    //由子类自定义配置
         AiJMessageHandler wsMsgHandler = new AiJMessageHandler();
         wsServerStarter = new WsServerStarter(config.getInt(CoreConfig.WS_PORT), wsMsgHandler);
-        ServerGroupContext groupContext = wsServerStarter.getServerGroupContext();
+        ServerTioConfig serverTioConfig = wsServerStarter.getServerTioConfig();
         //初始化AppConfig配置
-        initAppConfig(config, groupContext);
+        initAppConfig(config, serverTioConfig);
         //初始化数据源
         CoreDs coreDs = new CoreDs();
         coreDs.addUserCenterDs(configUserCenterDs());
@@ -247,9 +247,9 @@ public abstract class AiJStarter {
         configDefaultRRouter(rRouter);
         configRRouter(rRouter);
         ResponseFactory.init(rRouter);
-        //配置GroupContext
-        configDefaultServerGroupContext(groupContext);
-        configServerGroupContext(groupContext);
+        //配置ServerTioConfig
+        configDefaultServerTioConfig(serverTioConfig);
+        configServerTioConfig(serverTioConfig);
         //配置注册中心
         RegistryCenter registryCenter = new RegistryCenter();
         configDefaultRegistryCenter(registryCenter);
@@ -479,19 +479,19 @@ public abstract class AiJStarter {
     /**
      * 配置serverGroupContext的默认属性
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
-    private void configDefaultServerGroupContext(ServerGroupContext serverGroupContext) {
+    private void configDefaultServerTioConfig(ServerTioConfig serverTioConfig) {
         AiJMessageListener aioListener = new AiJMessageListener();
         aioListener.setTioListener(configTioListener());
-        serverGroupContext.setServerAioListener(aioListener);
+        serverTioConfig.setServerAioListener(aioListener);
     }
 
     /**
      * 初始化AppConfig
      */
-    private void initAppConfig(Config config, ServerGroupContext groupContext) {
-        AppConfig.init(config, groupContext);
+    private void initAppConfig(Config config, ServerTioConfig serverTioConfig) {
+        AppConfig.init(config, serverTioConfig);
     }
 
     /**

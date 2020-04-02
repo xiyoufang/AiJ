@@ -419,7 +419,7 @@ public class Table {
      */
     public void sendTable(Response response) {
         for (HeroMate heroMate : heroes.values()) {
-            Tio.sendToUser(AppConfig.use().getGroupContext(), heroMate.hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
+            Tio.sendToUser(AppConfig.use().getTioConfig(), heroMate.hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
         }
     }
 
@@ -437,7 +437,7 @@ public class Table {
         for (int chair : chairs) {
             HeroMate heroMate = heroes.get(chair);
             if (heroMate != null) {
-                Tio.sendToUser(AppConfig.use().getGroupContext(), heroMate.hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
+                Tio.sendToUser(AppConfig.use().getTioConfig(), heroMate.hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
             }
         }
     }
@@ -450,7 +450,7 @@ public class Table {
      */
     public void sendHeroes(Response response, Hero... heroes) {
         for (Hero hero : heroes) {
-            Tio.sendToUser(AppConfig.use().getGroupContext(), hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
+            Tio.sendToUser(AppConfig.use().getTioConfig(), hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
         }
     }
 
@@ -470,7 +470,7 @@ public class Table {
                 }
             }
             if (!contain) {
-                Tio.sendToUser(AppConfig.use().getGroupContext(), entry.getValue().hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
+                Tio.sendToUser(AppConfig.use().getTioConfig(), entry.getValue().hero.getUserId(), WsResponse.fromText(response.toJson(), AppConfig.use().getCharset()));
             }
         }
 

@@ -4,7 +4,7 @@ import com.xiyoufang.aij.core.*;
 import com.xiyoufang.aij.plaza.config.PlazaConfig;
 import com.xiyoufang.aij.plaza.handler.*;
 import com.xiyoufang.aij.plaza.response.*;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 
 /**
  * Created by 席有芳 on 2018-12-26.
@@ -83,12 +83,12 @@ public class PlazaAiJStarter extends AiJStarter {
     }
 
     /**
-     * 配置 serverGroupContext
+     * 配置 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
     @Override
-    protected void configServerGroupContext(ServerGroupContext serverGroupContext) {
+    protected void configServerTioConfig(ServerTioConfig serverTioConfig) {
 
     }
 

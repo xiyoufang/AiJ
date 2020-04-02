@@ -1,7 +1,7 @@
 package com.xiyoufang.aij.core;
 
 import com.jfinal.kit.StrKit;
-import org.tio.core.GroupContext;
+import org.tio.core.TioConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class AppConfig {
     /**
      * Context
      */
-    private GroupContext groupContext;
+    private TioConfig tioConfig;
     /**
      * AppConfig
      */
@@ -43,10 +43,10 @@ public class AppConfig {
      * 初始化
      *
      * @param config       config
-     * @param groupContext groupContext
+     * @param tioConfig tioConfig
      */
-    public static synchronized void init(Config config, GroupContext groupContext) {
-        String name = groupContext.getName();
+    public static synchronized void init(Config config, TioConfig tioConfig) {
+        String name = tioConfig.getName();
         if (StrKit.isBlank(name)) {
             throw new RuntimeException("GroupContext名称不能为空");
         }
@@ -54,7 +54,7 @@ public class AppConfig {
             throw new RuntimeException("已经存在同名的GroupContext");
         }
         AppConfig appConfig = new AppConfig();
-        appConfig.groupContext = groupContext;
+        appConfig.tioConfig = tioConfig;
         appConfig.config = config;
         if (instances.size() == 0) {
             AppConfig.defaultInstance = appConfig;
@@ -98,8 +98,8 @@ public class AppConfig {
         return config;
     }
 
-    public GroupContext getGroupContext() {
-        return groupContext;
+    public TioConfig getTioConfig() {
+        return tioConfig;
     }
 
     public boolean getBool(String key) {

@@ -1,7 +1,7 @@
 package com.xiyoufang.aij.circle;
 
 import com.xiyoufang.aij.core.*;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 
 /**
  * Created by 席有芳 on 2019-02-02.
@@ -60,12 +60,12 @@ public class CircleAiJStarter extends AiJStarter {
     }
 
     /**
-     * 配置 serverGroupContext
+     * 配置 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
     @Override
-    protected void configServerGroupContext(ServerGroupContext serverGroupContext) {
+    protected void configServerTioConfig(ServerTioConfig serverTioConfig) {
 
     }
 

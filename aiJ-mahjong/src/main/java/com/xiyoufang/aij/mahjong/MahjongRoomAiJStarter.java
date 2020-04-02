@@ -14,7 +14,7 @@ import com.xiyoufang.aij.room.table.TableAbility;
 import com.xiyoufang.aij.room.tester.RoomAiJTester;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 
 /**
  * Created by 席有芳 on 2018-12-20.
@@ -127,12 +127,12 @@ public class MahjongRoomAiJStarter extends RoomAiJStarter {
 
 
     /**
-     * 配置自定义 serverGroupContext
+     * 配置自定义 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
     @Override
-    protected void configCustomServerGroupContext(ServerGroupContext serverGroupContext) {
+    protected void configCustomServerTioConfig(ServerTioConfig serverTioConfig) {
 
     }
 

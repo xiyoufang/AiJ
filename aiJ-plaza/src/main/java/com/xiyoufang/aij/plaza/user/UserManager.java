@@ -35,7 +35,7 @@ public class UserManager {
      */
     public void success(ChannelContext channelContext, User user) {
         String userId = user.getUserId();
-        SetWithLock<ChannelContext> objs = Tio.getChannelContextsByUserid(channelContext.groupContext, userId);
+        SetWithLock<ChannelContext> objs = Tio.getByUserid(channelContext.tioConfig, userId);
         Tio.unbindUser(channelContext); //先解绑
         channelContext.setUserid(userId); //用户名称绑定
         LoginEventResponse response = ResponseFactory.success(LoginEventResponse.class, "登录成功");

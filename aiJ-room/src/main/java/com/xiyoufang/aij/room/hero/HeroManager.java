@@ -131,7 +131,7 @@ public class HeroManager {
         hero.setIp(user.getIp());
         hero.setCertStatus(user.getCertStatus());
         String userId = hero.getUserId();
-        SetWithLock<ChannelContext> objs = Tio.getChannelContextsByUserid(channelContext.groupContext, userId);
+        SetWithLock<ChannelContext> objs = Tio.getByUserid(channelContext.tioConfig, userId);
         if (objs != null) {
             for (ChannelContext obj : objs.getObj()) {
                 if (obj == channelContext) {
@@ -168,7 +168,7 @@ public class HeroManager {
         //广播登录信息
         LoginNotifyResponse notifyResponse = ResponseFactory.success(LoginNotifyResponse.class, "玩家登录");
         notifyResponse.setUserName(hero.getUserName());
-        Tio.sendToGroup(channelContext.groupContext, LOGIN_GROUP, WsResponse.fromText(notifyResponse.toJson(), AppConfig.use().getCharset()));
+        Tio.sendToGroup(channelContext.tioConfig, LOGIN_GROUP, WsResponse.fromText(notifyResponse.toJson(), AppConfig.use().getCharset()));
         if (hero.getTableNo() != Table.INVALID_TABLE && TableManager.getInstance().getTable(hero.getTableNo()) != null) {
             TableManager.getInstance().getCurrTable(hero).enter(hero);
         }

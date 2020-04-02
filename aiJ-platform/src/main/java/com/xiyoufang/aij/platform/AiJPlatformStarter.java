@@ -3,7 +3,7 @@ package com.xiyoufang.aij.platform;
 import com.jfinal.server.undertow.UndertowServer;
 import com.xiyoufang.aij.core.*;
 import com.xiyoufang.aij.platform.config.PlatformConfig;
-import org.tio.server.ServerGroupContext;
+import org.tio.server.ServerTioConfig;
 
 /**
  * Created by 席有芳 on 2018-12-31.
@@ -62,12 +62,12 @@ public class AiJPlatformStarter extends AiJStarter {
     }
 
     /**
-     * 配置 serverGroupContext
+     * 配置 serverTioConfig
      *
-     * @param serverGroupContext serverGroupContext
+     * @param serverTioConfig serverTioConfig
      */
     @Override
-    protected void configServerGroupContext(ServerGroupContext serverGroupContext) {
+    protected void configServerTioConfig(ServerTioConfig serverTioConfig) {
 
     }
 
