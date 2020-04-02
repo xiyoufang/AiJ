@@ -40,7 +40,7 @@ public class RoleService {
         Date now = new Date();
         record.set("created_time", now);
         record.set("modified_time", now);
-        record.set("protected", "Y");
+        record.set("protected", "N");
         record.set("status", 1);
         return AiJPlatformDb.uc().save("role", "id", record);
     }
