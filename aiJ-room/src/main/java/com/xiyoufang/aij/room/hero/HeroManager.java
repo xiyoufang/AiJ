@@ -119,6 +119,7 @@ public class HeroManager {
      */
     public void success(ChannelContext channelContext, User user) {
         Hero hero = new Hero();
+        hero.setShowId(user.getShowId());
         hero.setUserName(user.getUserName());
         hero.setUserId(user.getUserId());
         hero.setNickName(user.getNickName());
@@ -157,6 +158,7 @@ public class HeroManager {
         }
         LoginEventResponse response = ResponseFactory.success(LoginEventResponse.class, "登录成功");
         response.setUserId(channelContext.userid);
+        response.setShowId(hero.getShowId());
         response.setUserName(hero.getUserName());
         response.setAvatar(hero.getAvatar());
         response.setGender(hero.getGender());

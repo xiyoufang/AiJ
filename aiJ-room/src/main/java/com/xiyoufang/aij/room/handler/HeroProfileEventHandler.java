@@ -38,6 +38,7 @@ public class HeroProfileEventHandler extends AuthorizedEventHandler<HeroProfileE
             return;
         }
         HeroProfileEventResponse response = ResponseFactory.success(HeroProfileEventResponse.class, "获取玩家信息成功");
+        response.setShowId(hero.getShowId());
         response.setAvatar(hero.getAvatar());
         response.setGender(hero.getGender());
         response.setNickName(hero.getNickName());

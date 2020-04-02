@@ -9,6 +9,10 @@ import com.xiyoufang.aij.response.CommonResponse;
  */
 public class LoginEventResponse extends CommonResponse {
     /**
+     * 展示用的Id
+     */
+    private String showId;
+    /**
      * userId
      */
     private String userId;
@@ -28,6 +32,14 @@ public class LoginEventResponse extends CommonResponse {
      * 昵称
      */
     private String nickName;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserId() {
         return userId;

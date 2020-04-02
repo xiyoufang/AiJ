@@ -11,6 +11,10 @@ import com.xiyoufang.aij.room.table.Table;
 public class Hero {
 
     /**
+     * 显示用的ID
+     */
+    private String showId;
+    /**
      * 玩家名称
      */
     private String userName;
@@ -63,6 +67,14 @@ public class Hero {
      * 桌子编号
      */
     private int tableNo = Table.INVALID_TABLE;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserName() {
         return userName;

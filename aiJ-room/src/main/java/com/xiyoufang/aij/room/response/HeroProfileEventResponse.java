@@ -8,7 +8,10 @@ import com.xiyoufang.aij.response.CommonResponse;
  * @author 席有芳
  */
 public class HeroProfileEventResponse extends CommonResponse {
-
+    /**
+     * 显示用的ID
+     */
+    private String showId;
     /**
      * 玩家名称
      */
@@ -53,6 +56,14 @@ public class HeroProfileEventResponse extends CommonResponse {
      * 实名状态
      */
     private String certStatus;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserName() {
         return userName;

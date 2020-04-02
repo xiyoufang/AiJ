@@ -28,9 +28,10 @@ public class LoginResponseHandler extends ResponseHandler<LoginEventResponse> {
     @Override
     protected void doHandle(TesterHero testerHero, LoginEventResponse response, WebSocket webSocket) {
         LOGGER.info("用户ID:{},用户名称:{},登录成功!", response.getUserId(), response.getUserName());
+        testerHero.setShowId(response.getShowId());
         testerHero.setUserId(response.getUserId());
         testerHero.setUserName(response.getUserName());
-        if ("1".equals(testerHero.getUserId())) {
+        if ("00000001".equals(testerHero.getShowId())) {
             CreateTableEvent event = EventFactory.create(CreateTableEvent.class);
             event.setRuleText("{}");
             webSocket.sendText(event.toJson());

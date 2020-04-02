@@ -8,7 +8,10 @@ import com.xiyoufang.aij.response.CommonResponse;
  * @author 席有芳
  */
 public class JoinTableEventResponse extends CommonResponse {
-
+    /**
+     * 显示用的ID
+     */
+    private String showId;
     /**
      * self id
      */
@@ -29,6 +32,14 @@ public class JoinTableEventResponse extends CommonResponse {
      * owner user id
      */
     private String ownerId;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserId() {
         return userId;

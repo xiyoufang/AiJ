@@ -18,6 +18,10 @@ public class TesterHero {
      */
     private String password;
     /**
+     * 展示用的ID
+     */
+    private String showId;
+    /**
      * 用户ID
      */
     private String userId;
@@ -33,6 +37,14 @@ public class TesterHero {
      * 初始化为无效的椅子
      */
     private int chair = Table.INVALID_CHAIR;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserId() {
         return userId;

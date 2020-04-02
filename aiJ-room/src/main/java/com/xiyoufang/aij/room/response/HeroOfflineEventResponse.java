@@ -13,6 +13,10 @@ public class HeroOfflineEventResponse extends CommonResponse {
      */
     private int chair;
     /**
+     * 展示用的Id
+     */
+    private String showId;
+    /**
      * 用户ID
      */
     private String userId;
@@ -27,6 +31,14 @@ public class HeroOfflineEventResponse extends CommonResponse {
 
     public void setChair(int chair) {
         this.chair = chair;
+    }
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
     }
 
     public String getUserName() {

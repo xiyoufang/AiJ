@@ -174,6 +174,7 @@ public class MahjongRoomAiJStarter extends RoomAiJStarter {
      */
     @Override
     protected void configCustomConfig(RoomConfig config) {
+        config.setDevMode(true);
         config.setEnableAndroid(true); //激活机器人
     }
 

@@ -6,7 +6,10 @@ package com.xiyoufang.aij.user;
  * @author 席有芳
  */
 public class User {
-
+    /**
+     * 展示用的ID，来自数据库ID字段
+     */
+    private String showId;
     /**
      * 玩家名称
      */
@@ -51,6 +54,14 @@ public class User {
      * 实名状态
      */
     private String certStatus;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserName() {
         return userName;

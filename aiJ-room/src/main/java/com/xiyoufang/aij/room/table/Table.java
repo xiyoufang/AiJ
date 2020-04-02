@@ -362,6 +362,7 @@ public class Table {
         sendJoin(hero, currChair);
         HeroEnterEventResponse response = ResponseFactory.success(HeroEnterEventResponse.class, "成功加入");
         response.setChair(currChair);
+        response.setShowId(hero.getShowId());
         response.setUserId(hero.getUserId());
         response.setNickName(hero.getNickName());
         sendTable(response);
@@ -379,6 +380,7 @@ public class Table {
         Hero owner = this.getOwner();
         JoinTableEventResponse response = ResponseFactory.success(JoinTableEventResponse.class, "加入桌子");
         response.setOwnerId(owner.getUserId());
+        response.setShowId(owner.getShowId());
         response.setUserId(hero.getUserId());
         response.setRuleText(ruleText);
         response.setTableNo(tableNo);
@@ -399,6 +401,7 @@ public class Table {
         for (Map.Entry<Integer, HeroMate> entry : heroes.entrySet()) {
             HeroSceneResponse.HeroItem heroItem = new HeroSceneResponse.HeroItem();
             heroItem.setChair(entry.getKey());
+            heroItem.setShowId(entry.getValue().hero.getShowId());
             heroItem.setUserId(entry.getValue().hero.getUserId());
             heroItem.setNickName(entry.getValue().hero.getNickName());
             heroItem.setOnline(entry.getValue().heroStatus.netStatus == HeroNetStatus.ONLINE);
@@ -490,6 +493,7 @@ public class Table {
             case OFFLINE:
                 HeroOfflineEventResponse offlineResponse = ResponseFactory.success(HeroOfflineEventResponse.class, "玩家掉线");
                 offlineResponse.setChair(chair);
+                offlineResponse.setShowId(hero.getShowId());
                 offlineResponse.setUserId(hero.getUserId());
                 offlineResponse.setUserName(hero.getUserName());
                 sendTable(offlineResponse);
@@ -498,6 +502,7 @@ public class Table {
             case ONLINE:
                 HeroOnlineEventResponse onlineResponse = ResponseFactory.success(HeroOnlineEventResponse.class, "玩家上线");
                 onlineResponse.setChair(chair);
+                onlineResponse.setShowId(hero.getShowId());
                 onlineResponse.setUserId(hero.getUserId());
                 onlineResponse.setUserName(hero.getUserName());
                 sendTable(onlineResponse);
@@ -520,6 +525,7 @@ public class Table {
             case SIT_DOWN:
                 HeroSitDownEventResponse sitDownResponse = ResponseFactory.success(HeroSitDownEventResponse.class, "玩家坐下");
                 sitDownResponse.setChair(chair);
+                sitDownResponse.setShowId(hero.getShowId());
                 sitDownResponse.setUserId(hero.getUserId());
                 sitDownResponse.setUserName(hero.getUserName());
                 sendTable(sitDownResponse);
@@ -528,6 +534,7 @@ public class Table {
             case STAND_UP:
                 HeroStandUpEventResponse standUpResponse = ResponseFactory.success(HeroStandUpEventResponse.class, "玩家起立");
                 standUpResponse.setChair(chair);
+                standUpResponse.setShowId(hero.getShowId());
                 standUpResponse.setUserId(hero.getUserId());
                 standUpResponse.setUserName(hero.getUserName());
                 sendTable(standUpResponse);
@@ -621,6 +628,7 @@ public class Table {
                 hero.setTableNo(INVALID_TABLE);
                 HeroLeaveEventResponse response = ResponseFactory.success(HeroLeaveEventResponse.class, "玩家离开");
                 response.setChair(chair);
+                response.setShowId(hero.getShowId());
                 response.setUserId(hero.getUserId());
                 response.setUserName(hero.getUserName());
                 sendTable(response);

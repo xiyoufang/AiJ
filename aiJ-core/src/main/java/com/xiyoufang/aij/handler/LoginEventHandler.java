@@ -10,6 +10,8 @@ import org.tio.core.ChannelContext;
 import org.tio.core.Tio;
 import org.tio.websocket.common.WsResponse;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by 席有芳 on 2018-12-19.
  *
@@ -41,6 +43,7 @@ public abstract class LoginEventHandler<E extends Event> extends EventHandler<E>
      */
     protected void authenticate(ChannelContext channelContext, String key, Record record) {
         if (authenticate(key, record)) {
+            Long id = record.getLong("id");
             String userId = record.getStr("user_id");
             String userName = record.getStr("user_name");
             String nickName = record.getStr("nick_name");
@@ -53,6 +56,7 @@ public abstract class LoginEventHandler<E extends Event> extends EventHandler<E>
             String certStatus = record.getStr("cert_status");
             String ip = record.getStr("ip");
             User user = new User();
+            user.setShowId(new DecimalFormat("00000000").format(id));
             user.setUserName(userName);
             user.setUserId(userId);
             user.setNickName(nickName);
