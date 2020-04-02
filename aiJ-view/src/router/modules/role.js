@@ -6,7 +6,6 @@ const roleRouter = {
   path: '/role',
   component: Layout,
   redirect: '/role/index',
-  name: 'Role',
   children: [
     {
       path: 'index',

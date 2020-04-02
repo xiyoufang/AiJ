@@ -6,9 +6,24 @@ import { constantRoutes } from '@/router'
  * @param route
  */
 function hasPermission(menus, route) {
-  return menus.indexOf(route.name) !== -1
+  if (route.hidden) { return false }
+  const routeName = getRouteName(route.children, route)
+  return menus.indexOf(routeName) !== -1
 }
 
+/**
+ * get route's name
+ * @param children
+ * @param parent
+ * @returns {boolean|*}
+ */
+function getRouteName(children = [], parent) {
+  const showingChildren = children.filter(item => !item.hidden)
+  if (showingChildren.length === 1) {
+    return showingChildren[0].name
+  }
+  return parent.name
+}
 /**
  * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes

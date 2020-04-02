@@ -74,7 +74,6 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
     children: [
       {
         path: 'dashboard',
@@ -103,12 +102,24 @@ export const constantRoutes = [
   gameRouter,
   dataRouter,
   {
-    path: 'external-link',
+    path: 'blog',
     component: Layout,
     children: [
       {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'https://www.xiyoufang.com',
+        name: 'Blog',
+        meta: { title: '技术博客', icon: 'blog' }
+      }
+    ]
+  },
+  {
+    path: 'Git-Link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://gitee.com/xiyoufang/aij',
+        name: 'GitLink',
+        meta: { title: '代码仓库', icon: 'link' }
       }
     ]
   },

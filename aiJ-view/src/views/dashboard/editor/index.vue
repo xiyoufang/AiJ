@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
-      <pan-thumb :image="avatar" style="float: left">
-        Your roles:
+      <pan-thumb :image="baseURL+'/avatar?url=' + avatar" style="float: left">
+        当前角色:
         <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
       </pan-thumb>
       <github-corner style="position: absolute; top: 0px; border: 0; right: 0;" />
@@ -12,7 +12,6 @@
       </div>
     </div>
     <div>
-      <img :src="emptyGif" class="emptyGif">
     </div>
   </div>
 </template>
@@ -27,7 +26,7 @@ export default {
   components: { PanThumb, GithubCorner },
   data() {
     return {
-      emptyGif: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
+      baseURL: process.env.VUE_APP_BASE_API
     }
   },
   computed: {
