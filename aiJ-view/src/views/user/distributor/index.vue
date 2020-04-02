@@ -68,7 +68,7 @@
           <span>{{ row.id | idFilter }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户ID" prop="user_id" align="center" width="100" show-overflow-tooltip />
+      <el-table-column label="用户ID" prop="user_id" align="center" width="200" show-overflow-tooltip />
       <el-table-column label="昵称" prop="nick_name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="代理级别" prop="level" align="center" width="80" show-overflow-tooltip>
         <template slot-scope="{row}">
