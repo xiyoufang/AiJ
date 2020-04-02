@@ -11,6 +11,7 @@ import userRouter from './modules/user'
 import roleRouter from './modules/role'
 import gameRouter from './modules/game'
 import dataRouter from './modules/data'
+import toolsRouter from './modules/tools'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -101,6 +102,7 @@ export const constantRoutes = [
   roleRouter,
   gameRouter,
   dataRouter,
+  toolsRouter,
   {
     path: 'blog',
     component: Layout,

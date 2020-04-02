@@ -74,7 +74,7 @@ public class AvatarController extends Controller {
             }
             InputStream in = new ByteArrayInputStream(Jsoup.connect(url)
                     .sslSocketFactory(sslSocketFactory)
-                    .ignoreContentType(true).timeout(5 * 1000)
+                    .ignoreContentType(true).timeout(20 * 1000)
                     .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36")
                     .method(Connection.Method.GET).execute().bodyAsBytes());
             render(new ImageRender(in));
