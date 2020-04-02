@@ -39,6 +39,7 @@ public class UserManager {
         Tio.unbindUser(channelContext); //先解绑
         channelContext.setUserid(userId); //用户名称绑定
         LoginEventResponse response = ResponseFactory.success(LoginEventResponse.class, "登录成功");
+        response.setShowId(user.getShowId());
         response.setUserId(user.getUserId());
         response.setUserName(user.getUserName());
         response.setNickName(user.getNickName());

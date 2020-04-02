@@ -10,6 +10,10 @@ export default class RoomLoginEventResponse extends AiJ.Response {
      */
     userName: string;
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * ID
      */
     userId: string;

@@ -10,6 +10,10 @@ export default class PlazaLoginEventResponse extends AiJ.Response {
      */
     userName: string;
     /**
+     *  Show ID
+     */
+    showId: string;
+    /**
      * ID
      */
     userId: string;

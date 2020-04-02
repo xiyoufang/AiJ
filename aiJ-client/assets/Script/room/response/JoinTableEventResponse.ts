@@ -2,6 +2,10 @@ import {AiJ} from "../../ws/AiJ";
 
 export default class JoinTableEventResponse extends AiJ.Response {
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * 自己的ID
      */
     userId: string;

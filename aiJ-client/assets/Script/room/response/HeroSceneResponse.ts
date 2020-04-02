@@ -17,6 +17,10 @@ export class HeroItem {
      */
     chair: number;
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * 玩家ID
      */
     userId: string;

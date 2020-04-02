@@ -9,6 +9,10 @@ export default class HeroSitDownEventResponse extends AiJ.Response {
      */
     chair: number;
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * 用户ID
      */
     userId: string;
@@ -16,5 +20,5 @@ export default class HeroSitDownEventResponse extends AiJ.Response {
      * 用户名
      */
     userName: string;
-    
+
 }

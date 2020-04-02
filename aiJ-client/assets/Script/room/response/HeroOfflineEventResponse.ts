@@ -9,6 +9,10 @@ export default class HeroOfflineEventResponse extends AiJ.Response {
      */
     chair: number;
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * 用户ID
      */
     userId: string;

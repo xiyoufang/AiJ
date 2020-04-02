@@ -9,6 +9,10 @@ import com.xiyoufang.aij.response.CommonResponse;
  */
 public class LoginEventResponse extends CommonResponse {
     /**
+     * showId
+     */
+    private String showId;
+    /**
      * userId
      */
     private String userId;
@@ -52,6 +56,14 @@ public class LoginEventResponse extends CommonResponse {
      * 实名状态
      */
     private String certStatus;
+
+    public String getShowId() {
+        return showId;
+    }
+
+    public void setShowId(String showId) {
+        this.showId = showId;
+    }
 
     public String getUserId() {
         return userId;

@@ -191,7 +191,7 @@ export default class PlazaLayer extends AiJCCComponent {
 
     private initView() {
         this._view.getChild("NickNameText").asTextField.text = HeroManager.getInst().getMe().nickName;  //昵称
-        this._view.getChild("UserIdText").asTextField.text = _.padStart(HeroManager.getInst().getMe().userId, 8, "0");      //用户ID
+        this._view.getChild("UserIdText").asTextField.text = HeroManager.getInst().getMe().showId;      //用户ID
         this._view.getChild("AvatarLoader").asLoader.url = HeroManager.getInst().getMe().avatar;
         this.initDistributorView();
         this.initTransView();

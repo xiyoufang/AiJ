@@ -72,7 +72,7 @@ export default class WelcomeLayer extends AiJCCComponent {
     }
 
     loginSuccessCb = (resp: PlazaLoginEventResponse) => {
-        HeroManager.getInst().setMe(new Hero(resp.userName, resp.userId, resp.nickName, resp.gender, resp.avatar,
+        HeroManager.getInst().setMe(new Hero(resp.userName, resp.showId, resp.userId, resp.nickName, resp.gender, resp.avatar,
             resp.distributorId, resp.address, resp.longitude, resp.latitude, resp.ip, resp.certStatus)); //添加自己
         UIManger.getInst().switchLayer(PlazaLayer);
     };

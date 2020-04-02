@@ -37,7 +37,6 @@ export class HeroMate {
      */
     chair: number;
 
-
     /**
      * 在线状态
      */
@@ -269,7 +268,7 @@ export default class MahjongGameEngine {
      * @param resp
      */
     gameHeroProfileCb = (resp: HeroProfileEventResponse): void => {
-        let hero = new Hero(resp.userName, resp.userId, resp.nickName, resp.gender, resp.avatar,
+        let hero = new Hero(resp.userName, resp.showId, resp.userId, resp.nickName, resp.gender, resp.avatar,
             resp.distributorId, resp.address, resp.longitude, resp.latitude, resp.ip, resp.certStatus);
         HeroManager.getInst().addHero(hero);
         this.renderHeroProfile(hero);

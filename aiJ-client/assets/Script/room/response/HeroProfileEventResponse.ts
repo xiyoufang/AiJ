@@ -9,6 +9,10 @@ export default class HeroProfileEventResponse extends AiJ.Response {
      */
     userName: string;
     /**
+     * 显示ID
+     */
+    showId: string;
+    /**
      * ID
      */
     userId: string;

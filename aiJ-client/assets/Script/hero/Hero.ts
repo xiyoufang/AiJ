@@ -10,6 +10,10 @@ export default class Hero {
      */
     userName: string;
     /**
+     * show ID
+     */
+    showId: string;
+    /**
      * ID
      */
     userId: string;
@@ -53,6 +57,7 @@ export default class Hero {
     /**
      *
      * @param userName
+     * @param showId
      * @param userId
      * @param nickName
      * @param gender
@@ -64,9 +69,10 @@ export default class Hero {
      * @param ip
      * @param certStatus
      */
-    constructor(userName: string, userId: string, nickName: string, gender: number, avatar: string, distributorId: string,
+    constructor(userName: string, showId: string, userId: string, nickName: string, gender: number, avatar: string, distributorId: string,
                 address: string, longitude: number, latitude: number, ip: string, certStatus: string) {
         this.userName = userName;
+        this.showId = showId;
         this.userId = userId;
         this.nickName = nickName;
         this.gender = gender;
