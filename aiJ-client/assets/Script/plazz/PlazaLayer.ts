@@ -200,7 +200,7 @@ export default class PlazaLayer extends AiJCCComponent {
         this.initGameCreateView();
         this._view.getChild("AvatarLoader").asLoader.onClick(() => {        //点击头像
             let me = HeroManager.getInst().getMe();
-            UserInfoWindow.open(me.avatar, me.address, me.nickName, me.userId, me.ip);
+            UserInfoWindow.open(me.avatar, me.address, me.nickName, me.showId, me.ip);
         }, this);
         this._view.getChild("n21").asButton.onClick(() => {
             AiJKit.use(AppConfig.PLAZA_WS_NAME).send(new RoomRecordEvent(1, 10));

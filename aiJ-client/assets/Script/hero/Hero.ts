@@ -76,7 +76,7 @@ export default class Hero {
         this.userId = userId;
         this.nickName = nickName;
         this.gender = gender;
-        this.avatar = cc.sys.isBrowser ? AppConfig.PLATFORM_URL + "avatar?url=" + encodeURIComponent(avatar) : avatar;
+        this.avatar = cc.sys.isBrowser ? AppConfig.AVATAR_PROXY_URL + "?url=" + encodeURIComponent(avatar) : avatar;
         this.distributorId = distributorId;
         this.address = address;
         this.longitude = longitude;

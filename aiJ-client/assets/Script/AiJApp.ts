@@ -8,6 +8,7 @@ import FireKit from "./fire/FireKit";
 export default class AiJApp extends cc.Component {
 
     protected onLoad(): void {
+        cc.game.setFrameRate(15); // 电脑配置太低，少占用点CPU 控制下FPS
         fgui.addLoadHandler();
         fgui.GRoot.create();
         fgui.UIPackage.loadPackage("commons", () => {
