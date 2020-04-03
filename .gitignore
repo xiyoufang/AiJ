@@ -40,3 +40,4 @@ target/
 aiJ-jslib/
 **/node_modules/
 **/dist/
+**/package-lock.json
