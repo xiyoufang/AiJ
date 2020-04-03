@@ -24,9 +24,9 @@ JAVA_OPTS="-Djava.awt.headless=true $opt"
 # process id
 p_id=
 
-# check process id
+# check process
 check_pid() {
-   p_id=`ps -ef | grep ${MAIN_CLASS} | grep -v 'grep' | awk '{print $2}' | tr '\n' ' '`
+   p_id=`ps -efwww | grep ${MAIN_CLASS} | grep -v 'grep' | awk '{print $2}' | tr '\n' ' '`
    echo "aij server process id: $p_id"
 }
 
