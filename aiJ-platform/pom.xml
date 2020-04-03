@@ -156,7 +156,7 @@
                             <fileset dir="${basedir}/target/lib"/>
                             <fileset file="${basedir}/target/${project.build.finalName}.jar"/>
                         </copy>
-                        <chmod file="./dist/aijServer.sh" perm="777"/>
+                        <chmod file="./dist/aijServer*.sh" perm="777"/>
                     </tasks>
                 </configuration>
             </plugin>
