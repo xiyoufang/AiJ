@@ -665,12 +665,11 @@ export default class MahjongGameLayer extends AiJCCComponent {
      */
     public renderHeroProfile(view: number, chair: number, hero: Hero): void {
         //各个位置的头像
-        let userId = _.padStart(hero.userId, 6, "0");
         this._headViewMap[view].getChild("nickName").asTextField.text = hero.nickName;
         this._gameOverViewMap[view].getChild("GameOverHeadItemComponent").asCom.getChild("NickNameText").asTextField.text = hero.nickName;
         this._endViewMap[view].getChild("NickNameText").asTextField.text = hero.nickName;
-        this._endViewMap[view].getChild("UserIdText").asTextField.text = userId;
-        this._gameOverViewMap[view].getChild("GameOverHeadItemComponent").asCom.getChild("IdText").asTextField.text = userId;
+        this._endViewMap[view].getChild("UserIdText").asTextField.text = hero.showId;
+        this._gameOverViewMap[view].getChild("GameOverHeadItemComponent").asCom.getChild("IdText").asTextField.text = hero.showId;
         if (hero.avatar != null) {
             let md5png = "?name=" + md5(hero.avatar) + ".png";
             this._headViewMap[view].getChild("avatar").asLoader.url = hero.avatar + md5png;

@@ -477,11 +477,12 @@ export namespace AiJ {
         /**
          * 连接
          *
-         * @param {boolean} reconnectAttempt 是否重连
+         * @param {boolean} reconnectAttempt
+         *  是否为重连进来的请求 第一次链接为false，后续重连的为true
          */
         public connect(reconnectAttempt : boolean) {
             if(!reconnectAttempt) {
-                this.reconnectAttempts = 0;
+                this.reconnectAttempts = 0; // 重连的次数
             }
             this.ws = new WebSocket(this.config.ws);
             this.forcedClose = false;
