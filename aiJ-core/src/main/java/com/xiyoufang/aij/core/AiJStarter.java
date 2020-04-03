@@ -216,8 +216,7 @@ public abstract class AiJStarter {
         ad();
         onCreate();
         CoreConfig config = new CoreConfig();
-        configDefault(config);      //初始化默认配置
-        config = config(config);    //由子类自定义配置
+        config = initCoreConfig(config);      //初始化默认配置
         AiJMessageHandler wsMsgHandler = new AiJMessageHandler();
         wsServerStarter = new WsServerStarter(config.getInt(CoreConfig.WS_PORT), wsMsgHandler);
         ServerTioConfig serverTioConfig = wsServerStarter.getServerTioConfig();
@@ -451,11 +450,9 @@ public abstract class AiJStarter {
      *
      * @param config config
      */
-    private void configDefault(CoreConfig config) {
+    private CoreConfig initCoreConfig(CoreConfig config) {
         config.setWsPort(8081);
         config.setWsAddress(getLocalHostLANAddress().getHostAddress());
-        config.setWsProxyPort(config.getInt(CoreConfig.WS_PORT));
-        config.setWsProxyAddress(config.getStr(CoreConfig.WS_ADDRESS));
         config.setServiceCode(configServiceCode());
         config.setNodeName(configNodeName());
         config.setNodeDescription(configNodeDescription());
@@ -465,6 +462,14 @@ public abstract class AiJStarter {
         config.setDsPlatform("aij-platform");
         config.setWxAppId("wx7da1c028a41aeaf3");
         config.setWxSecret("61fca66cdaf99017bbd2f78c4393b84a");
+        config = config(config);    //由子类自定义配置
+        if (config.get(CoreConfig.WS_PROXY_PORT) == null) {
+            config.setWsProxyPort(config.getInt(CoreConfig.WS_PORT));
+        }
+        if (config.get(CoreConfig.WS_PROXY_ADDRESS) == null) {
+            config.setWsProxyAddress(config.getStr(CoreConfig.WS_ADDRESS));
+        }
+        return config;
     }
 
 
