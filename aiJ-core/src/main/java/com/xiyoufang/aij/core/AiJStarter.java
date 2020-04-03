@@ -313,8 +313,10 @@ public abstract class AiJStarter {
     private void initRegistryCenter(final RegistryCenter registryCenter) {
         try {
             LOGGER.info("初始化注册中心,Address:{}", registryCenter.getAddress());
-            RetryPolicy rp = new RetryOneTime(1000);
-            CuratorFrameworkFactory.Builder builder = CuratorFrameworkFactory.builder().connectString(registryCenter.getAddress()).connectionTimeoutMs(5 * 1000).sessionTimeoutMs(20 * 1000).retryPolicy(rp);
+            RetryPolicy rp = new RetryOneTime(30 * 1000);
+            CuratorFrameworkFactory.Builder builder = CuratorFrameworkFactory.builder().connectString(registryCenter.getAddress())
+                    .connectionTimeoutMs(5 * 1000)
+                    .sessionTimeoutMs(20 * 1000).retryPolicy(rp);
             CuratorFramework zkClient = builder.build();
             registryCenter.setZkClient(zkClient);
             zkClient.getConnectionStateListenable().addListener(new ConnectionStateListener() {
