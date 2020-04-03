@@ -149,7 +149,8 @@
                     <tasks>
                         <delete dir="./dist/" verbose="true"/>
                         <copy todir="./dist/" overwrite="true">
-                            <fileset file="${basedir}/src/aijServer.sh"/>
+                            <fileset file="${basedir}/src/aijServer*.sh"/>
+                            <fileset file="${basedir}/src/aijServer*.bat"/>
                         </copy>
                         <copy todir="./dist/lib" overwrite="true">
                             <fileset dir="${basedir}/target/lib"/>
