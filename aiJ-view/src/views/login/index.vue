@@ -13,7 +13,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="登录账号"
           name="username"
           type="text"
           tabindex="1"
@@ -31,7 +31,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            placeholder="登录密码"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -44,27 +44,14 @@
           </span>
         </el-form-item>
       </el-tooltip>
-
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <!--
-      <div style="position:relative">
-        <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
-      </div>
-      -->
+      <el-alert
+        title="提示信息"
+        type="info"
+        description="演示环境使用 15000000004 / 123456 登录，账号权限为只读，无法进行任何修改"
+        show-icon
+      />
     </el-form>
-
     <el-dialog title="Or connect with" :visible.sync="showDialog">
       Can not be simulated on local, so please combine you own business simulation! ! !
       <br>
@@ -76,13 +63,13 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
 
 export default {
   name: 'Login',
   components: { SocialSign },
   data() {
+    /*
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -96,11 +83,11 @@ export default {
       } else {
         callback()
       }
-    }
+    }*/
     return {
       loginForm: {
-        username: '15000000001',
-        password: '123456'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur' /*, validator: validateUsername*/ }],

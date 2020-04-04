@@ -82,8 +82,9 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 ![输入图片说明](https://gitee.com/uploads/images/2019/0428/214352_4e7b7e03_369917.png "QQ20190428-214307.png")
 
 * 运营管理
-
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/175609_acddfeaf_369917.png "4.png")
+![玩家管理](doc/screenshot/screenshot_0.png)
+![游戏管理](doc/screenshot/screenshot_1.png)
+![权限管理](doc/screenshot/screenshot_2.png)
 
 #### 参与贡献
 
