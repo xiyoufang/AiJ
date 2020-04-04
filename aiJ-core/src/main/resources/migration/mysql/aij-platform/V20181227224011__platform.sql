@@ -2,13 +2,16 @@
 CREATE TABLE service
 (
     id            integer PRIMARY KEY AUTO_INCREMENT,
-    type          varchar(32),  -- 服务类型
-    code          integer,      -- 服务编码 1001
-    name          varchar(128), -- 显示名称 麻将
-    description   text,         -- 服务描述
-    protected     char(1),      -- 系统保护 (Y\N)
-    created_time  datetime,     -- 创建时间
-    modified_time datetime      -- 修改时间
+    type          varchar(32),   -- 服务类型
+    code          integer,       -- 服务编码 1001
+    name          varchar(128),  -- 显示名称 麻将
+    description   text,          -- 服务描述
+    protected     char(1),       -- 系统保护 (Y\N)
+    icon          varchar(1023), -- 服务图标URL（图标将用于客户端显示）
+    deployment    varchar(1023), -- 下载/热更新相关地址
+    sort          integer,       -- 排列顺序
+    created_time  datetime,      -- 创建时间
+    modified_time datetime       -- 修改时间
 );
 
 -- 配置表

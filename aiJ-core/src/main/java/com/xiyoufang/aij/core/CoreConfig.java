@@ -31,6 +31,18 @@ public class CoreConfig extends Config {
      */
     public static final String SERVICE_DESCRIPTION = "$service_description";
     /**
+     * 服务图标
+     */
+    public static final String SERVICE_ICON = "$service_icon";
+    /**
+     * 服务部署地址
+     */
+    public static final String SERVICE_DEPLOYMENT = "$service_deployment";
+    /**
+     * 服务排序
+     */
+    public static final String SERVICE_SORT = "$service_sort";
+    /**
      * 节点名称
      */
     public static final String NODE_NAME = "$node_name";
@@ -211,6 +223,33 @@ public class CoreConfig extends Config {
      */
     public void setServiceDescription(String description) {
         setStr(SERVICE_DESCRIPTION, description);
+    }
+
+    /**
+     * 设置图标
+     *
+     * @param icon icon
+     */
+    public void setServiceIcon(String icon) {
+        setStr(SERVICE_ICON, icon);
+    }
+
+    /**
+     * 设置部署地址
+     *
+     * @param deployment deployment
+     */
+    public void setServiceDeployment(String deployment) {
+        setStr(SERVICE_DEPLOYMENT, deployment);
+    }
+
+    /**
+     * 设置排序
+     *
+     * @param sort sort
+     */
+    public void setServiceSort(int sort) {
+        setInt(SERVICE_SORT, sort);
     }
 
     /**

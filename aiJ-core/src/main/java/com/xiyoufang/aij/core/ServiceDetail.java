@@ -17,6 +17,18 @@ public class ServiceDetail {
      */
     private int serviceId;
     /**
+     * 图标
+     */
+    private String serviceIcon;
+    /**
+     * 部署地址
+     */
+    private String serviceDeployment;
+    /**
+     * 排序
+     */
+    private int serviceSort;
+    /**
      * 服务Code
      */
     private int serviceCode;
@@ -71,6 +83,30 @@ public class ServiceDetail {
 
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
+    }
+
+    public String getServiceIcon() {
+        return serviceIcon;
+    }
+
+    public void setServiceIcon(String serviceIcon) {
+        this.serviceIcon = serviceIcon;
+    }
+
+    public String getServiceDeployment() {
+        return serviceDeployment;
+    }
+
+    public void setServiceDeployment(String serviceDeployment) {
+        this.serviceDeployment = serviceDeployment;
+    }
+
+    public int getServiceSort() {
+        return serviceSort;
+    }
+
+    public void setServiceSort(int serviceSort) {
+        this.serviceSort = serviceSort;
     }
 
     public int getServiceCode() {

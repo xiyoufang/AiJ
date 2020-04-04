@@ -3,7 +3,6 @@ package com.xiyoufang.aij.platform.service;
 import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.Record;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
-import com.xiyoufang.aij.platform.dto.ServiceDTO;
 
 import java.util.Date;
 
@@ -22,38 +21,25 @@ public class ServiceService {
     /**
      * 保存
      *
-     * @param serviceDTO serviceDTO
+     * @param record record
      * @return recode
      */
-    public Record save(ServiceDTO serviceDTO) {
-        Record record = new Record()
-                .set("type", serviceDTO.getType().name())
-                .set("code", serviceDTO.getCode())
-                .set("name", serviceDTO.getName())
-                .set("description", serviceDTO.getDescription())
-                .set("created_time", new Date())
-                .set("modified_time", new Date());
-        AiJPlatformDb.platform().save("service", "id", record);
-        return record;
+    public boolean save(Record record) {
+        record.set("protected", 'N').set("created_time", new Date()).set("modified_time", new Date());
+        return AiJPlatformDb.platform().save("service", "id", record);
     }
 
     /**
      * 更新
      *
-     * @param serviceDTO serviceDTO
-     * @return recode
+     * @param record record
+     * @return boolean result
      */
-    public Record update(ServiceDTO serviceDTO) {
-        Record record = AiJPlatformDb.platform().findById("service", serviceDTO.getId());
-        record.set("type", serviceDTO.getType().name())
-                .set("code", serviceDTO.getCode())
-                .set("name", serviceDTO.getName())
-                .set("description", serviceDTO.getDescription())
-                .set("protected", 'N')
-                .set("modified_time", new Date());
-        AiJPlatformDb.platform().update("service", "id", record);
-        return record;
+    public boolean update(Record record) {
+        record.set("modified_time", new Date());
+        return AiJPlatformDb.platform().updateByUnique("service", "id", record);
     }
+
 
     /**
      * 通过Code查询记录

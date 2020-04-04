@@ -27,6 +27,18 @@ public class ServiceInfo {
      * 服务描述
      */
     private String description;
+    /**
+     * 图标
+     */
+    private String icon;
+    /**
+     * 部署地址
+     */
+    private String deployment;
+    /**
+     * 排序
+     */
+    private int sort;
 
     public int getId() {
         return id;
@@ -66,5 +78,29 @@ public class ServiceInfo {
 
     public int getCode() {
         return code;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getDeployment() {
+        return deployment;
+    }
+
+    public void setDeployment(String deployment) {
+        this.deployment = deployment;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 }

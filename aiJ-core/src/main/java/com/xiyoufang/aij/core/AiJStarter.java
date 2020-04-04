@@ -233,6 +233,9 @@ public abstract class AiJStarter {
         config.setServiceId(serviceInfo.getId());
         config.setServiceName(serviceInfo.getName());
         config.setServiceDescription(serviceInfo.getDescription());
+        config.setServiceIcon(serviceInfo.getIcon());
+        config.setServiceDeployment(serviceInfo.getDeployment());
+        config.setServiceSort(serviceInfo.getSort());
         config.setNodeToken(UUID.randomUUID().toString());
         //初始化Id生成器
         Id.init();
@@ -285,6 +288,9 @@ public abstract class AiJStarter {
         serviceInfo.setName(record.getStr("name"));
         serviceInfo.setCode(record.getInt("code"));
         serviceInfo.setType(ServiceType.valueOf(record.getStr("type")));
+        serviceInfo.setIcon(record.getStr("icon"));
+        serviceInfo.setDeployment(record.getStr("deployment"));
+        serviceInfo.setSort(record.getInt("sort"));
         return serviceInfo;
     }
 
@@ -334,6 +340,9 @@ public abstract class AiJStarter {
                             payload.setServiceCode(AppConfig.use().getInt(CoreConfig.SERVICE_CODE));
                             payload.setServiceName(AppConfig.use().getStr(CoreConfig.SERVICE_NAME));
                             payload.setServiceDescription(AppConfig.use().getStr(CoreConfig.SERVICE_DESCRIPTION));
+                            payload.setServiceIcon(AppConfig.use().getStr(CoreConfig.SERVICE_ICON));
+                            payload.setServiceDeployment(AppConfig.use().getStr(CoreConfig.SERVICE_DEPLOYMENT));
+                            payload.setServiceSort(AppConfig.use().getInt(CoreConfig.SERVICE_SORT));
                             payload.setNodeName(AppConfig.use().getStr(CoreConfig.NODE_NAME));
                             payload.setNodeDescription(AppConfig.use().getStr(CoreConfig.NODE_DESCRIPTION));
                             payload.setNodeToken(AppConfig.use().getStr(CoreConfig.NODE_TOKEN));

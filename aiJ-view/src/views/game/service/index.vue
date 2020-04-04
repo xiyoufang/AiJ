@@ -31,12 +31,19 @@
       highlight-current-row
       style="width: 100%;"
     >
+      <el-table-column label="图标" align="center" width="80" fixed="left">
+        <template slot-scope="{row}">
+          <img v-if="row.icon" :src="baseURL+'/avatar?url=' + row.icon" alt="" class="service-icon">
+        </template>
+      </el-table-column>
       <el-table-column label="ID" prop="id" align="center" width="80" />
       <el-table-column label="类型" prop="type" align="center" width="160" />
       <el-table-column label="CODE" prop="code" align="center" width="160" />
       <el-table-column label="名称" prop="name" align="center" width="160" show-overflow-tooltip />
       <el-table-column label="描述" prop="description" align="center" width="240" show-overflow-tooltip />
       <el-table-column label="数据保护" prop="protected" align="center" width="160" show-overflow-tooltip />
+      <el-table-column label="部署地址" prop="deployment" align="center" width="240" show-overflow-tooltip />
+      <el-table-column label="顺序" prop="sort" align="center" width="80" />
       <el-table-column label="创建时间" prop="created_time" align="center" width="160" />
       <el-table-column label="修改时间" prop="modified_time" align="center" width="160" />
       <el-table-column label="操作" prop="id" align="center" width="160" fixed="right">
@@ -93,6 +100,15 @@
             placeholder="Please input"
           />
         </el-form-item>
+        <el-form-item label="图标" prop="icon">
+          <el-input v-model="service.icon" />
+        </el-form-item>
+        <el-form-item label="部署地址" prop="deployment">
+          <el-input v-model="service.deployment" />
+        </el-form-item>
+        <el-form-item label="排序" prop="sort">
+          <el-input v-model="service.sort" type="number" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
@@ -145,10 +161,13 @@ export default {
       dialogFormVisible: false,
       service: {
         id: undefined,
-        type: '',
-        code: '',
-        name: '',
-        description: ''
+        type: undefined,
+        code: undefined,
+        name: undefined,
+        description: undefined,
+        icon: undefined,
+        deployment: undefined,
+        sort: undefined
       },
       statusOptions: ['published', 'draft', 'deleted'],
       typeOptions: [
@@ -183,10 +202,13 @@ export default {
     resetService() {
       this.service = {
         id: undefined,
-        type: '',
-        code: '',
-        name: '',
-        description: ''
+        type: undefined,
+        code: undefined,
+        name: undefined,
+        description: undefined,
+        icon: undefined,
+        deployment: undefined,
+        sort: undefined
       }
     },
     handleFilter() {
@@ -250,6 +272,11 @@ export default {
   }
   .el-alert {
     margin-bottom: 10px;
+  }
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
   }
 </style>
 

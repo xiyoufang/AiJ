@@ -7,13 +7,13 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.xiyoufang.aij.platform.config.AiJPlatformDb;
 import com.xiyoufang.aij.platform.config.ResponseStatusCode;
-import com.xiyoufang.aij.platform.dto.ServiceDTO;
 import com.xiyoufang.aij.platform.service.ServiceService;
-import com.xiyoufang.aij.platform.validate.ServiceValidator;
 import com.xiyoufang.jfinal.aop.Body;
 import com.xiyoufang.jfinal.aop.BodyInject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+
+import java.util.HashMap;
 
 /**
  * Created by 席有芳 on 2018-12-31.
@@ -44,10 +44,15 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresPermissions("ServiceController_Create")
-    @Before({BodyInject.class, ServiceValidator.class})
-    public void create(@Body ServiceDTO serviceDTO) {
-        Record record = ServiceService.me.save(serviceDTO);
-        renderOk(Kv.by(ResponseStatusCode.DATA_KEY, record));
+    @Before({BodyInject.class})
+    public void create(@Body HashMap<String, Object> serviceDTO) {
+
+        Record record = new Record().setColumns(serviceDTO);
+        if (ServiceService.me.save(record)) {
+            renderOk(Kv.by(ResponseStatusCode.DATA_KEY, record).set(ResponseStatusCode.MESSAGE_KEY, "success"));
+        } else {
+            renderWithCode(ResponseStatusCode.OPERATION_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "operation failed"));
+        }
     }
 
     /**
@@ -56,10 +61,14 @@ public class ServiceController extends BaseController {
      * @param serviceDTO serviceDTO
      */
     @RequiresPermissions("ServiceController_Update")
-    @Before({BodyInject.class, ServiceValidator.class})
-    public void update(@Body ServiceDTO serviceDTO) {
-        Record record = ServiceService.me.update(serviceDTO);
-        renderOk(Kv.by(ResponseStatusCode.DATA_KEY, record));
+    @Before({BodyInject.class})
+    public void update(@Body HashMap<String, Object> serviceDTO) {
+        Record record = new Record().setColumns(serviceDTO);
+        if (ServiceService.me.update(record)) {
+            renderOk(Kv.by(ResponseStatusCode.DATA_KEY, record).set(ResponseStatusCode.MESSAGE_KEY, "success"));
+        } else {
+            renderWithCode(ResponseStatusCode.OPERATION_FAILURE, Kv.create().set(ResponseStatusCode.MESSAGE_KEY, "operation failed"));
+        }
     }
 
 }

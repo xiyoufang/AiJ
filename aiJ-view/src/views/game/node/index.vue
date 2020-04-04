@@ -15,6 +15,11 @@
       highlight-current-row
       style="width: 100%;"
     >
+      <el-table-column label="图标" align="center" width="80" fixed="left">
+        <template slot-scope="{row}">
+          <img v-if="row.serviceIcon" :src="baseURL+'/avatar?url=' + row.serviceIcon" alt="" class="service-icon">
+        </template>
+      </el-table-column>
       <el-table-column label="服务CODE" prop="serviceCode" align="center" width="120" />
       <el-table-column label="类型" prop="serviceType" align="center" width="160" />
       <el-table-column label="状态" prop="enable" align="center" width="120">
@@ -99,10 +104,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .user-avatar {
-    cursor: pointer;
+  .service-icon {
     width: 36px;
     height: 36px;
-    border-radius: 18px;
+    border-radius: 5px;
   }
 </style>
