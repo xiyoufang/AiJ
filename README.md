@@ -66,30 +66,33 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 
 ![输入图片说明](https://gitee.com/uploads/images/2019/0428/175537_3e7b183a_369917.png "2.png")
 
-* 开发调试
-
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/175549_b02a6a74_369917.png "WX20190428-175249.png")
-
 * 子游戏
 
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/213459_1ec2c286_369917.png "QQ20190428-212614.png")
-
-* 结算1
-
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/213413_7b220071_369917.png "QQ20190428-212906.png")
-
-* 结算2
-
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/213439_d873ad71_369917.png "QQ20190428-212937.png")
-
-* 回放
-
-![输入图片说明](https://gitee.com/uploads/images/2019/0428/214352_4e7b7e03_369917.png "QQ20190428-214307.png")
+<table>
+    <tr>
+        <td><img src="https://gitee.com/uploads/images/2019/0428/213459_1ec2c286_369917.png"/></td>
+        <td><img src="https://gitee.com/uploads/images/2019/0428/213413_7b220071_369917.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://gitee.com/uploads/images/2019/0428/213439_d873ad71_369917.png"/></td>
+        <td><img src="https://gitee.com/uploads/images/2019/0428/214352_4e7b7e03_369917.png"/></td>
+    </tr>
+</table>
 
 * 运营管理
-![玩家管理](doc/screenshot/screenshot_0.png)
-![游戏管理](doc/screenshot/screenshot_1.png)
-![权限管理](doc/screenshot/screenshot_2.png)
+
+<table>
+    <tr>
+        <td><img src="./doc/screenshot/screenshot_0.png"/></td>
+        <td><img src="./doc/screenshot/screenshot_1.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="./doc/screenshot/screenshot_2.png"/></td>
+        <td></td>
+    </tr>
+</table>
+
+
 
 #### 参与贡献
 
