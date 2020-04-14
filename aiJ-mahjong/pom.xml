@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>aiJ-mahjiong</artifactId>
+    <artifactId>aiJ-mahjong</artifactId>
 
     <dependencies>
         <dependency>
