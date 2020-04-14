@@ -85,6 +85,9 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 
 <table>
     <tr>
+        <td colspan="2">玩家、游戏服务、角色权限、机器人</td>
+    </tr>
+    <tr>
         <td><img src="./doc/screenshot/screenshot_0.png"/></td>
         <td><img src="./doc/screenshot/screenshot_1.png"/></td>
     </tr>
