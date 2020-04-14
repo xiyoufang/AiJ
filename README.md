@@ -19,6 +19,8 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
 
 网络协议使用Websocket，以更好的支持多平台需求，计划同时支持Mysql、Oracle、SqlServer、Postgresql、Sqlite等多种数据库。
 
+具有完整的机器人体系，机器人自动游戏，高智商游戏AI。
+
 #### 帮助文档
 
 - [快速开始](./doc/aij_quick_start_dev.md)
@@ -88,7 +90,14 @@ AiJ是一套完整的房间类游戏解决方案，支持无限水平扩展来�
     </tr>
     <tr>
         <td><img src="./doc/screenshot/screenshot_2.png"/></td>
-        <td></td>
+        <td><img src="./doc/screenshot/screenshot_3.png"/></td>
+    </tr>
+    <tr>
+        <td colspan="2">机器人自动游戏，后台管理系统观看游戏录像</td>
+    </tr>
+    <tr>
+        <td><img src="./doc/screenshot/screenshot_4.png"/></td>
+        <td><img src="./doc/screenshot/screenshot_5.png"/></td>
     </tr>
 </table>
 
